@@ -68,7 +68,7 @@ def guess_sigungu(a):
 def fetch_applyhome(key):
     if not key:
         return pd.DataFrame()
-    start = (date.today() - timedelta(days=365 * 7)).strftime('%Y-%m-%d')
+    start = '2025-01-01'
     end = date.today().strftime('%Y-%m-%d')
     rows = []
     for page in range(1, 51):
@@ -147,21 +147,20 @@ def nname(v):
 
 
 def naver_apt_url(row):
-    """네이버페이 부동산에서 해당 단지를 찾는 지도형 검색 링크를 만든다.
+    """네이버 부동산의 실제 검색 경로로 연결한다.
 
-    네이버의 고유 complexNo가 DB에 없는 단지는 '지역 + 단지명'으로
-    네이버 부동산 자체 검색을 열어, 일치하는 단지가 있으면 지도/단지 패널로 연결한다.
+    land.naver.com/search/result/... 경로는 현재 '잘못된 접근'이 뜰 수 있어
+    네이버 부동산 모바일 검색 경로(m.land.naver.com/search/result/...)를 사용한다.
+    현재 네이버 부동산 화면으로 자동 전환되며, 단지명이 정확히 매칭되면
+    해당 단지/지도 화면으로 연결된다.
     """
     sido = str(row.get('시도', '') or '').strip()
     sigungu = str(row.get('시군구', '') or '').strip()
     apt_name = str(row.get('단지명', '') or '').strip()
 
-    # 동명이인 단지를 줄이기 위해 지역명도 함께 넘긴다.
+    # 동명이인 단지를 줄이기 위해 지역 + 단지명으로 검색한다.
     query = ' '.join(x for x in [sido, sigungu, apt_name] if x)
-    # land.naver.com의 부동산 검색 경로를 사용하면 PC에서는 네이버페이 부동산
-    # 지도 화면으로 연결되며, 정확히 매칭되면 단지 패널이 선택된 상태로 열린다.
-    # fragment(#)에는 표에 표시할 실제 단지명을 넣는다. 네이버 서버에는 전달되지 않는다.
-    return f"https://land.naver.com/search/result/{quote(query, safe='')}#{apt_name}"
+    return f"https://m.land.naver.com/search/result/{quote(query, safe='')}#{apt_name}"
 
 
 def dedup(f):
@@ -198,7 +197,7 @@ def render_apartment_db():
         st.error('입주정보를 불러오지 못했습니다.')
         return
     df = dedup(pd.concat(frames, ignore_index=True))
-    df = df[df['세대수'] >= 300].sort_values(['입주예정월', '시도', '단지명'])
+    df = df[(df['세대수'] >= 300) & (df['입주예정월'] >= '2025-01')].sort_values(['입주예정월', '시도', '단지명'])
     this = pd.Timestamp.today().strftime('%Y-%m')
     m3 = (pd.Timestamp.today() + pd.DateOffset(months=3)).strftime('%Y-%m')
     c1, c2, c3, c4 = st.columns(4)
@@ -247,7 +246,7 @@ def render_apartment_db():
             column_config={
                 '단지명': st.column_config.LinkColumn(
                     '단지명',
-                    help='아파트명을 클릭하면 네이버페이 부동산 지도/단지 검색이 새 창으로 열립니다.',
+                    help='클릭하면 네이버 부동산에서 해당 단지를 검색합니다.',
                     display_text=r'.*#(.*)$'
                 ),
                 '원문': st.column_config.LinkColumn('원문', display_text='공식 원문')
