@@ -146,21 +146,76 @@ def nname(v):
     return re.sub(r'[^가-힣A-Za-z0-9]', '', str(v or '')).lower()
 
 
-def naver_apt_url(row):
-    """네이버 부동산의 실제 검색 경로로 연결한다.
+def clean_apt_name(v):
+    """청약 공고 제목에서 실제 단지명 검색에 방해되는 문구를 제거한다.
 
-    land.naver.com/search/result/... 경로는 현재 '잘못된 접근'이 뜰 수 있어
-    네이버 부동산 모바일 검색 경로(m.land.naver.com/search/result/...)를 사용한다.
-    현재 네이버 부동산 화면으로 자동 전환되며, 단지명이 정확히 매칭되면
-    해당 단지/지도 화면으로 연결된다.
+    예: '명지화전 우방아이유쉘 우선분양전환 후 잔여세대(2차)'
+        -> '명지화전 우방아이유쉘'
+
+    실제 단지명의 '2차', '3차' 등이 잘못 지워지지 않도록 공고성 문구를
+    우선 제거하고, 그 뒤에 붙은 차수 표기만 정리한다.
     """
+    s = re.sub(r'\s+', ' ', str(v or '')).strip()
+    if not s:
+        return ''
+
+    original = s
+
+    # 제목 앞뒤의 따옴표/공고 표시 정리
+    s = s.strip(' \t\r\n"\'“”‘’')
+
+    # 청약/재공급 공고에 자주 붙는 문구. 실제 단지명 뒤에 붙는 경우부터 잘라낸다.
+    notice_patterns = [
+        r'\s*우선분양전환\s*후\s*잔여세대.*$',
+        r'\s*분양전환\s*후\s*잔여세대.*$',
+        r'\s*우선분양전환.*$',
+        r'\s*계약취소주택.*$',
+        r'\s*취소주택\s*재공급.*$',
+        r'\s*취소후\s*재공급.*$',
+        r'\s*무순위(?:\s*\(사후\))?.*$',
+        r'\s*임의공급.*$',
+        r'\s*잔여세대.*$',
+        r'\s*추가모집.*$',
+        r'\s*추가입주자모집.*$',
+        r'\s*추가\s*입주자모집.*$',
+        r'\s*입주자모집공고.*$',
+        r'\s*입주자\s*모집공고.*$',
+        r'\s*예비입주자.*$',
+        r'\s*특별공급.*$',
+        r'\s*일반공급.*$',
+        r'\s*선착순.*$',
+        r'\s*재공급.*$',
+    ]
+    for pat in notice_patterns:
+        cleaned = re.sub(pat, '', s, flags=re.IGNORECASE).strip()
+        if cleaned != s:
+            s = cleaned
+            break
+
+    # 공고성 문구가 제거된 경우에만 끝에 남은 '(2차)', '[3차]' 같은 차수 표기를 제거.
+    if s != original.strip(' \t\r\n"\'“”‘’'):
+        s = re.sub(r'\s*[\(\[]\s*\d+\s*차\s*[\)\]]\s*$', '', s).strip()
+        s = re.sub(r'\s+\d+\s*차\s*$', '', s).strip()
+
+    # 괄호 안에 공고 문구만 있는 경우도 제거한다.
+    s = re.sub(
+        r'\s*[\(\[]\s*(?:무순위(?:\s*사후)?|잔여세대|임의공급|계약취소주택|재공급|추가모집)'
+        r'(?:\s*\d+\s*차)?\s*[\)\]]\s*$',
+        '', s, flags=re.IGNORECASE
+    ).strip()
+
+    return re.sub(r'\s+', ' ', s).strip(' -_/') or original
+
+
+def naver_apt_url(row):
+    """지역 + 정리된 실제 단지명으로 네이버 부동산 검색 화면을 연다."""
     sido = str(row.get('시도', '') or '').strip()
     sigungu = str(row.get('시군구', '') or '').strip()
-    apt_name = str(row.get('단지명', '') or '').strip()
+    apt_name = clean_apt_name(row.get('단지명', ''))
 
-    # 동명이인 단지를 줄이기 위해 지역 + 단지명으로 검색한다.
+    # 동명이인 단지를 줄이기 위해 지역 + 정리된 단지명으로 검색한다.
     query = ' '.join(x for x in [sido, sigungu, apt_name] if x)
-    return f"https://m.land.naver.com/search/result/{quote(query, safe='')}#{apt_name}"
+    return f"https://m.land.naver.com/search/result/{quote(query, safe='')}#{quote(apt_name, safe='')}"
 
 
 def dedup(f):
@@ -197,7 +252,11 @@ def render_apartment_db():
         st.error('입주정보를 불러오지 못했습니다.')
         return
     df = dedup(pd.concat(frames, ignore_index=True))
-    df = df[(df['세대수'] >= 300) & (df['입주예정월'] >= '2025-01')].sort_values(['입주예정월', '시도', '단지명'])
+    df = df[(df['세대수'] >= 300) & (df['입주예정월'] >= '2025-01')].copy()
+    # 화면/검색용 실제 단지명. 원본 공고명은 '원공고단지명'으로 보존한다.
+    df['원공고단지명'] = df['단지명']
+    df['단지명'] = df['단지명'].map(clean_apt_name)
+    df = df.sort_values(['입주예정월', '시도', '단지명'])
     this = pd.Timestamp.today().strftime('%Y-%m')
     m3 = (pd.Timestamp.today() + pd.DateOffset(months=3)).strftime('%Y-%m')
     c1, c2, c3, c4 = st.columns(4)
@@ -237,6 +296,9 @@ def render_apartment_db():
             if r.get('원문'):
                 with st.expander('상세정보'):
                     st.write('주소:', r.get('주소', ''))
+                    original_name = str(r.get('원공고단지명', '') or '').strip()
+                    if original_name and original_name != str(r.get('단지명', '') or '').strip():
+                        st.write('원 공고명:', original_name)
                     st.link_button('공식 원문 보기', r['원문'], use_container_width=True)
     with tt:
         table_f = f[['입주예정월','시도','시군구','단지명','세대수','시공사','출처','검증상태','최근확인','원문']].copy()
