@@ -147,14 +147,21 @@ def nname(v):
 
 
 def naver_apt_url(row):
-    """네이버에서 지역 + 아파트명으로 검색하는 링크를 만든다."""
-    parts = [str(row.get('시도', '') or '').strip(),
-             str(row.get('시군구', '') or '').strip(),
-             str(row.get('단지명', '') or '').strip()]
-    query = ' '.join(x for x in parts if x)
+    """네이버페이 부동산에서 해당 단지를 찾는 지도형 검색 링크를 만든다.
+
+    네이버의 고유 complexNo가 DB에 없는 단지는 '지역 + 단지명'으로
+    네이버 부동산 자체 검색을 열어, 일치하는 단지가 있으면 지도/단지 패널로 연결한다.
+    """
+    sido = str(row.get('시도', '') or '').strip()
+    sigungu = str(row.get('시군구', '') or '').strip()
     apt_name = str(row.get('단지명', '') or '').strip()
-    # fragment(#)에 단지명을 넣어 표에서 실제 단지명으로 표시하면서 링크를 유지한다.
-    return f"https://search.naver.com/search.naver?query={quote(query)}#{apt_name}"
+
+    # 동명이인 단지를 줄이기 위해 지역명도 함께 넘긴다.
+    query = ' '.join(x for x in [sido, sigungu, apt_name] if x)
+    # land.naver.com의 부동산 검색 경로를 사용하면 PC에서는 네이버페이 부동산
+    # 지도 화면으로 연결되며, 정확히 매칭되면 단지 패널이 선택된 상태로 열린다.
+    # fragment(#)에는 표에 표시할 실제 단지명을 넣는다. 네이버 서버에는 전달되지 않는다.
+    return f"https://land.naver.com/search/result/{quote(query, safe='')}#{apt_name}"
 
 
 def dedup(f):
@@ -240,7 +247,7 @@ def render_apartment_db():
             column_config={
                 '단지명': st.column_config.LinkColumn(
                     '단지명',
-                    help='아파트명을 클릭하면 네이버 검색이 새 창으로 열립니다.',
+                    help='아파트명을 클릭하면 네이버페이 부동산 지도/단지 검색이 새 창으로 열립니다.',
                     display_text=r'.*#(.*)$'
                 ),
                 '원문': st.column_config.LinkColumn('원문', display_text='공식 원문')
