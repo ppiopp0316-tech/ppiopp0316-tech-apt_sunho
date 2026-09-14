@@ -1,7 +1,7 @@
 import io, re
 from datetime import date, timedelta
 from pathlib import Path
-from urllib.parse import unquote
+from urllib.parse import unquote, quote
 import pandas as pd
 import requests
 import streamlit as st
@@ -146,6 +146,17 @@ def nname(v):
     return re.sub(r'[^가-힣A-Za-z0-9]', '', str(v or '')).lower()
 
 
+def naver_apt_url(row):
+    """네이버에서 지역 + 아파트명으로 검색하는 링크를 만든다."""
+    parts = [str(row.get('시도', '') or '').strip(),
+             str(row.get('시군구', '') or '').strip(),
+             str(row.get('단지명', '') or '').strip()]
+    query = ' '.join(x for x in parts if x)
+    apt_name = str(row.get('단지명', '') or '').strip()
+    # fragment(#)에 단지명을 넣어 표에서 실제 단지명으로 표시하면서 링크를 유지한다.
+    return f"https://search.naver.com/search.naver?query={quote(query)}#{apt_name}"
+
+
 def dedup(f):
     x = f.copy()
     x['_k'] = x['시도'].fillna('') + '|' + x['단지명'].map(nname) + '|' + x['입주예정월'].fillna('')
@@ -210,13 +221,34 @@ def render_apartment_db():
     mt, tt = st.tabs(['📱 모바일 보기', '📋 표 보기'])
     with mt:
         for _, r in f.head(200).iterrows():
-            st.markdown(f"<div class='apt-card'><div class='movein'>📅 {r['입주예정월']} 입주예정</div><div class='apt-name'>{r['단지명']}</div><div class='meta'>📍 {r['시도']} {r['시군구']}<br>🏠 {int(r['세대수']):,}세대<br>🏗️ {r['시공사']}<br>🔎 {r['출처']} · {r['검증상태']}</div></div>", unsafe_allow_html=True)
+            naver_url = naver_apt_url(r)
+            st.markdown(
+                f"<div class='apt-card'><div class='movein'>📅 {r['입주예정월']} 입주예정</div>"
+                f"<div class='apt-name'><a href='{naver_url}' target='_blank' rel='noopener noreferrer'>{r['단지명']}</a></div>"
+                f"<div class='meta'>📍 {r['시도']} {r['시군구']}<br>🏠 {int(r['세대수']):,}세대<br>🏗️ {r['시공사']}<br>🔎 {r['출처']} · {r['검증상태']}</div></div>",
+                unsafe_allow_html=True
+            )
             if r.get('원문'):
                 with st.expander('상세정보'):
                     st.write('주소:', r.get('주소', ''))
                     st.link_button('공식 원문 보기', r['원문'], use_container_width=True)
     with tt:
-        st.dataframe(f[['입주예정월','시도','시군구','단지명','세대수','시공사','출처','검증상태','최근확인','원문']], use_container_width=True, hide_index=True, height=600)
+        table_f = f[['입주예정월','시도','시군구','단지명','세대수','시공사','출처','검증상태','최근확인','원문']].copy()
+        table_f['단지명'] = f.apply(naver_apt_url, axis=1)
+        st.dataframe(
+            table_f,
+            column_config={
+                '단지명': st.column_config.LinkColumn(
+                    '단지명',
+                    help='아파트명을 클릭하면 네이버 검색이 새 창으로 열립니다.',
+                    display_text=r'.*#(.*)$'
+                ),
+                '원문': st.column_config.LinkColumn('원문', display_text='공식 원문')
+            },
+            use_container_width=True,
+            hide_index=True,
+            height=600
+        )
     st.download_button('⬇️ 현재 검색결과 Excel 다운로드', excel_bytes(f, '입주DB'), file_name=f'전국_300세대이상_입주예정_{date.today()}.xlsx', mime='application/vnd.openxmlformats-officedocument.spreadsheetml.sheet', use_container_width=True)
     if errs:
         with st.expander('일부 출처 오류'):
