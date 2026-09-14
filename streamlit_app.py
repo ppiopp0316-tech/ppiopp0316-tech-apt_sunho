@@ -208,14 +208,29 @@ def clean_apt_name(v):
 
 
 def naver_apt_url(row):
-    """지역 + 정리된 실제 단지명으로 네이버 부동산 검색 화면을 연다."""
+    """네이버 부동산 지도에서 '중개'가 선택된 상태로 연다.
+
+    네이버 지도 URL의 표시 옵션:
+    - showRealtors=true   : 중개사 표시
+    - showComplexes=false : 단지 표시 끔
+    - showArticles=false  : 매물 표시 끔
+    """
     sido = str(row.get('시도', '') or '').strip()
     sigungu = str(row.get('시군구', '') or '').strip()
     apt_name = clean_apt_name(row.get('단지명', ''))
 
-    # 동명이인 단지를 줄이기 위해 지역 + 정리된 단지명으로 검색한다.
+    # 동명이인 단지를 줄이기 위해 지역 + 실제 단지명을 검색어로 사용한다.
     query = ' '.join(x for x in [sido, sigungu, apt_name] if x)
-    return f"https://m.land.naver.com/search/result/{quote(query, safe='')}#{quote(apt_name, safe='')}"
+    encoded_query = quote(query, safe='')
+
+    # 사용자가 네이버 부동산에서 '중개'를 눌렀을 때 생성되는 표시 옵션을 적용한다.
+    return (
+        'https://fin.land.naver.com/map'
+        '?showRealtors=true'
+        '&showComplexes=false'
+        '&showArticles=false'
+        f'#{encoded_query}'
+    )
 
 
 def dedup(f):
@@ -308,7 +323,7 @@ def render_apartment_db():
             column_config={
                 '단지명': st.column_config.LinkColumn(
                     '단지명',
-                    help='클릭하면 네이버 부동산에서 해당 단지를 검색합니다.',
+                    help='클릭하면 네이버 부동산 지도에서 중개사 표시가 켜진 상태로 엽니다.',
                     display_text=r'.*#(.*)$'
                 ),
                 '원문': st.column_config.LinkColumn('원문', display_text='공식 원문')
