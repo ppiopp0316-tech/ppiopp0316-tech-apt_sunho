@@ -576,12 +576,12 @@ BROKER_DATA_URL = "CSV 또는 JSON 원천데이터 URL"
 
 with st.sidebar:
     st.header('📂 전국입주 DB')
-    page = st.radio('메뉴', ['🏢 아파트 입주 DB', '🏠 신규 부동산 DB'], key='main_page')
+    page = st.radio('메뉴', ['🏢 아파트 입주 DB', '🏠 신규 부동산 DB', '📒 애드플래닝 관리업체'], key='main_page')
     st.divider()
 
 if page == '🏢 아파트 입주 DB':
     render_apartment_db()
 else:
-    render_broker_db()
+    render_broker_db() if page == '🏠 신규 부동산 DB' else (st.title('📒 애드플래닝 관리업체'), st.dataframe(pd.read_csv('managed_offices.csv', sep='|', encoding='utf-8-sig').assign(번호=lambda d: range(1, len(d)+1), 관리사='애드플래닝')[['번호','관리사','업체명','원본표시']], use_container_width=True, hide_index=True))
 
 st.caption('전국입주 DB · 공식/공공 원천데이터 기반')
