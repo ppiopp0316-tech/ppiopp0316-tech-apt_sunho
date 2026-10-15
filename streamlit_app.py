@@ -582,6 +582,6 @@ with st.sidebar:
 if page == '🏢 아파트 입주 DB':
     render_apartment_db()
 else:
-    page_result = (render_broker_db() if page == '🏠 신규 부동산 DB' else (st.title('📒 애드플래닝 관리업체'), st.dataframe(pd.read_csv('managed_offices.csv', sep='|', encoding='utf-8-sig').assign(번호=lambda d: range(1, len(d)+1), 관리사='애드플래닝')[['번호','관리사','업체명','원본표시']], use_container_width=True, hide_index=True))) and None
+    page_result = (render_broker_db() if page == '🏠 신규 부동산 DB' else (st.title('📒 애드플래닝 관리업체'), st.dataframe(pd.read_csv('managed_offices.csv', sep='|', encoding='utf-8-sig').assign(번호=lambda d: range(1, len(d)+1), 관리사='애드플래닝')[['번호','관리사','업체명','지역주소','영업담당자','네이버키워드후보','원본표시']], use_container_width=True, hide_index=True))) and None
 
 st.caption('전국입주 DB · 공식/공공 원천데이터 기반')
