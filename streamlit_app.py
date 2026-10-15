@@ -583,6 +583,14 @@ def render_managed_offices():
         st.dataframe(raw, hide_index=True, use_container_width=True)
         return
     snap = json.loads(path.read_text(encoding='utf-8'))
+    office_proof = {o['name']: o for o in snap['offices']}
+    for extra_path in sorted(BASE_DIR.glob('naver_rank_extension_*.json')):
+        extra = json.loads(extra_path.read_text(encoding='utf-8'))
+        snap['queries'].update(extra.get('queries', {}))
+        office_proof.update({o['name']: o for o in extra.get('offices', [])})
+    snap['offices'] = list(office_proof.values())
+    snap['measuredQueries'] = sum(bool(v.get('time')) for v in snap['queries'].values())
+    snap['totalQueries'] = len(snap['queries'])
     proof = {o['name']: o for o in snap['offices']}
     def stamp(value):
         return pd.to_datetime(value, utc=True).tz_convert('Asia/Seoul').strftime('%Y-%m-%d %H:%M:%S') if value else ''
@@ -592,19 +600,23 @@ def render_managed_offices():
         matches = sorted(p['matches'], key=lambda m: m['rank'])
         measured = [q for q in p['keywords'] if snap['queries'].get(q, {}).get('time')]
         best = matches[0] if matches else {}
+        keyword_ranks = {}
+        for hit in matches:
+            keyword_ranks.setdefault(hit['keyword'], hit['rank'])
+        exposed_keywords = ', '.join(f"{q} ({r}위)" for q, r in keyword_ranks.items())
         if matches:
             status = '상위 10위 확인' if best['rank'] <= 10 else '상위 30개 내 확인'
         elif not p['keywords']:
             status = '주소 확인 필요'
         elif not measured:
-            status = '미측정 · 네이버 제한'
+            status = '미측정 · 조회 대기'
         else:
             status = '조회 결과 내 업체 미식별'
         if measured and len(measured) < len(p['keywords']):
             status += ' · 일부 미측정'
         times = [snap['queries'][q]['time'] for q in measured]
         rows.append({'업체명': office['업체명'], '지역주소': office['지역주소'], '영업담당자': office['영업담당자'],
-                     '측정상태': status, '최고순위': best.get('rank'), '확인검색어': best.get('keyword', ''),
+                     '측정상태': status, '실제 노출키워드': exposed_keywords, '최고순위': best.get('rank'), '확인검색어': best.get('keyword', ''),
                      '게시물': best.get('url', ''), '측정검색어수': f"{len(measured)}/{len(p['keywords'])}",
                      '측정시각(KST)': stamp(max(times)) if times else ''})
     summary = pd.DataFrame(rows)
@@ -614,7 +626,12 @@ def render_managed_offices():
     b.metric('실측 검색어', f"{snap['measuredQueries']}/{snap['totalQueries']}")
     c.metric('노출 확인 업체', int(summary['최고순위'].notna().sum()))
     d.metric('10위 이내 업체', int(summary['최고순위'].le(10).sum()))
-    st.warning('네이버가 측정 중 검색을 일시 제한하여 22개 검색어는 미측정입니다. 순위는 위 측정 시점의 결과입니다.')
+    remaining = snap['totalQueries'] - snap['measuredQueries']
+    if remaining:
+        st.warning(f'확장한 검색어 중 {remaining}개는 아직 미측정입니다. 검색 환경의 연속 조회 제한으로 조회가 대기 중이며, 해당 업체나 블로그가 제재받았다는 뜻이 아닙니다.')
+    with st.expander('미측정 · 조회 대기 표시의 의미'):
+        st.write('여러 검색어를 연속 조회한 브라우저·네트워크에 네이버가 일시적으로 검색을 제한한 것입니다. 업체의 블로그 제재, 검색 누락 또는 광고 실패 판정이 아닙니다. 순위와 실제 노출키워드는 결과를 직접 확인한 경우만 표시합니다.')
+    st.caption('측정 범위: 지역별 토지 매매 · 상가 임대 · 아파트 매매/전세/월세 · 확인 가능한 단지명+매매/전세/월세. 단지명은 업체명 자체가 아닌 부동산 단지 검색어입니다.')
     st.caption('작성자명과 업체명을 대조했습니다. 운영 블로그가 별칭을 쓰는 업체의 미식별은 30위 밖 확정이 아닙니다. 실제 유입수·문의수는 이 순위에 포함되지 않습니다.')
     search = st.text_input('업체명·지역·영업담당자 검색', key='rank_search')
     only_found = st.checkbox('노출 확인 업체만 보기', key='rank_only_found')
@@ -638,11 +655,11 @@ def render_managed_offices():
         hits = sorted([m for m in p['matches'] if m['keyword'] == q], key=lambda m: m['rank'])
         hit = hits[0] if hits else {}
         if not measured.get('time'):
-            result = '미측정 · 네이버 검색 제한'
+            result = '미측정 · 조회 대기'
         elif hits:
             result = f"{hit['rank']}위 · 해당 업체 {len(hits)}개 게시물 확인"
         else:
-            result = f"표시 {len(measured['results'])}개 내 업체 미식별"
+            result = f"표시 {measured.get('scanned_count', len(measured['results']))}개 내 업체 미식별"
         detail.append({'검색어': q, '측정결과': result, '작성자': hit.get('author', ''),
                        '게시물제목': hit.get('title', ''), '게시물': hit.get('url', ''),
                        '측정시각(KST)': stamp(measured.get('time'))})
@@ -651,9 +668,12 @@ def render_managed_offices():
                      column_config={'게시물': st.column_config.LinkColumn('근거 게시물', display_text='게시물 보기')})
         checked = [q for q in p['keywords'] if snap['queries'].get(q, {}).get('time')]
         if checked:
-            with st.expander('측정 당시 실제 검색결과 전체 보기'):
+            with st.expander('실측 근거 게시물 보기'):
                 query = st.selectbox('실측 검색어', checked, key='rank_audit_query')
-                audit = pd.DataFrame(snap['queries'][query]['results']).rename(columns={'rank':'순위','author':'작성자','title':'게시물제목','url':'게시물'})
+                record = snap['queries'][query]
+                if record.get('evidence_scope') == 'matched_posts_only':
+                    st.caption(f"실제 조회한 게시물 {record.get('scanned_count', 0)}개 중 관리업체와 작성자가 일치한 근거 게시물입니다.")
+                audit = pd.DataFrame(record['results']).rename(columns={'rank':'순위','author':'작성자','title':'게시물제목','url':'게시물'})
                 st.dataframe(audit, hide_index=True, use_container_width=True, height=450,
                              column_config={'게시물': st.column_config.LinkColumn('게시물', display_text='게시물 보기')})
     else:
