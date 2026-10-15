@@ -1,4 +1,4 @@
-import io, re
+import io, re, json
 from datetime import date, timedelta
 from pathlib import Path
 from urllib.parse import unquote, quote
@@ -574,6 +574,95 @@ BROKER_DATA_URL = "CSV 또는 JSON 원천데이터 URL"
         ''')
 
 
+def render_managed_offices():
+    st.title('📒 애드플래닝 관리업체 · 실제 네이버 노출순위')
+    raw = pd.read_csv(BASE_DIR / 'managed_offices.csv', sep='|', encoding='utf-8-sig').fillna('')
+    path = BASE_DIR / 'naver_rankings.json'
+    if not path.exists():
+        st.info('측정 자료를 불러오는 중입니다.')
+        st.dataframe(raw, hide_index=True, use_container_width=True)
+        return
+    snap = json.loads(path.read_text(encoding='utf-8'))
+    proof = {o['name']: o for o in snap['offices']}
+    def stamp(value):
+        return pd.to_datetime(value, utc=True).tz_convert('Asia/Seoul').strftime('%Y-%m-%d %H:%M:%S') if value else ''
+    rows = []
+    for _, office in raw.iterrows():
+        p = proof.get(office['업체명'], {'keywords': [], 'matches': []})
+        matches = sorted(p['matches'], key=lambda m: m['rank'])
+        measured = [q for q in p['keywords'] if snap['queries'].get(q, {}).get('time')]
+        best = matches[0] if matches else {}
+        if matches:
+            status = '상위 10위 확인' if best['rank'] <= 10 else '상위 30개 내 확인'
+        elif not p['keywords']:
+            status = '주소 확인 필요'
+        elif not measured:
+            status = '미측정 · 네이버 제한'
+        else:
+            status = '조회 결과 내 업체 미식별'
+        if measured and len(measured) < len(p['keywords']):
+            status += ' · 일부 미측정'
+        times = [snap['queries'][q]['time'] for q in measured]
+        rows.append({'업체명': office['업체명'], '지역주소': office['지역주소'], '영업담당자': office['영업담당자'],
+                     '측정상태': status, '최고순위': best.get('rank'), '확인검색어': best.get('keyword', ''),
+                     '게시물': best.get('url', ''), '측정검색어수': f"{len(measured)}/{len(p['keywords'])}",
+                     '측정시각(KST)': stamp(max(times)) if times else ''})
+    summary = pd.DataFrame(rows)
+    st.caption(snap['method'] + ' · 2026-10-15 측정 스냅샷')
+    a, b, c, d = st.columns(4)
+    a.metric('관리업체', len(raw))
+    b.metric('실측 검색어', f"{snap['measuredQueries']}/{snap['totalQueries']}")
+    c.metric('노출 확인 업체', int(summary['최고순위'].notna().sum()))
+    d.metric('10위 이내 업체', int(summary['최고순위'].le(10).sum()))
+    st.warning('네이버가 측정 중 검색을 일시 제한하여 22개 검색어는 미측정입니다. 순위는 위 측정 시점의 결과입니다.')
+    st.caption('작성자명과 업체명을 대조했습니다. 운영 블로그가 별칭을 쓰는 업체의 미식별은 30위 밖 확정이 아닙니다. 실제 유입수·문의수는 이 순위에 포함되지 않습니다.')
+    search = st.text_input('업체명·지역·영업담당자 검색', key='rank_search')
+    only_found = st.checkbox('노출 확인 업체만 보기', key='rank_only_found')
+    show = summary.copy()
+    if search.strip():
+        show = show[show[['업체명', '지역주소', '영업담당자']].astype(str).apply(lambda col: col.str.contains(search.strip(), case=False, regex=False)).any(axis=1)]
+    if only_found:
+        show = show[show['최고순위'].notna()]
+    show = show.sort_values('최고순위', na_position='last', kind='stable')
+    st.dataframe(show, hide_index=True, use_container_width=True, height=520,
+                 column_config={'게시물': st.column_config.LinkColumn('근거 게시물', display_text='게시물 보기'),
+                                '최고순위': st.column_config.NumberColumn('최고순위', format='%d위')})
+    st.download_button('실측 결과 CSV 다운로드', summary.to_csv(index=False).encode('utf-8-sig'),
+                       file_name='네이버_실측순위_2026-10-15.csv', mime='text/csv')
+    st.subheader('업체별 검색어 측정 상세')
+    selected = st.selectbox('업체 선택', summary.sort_values('최고순위', na_position='last', kind='stable')['업체명'].tolist(), key='rank_office')
+    p = proof.get(selected, {'keywords': [], 'matches': []})
+    detail = []
+    for q in p['keywords']:
+        measured = snap['queries'].get(q, {})
+        hits = sorted([m for m in p['matches'] if m['keyword'] == q], key=lambda m: m['rank'])
+        hit = hits[0] if hits else {}
+        if not measured.get('time'):
+            result = '미측정 · 네이버 검색 제한'
+        elif hits:
+            result = f"{hit['rank']}위 · 해당 업체 {len(hits)}개 게시물 확인"
+        else:
+            result = f"표시 {len(measured['results'])}개 내 업체 미식별"
+        detail.append({'검색어': q, '측정결과': result, '작성자': hit.get('author', ''),
+                       '게시물제목': hit.get('title', ''), '게시물': hit.get('url', ''),
+                       '측정시각(KST)': stamp(measured.get('time'))})
+    if detail:
+        st.dataframe(pd.DataFrame(detail), hide_index=True, use_container_width=True,
+                     column_config={'게시물': st.column_config.LinkColumn('근거 게시물', display_text='게시물 보기')})
+        checked = [q for q in p['keywords'] if snap['queries'].get(q, {}).get('time')]
+        if checked:
+            with st.expander('측정 당시 실제 검색결과 전체 보기'):
+                query = st.selectbox('실측 검색어', checked, key='rank_audit_query')
+                audit = pd.DataFrame(snap['queries'][query]['results']).rename(columns={'rank':'순위','author':'작성자','title':'게시물제목','url':'게시물'})
+                st.dataframe(audit, hide_index=True, use_container_width=True, height=450,
+                             column_config={'게시물': st.column_config.LinkColumn('게시물', display_text='게시물 보기')})
+    else:
+        st.info('주소가 확인되지 않아 지역 검색어를 측정하지 못했습니다.')
+    with st.expander('관리업체 주소·영업담당자·검색어 후보'):
+        st.dataframe(raw, hide_index=True, use_container_width=True)
+
+
+
 with st.sidebar:
     st.header('📂 전국입주 DB')
     page = st.radio('메뉴', ['🏢 아파트 입주 DB', '🏠 신규 부동산 DB', '📒 애드플래닝 관리업체'], key='main_page')
@@ -582,6 +671,6 @@ with st.sidebar:
 if page == '🏢 아파트 입주 DB':
     render_apartment_db()
 else:
-    page_result = (render_broker_db() if page == '🏠 신규 부동산 DB' else (st.title('📒 애드플래닝 관리업체'), st.dataframe(pd.read_csv('managed_offices.csv', sep='|', encoding='utf-8-sig').assign(번호=lambda d: range(1, len(d)+1), 관리사='애드플래닝')[['번호','관리사','업체명','지역주소','영업담당자','네이버키워드후보','원본표시']], use_container_width=True, hide_index=True))) and None
+    render_broker_db() if page == '🏠 신규 부동산 DB' else render_managed_offices()
 
 st.caption('전국입주 DB · 공식/공공 원천데이터 기반')
