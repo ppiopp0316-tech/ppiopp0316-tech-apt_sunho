@@ -1,0 +1,4032 @@
+{
+  "version": 2,
+  "measured_at": "2026-10-15T10:41:56.056Z",
+  "restriction_note": "검색 환경의 연속 조회 제한으로 일부 미측정이며 업체나 블로그 제재를 뜻하지 않습니다.",
+  "queries": {
+    "평택 아파트 매매": {
+      "time": null,
+      "results": [],
+      "status": "미측정 · 검색 환경 제한으로 조회 대기"
+    },
+    "평택 아파트 월세": {
+      "time": null,
+      "results": [],
+      "status": "미측정 · 검색 환경 제한으로 조회 대기"
+    },
+    "평택 상가 임대": {
+      "time": null,
+      "results": [],
+      "status": "미측정 · 검색 환경 제한으로 조회 대기"
+    },
+    "평택 토지 매매": {
+      "time": null,
+      "results": [],
+      "status": "미측정 · 검색 환경 제한으로 조회 대기"
+    },
+    "광명 아파트 전세": {
+      "time": null,
+      "results": [],
+      "status": "미측정 · 검색 환경 제한으로 조회 대기"
+    },
+    "광명 아파트 매매": {
+      "time": null,
+      "results": [],
+      "status": "미측정 · 검색 환경 제한으로 조회 대기"
+    },
+    "광명 아파트 월세": {
+      "time": null,
+      "results": [],
+      "status": "미측정 · 검색 환경 제한으로 조회 대기"
+    },
+    "광명 상가 임대": {
+      "time": null,
+      "results": [],
+      "status": "미측정 · 검색 환경 제한으로 조회 대기"
+    },
+    "광명 토지 매매": {
+      "time": null,
+      "results": [],
+      "status": "미측정 · 검색 환경 제한으로 조회 대기"
+    },
+    "의정부 아파트 전세": {
+      "time": null,
+      "results": [],
+      "status": "미측정 · 검색 환경 제한으로 조회 대기"
+    },
+    "의정부 아파트 매매": {
+      "time": null,
+      "results": [],
+      "status": "미측정 · 검색 환경 제한으로 조회 대기"
+    },
+    "의정부 아파트 월세": {
+      "time": null,
+      "results": [],
+      "status": "미측정 · 검색 환경 제한으로 조회 대기"
+    },
+    "의정부 상가 임대": {
+      "time": null,
+      "results": [],
+      "status": "미측정 · 검색 환경 제한으로 조회 대기"
+    },
+    "의정부 토지 매매": {
+      "time": null,
+      "results": [],
+      "status": "미측정 · 검색 환경 제한으로 조회 대기"
+    },
+    "동탄역 아파트 전세": {
+      "time": null,
+      "results": [],
+      "status": "미측정 · 검색 환경 제한으로 조회 대기"
+    },
+    "동탄역 아파트 매매": {
+      "time": null,
+      "results": [],
+      "status": "미측정 · 검색 환경 제한으로 조회 대기"
+    },
+    "동탄역 아파트 월세": {
+      "time": null,
+      "results": [],
+      "status": "미측정 · 검색 환경 제한으로 조회 대기"
+    },
+    "동탄역 상가 임대": {
+      "time": null,
+      "results": [],
+      "status": "미측정 · 검색 환경 제한으로 조회 대기"
+    },
+    "동탄역 토지 매매": {
+      "time": null,
+      "results": [],
+      "status": "미측정 · 검색 환경 제한으로 조회 대기"
+    },
+    "부평 아파트 전세": {
+      "time": null,
+      "results": [],
+      "status": "미측정 · 검색 환경 제한으로 조회 대기"
+    },
+    "부평 아파트 매매": {
+      "time": null,
+      "results": [],
+      "status": "미측정 · 검색 환경 제한으로 조회 대기"
+    },
+    "부평 아파트 월세": {
+      "time": null,
+      "results": [],
+      "status": "미측정 · 검색 환경 제한으로 조회 대기"
+    },
+    "부평 상가 임대": {
+      "time": null,
+      "results": [],
+      "status": "미측정 · 검색 환경 제한으로 조회 대기"
+    },
+    "부평 토지 매매": {
+      "time": null,
+      "results": [],
+      "status": "미측정 · 검색 환경 제한으로 조회 대기"
+    },
+    "청량리 아파트 전세": {
+      "time": null,
+      "results": [],
+      "status": "미측정 · 검색 환경 제한으로 조회 대기"
+    },
+    "청량리 아파트 매매": {
+      "time": null,
+      "results": [],
+      "status": "미측정 · 검색 환경 제한으로 조회 대기"
+    },
+    "청량리 아파트 월세": {
+      "time": null,
+      "results": [],
+      "status": "미측정 · 검색 환경 제한으로 조회 대기"
+    },
+    "청량리 상가 임대": {
+      "time": null,
+      "results": [],
+      "status": "미측정 · 검색 환경 제한으로 조회 대기"
+    },
+    "청량리 토지 매매": {
+      "time": null,
+      "results": [],
+      "status": "미측정 · 검색 환경 제한으로 조회 대기"
+    },
+    "성남 아파트 전세": {
+      "time": null,
+      "results": [],
+      "status": "미측정 · 검색 환경 제한으로 조회 대기"
+    },
+    "성남 아파트 매매": {
+      "time": null,
+      "results": [],
+      "status": "미측정 · 검색 환경 제한으로 조회 대기"
+    },
+    "성남 아파트 월세": {
+      "time": null,
+      "results": [],
+      "status": "미측정 · 검색 환경 제한으로 조회 대기"
+    },
+    "성남 상가 임대": {
+      "time": null,
+      "results": [],
+      "status": "미측정 · 검색 환경 제한으로 조회 대기"
+    },
+    "성남 토지 매매": {
+      "time": null,
+      "results": [],
+      "status": "미측정 · 검색 환경 제한으로 조회 대기"
+    },
+    "창릉지구 아파트 전세": {
+      "time": null,
+      "results": [],
+      "status": "미측정 · 검색 환경 제한으로 조회 대기"
+    },
+    "창릉지구 아파트 매매": {
+      "time": null,
+      "results": [],
+      "status": "미측정 · 검색 환경 제한으로 조회 대기"
+    },
+    "창릉지구 아파트 월세": {
+      "time": null,
+      "results": [],
+      "status": "미측정 · 검색 환경 제한으로 조회 대기"
+    },
+    "창릉지구 상가 임대": {
+      "time": null,
+      "results": [],
+      "status": "미측정 · 검색 환경 제한으로 조회 대기"
+    },
+    "창릉지구 토지 매매": {
+      "time": null,
+      "results": [],
+      "status": "미측정 · 검색 환경 제한으로 조회 대기"
+    },
+    "수원 아파트 전세": {
+      "time": null,
+      "results": [],
+      "status": "미측정 · 검색 환경 제한으로 조회 대기"
+    },
+    "수원 아파트 매매": {
+      "time": null,
+      "results": [],
+      "status": "미측정 · 검색 환경 제한으로 조회 대기"
+    },
+    "수원 아파트 월세": {
+      "time": null,
+      "results": [],
+      "status": "미측정 · 검색 환경 제한으로 조회 대기"
+    },
+    "수원 상가 임대": {
+      "time": null,
+      "results": [],
+      "status": "미측정 · 검색 환경 제한으로 조회 대기"
+    },
+    "수원 토지 매매": {
+      "time": null,
+      "results": [],
+      "status": "미측정 · 검색 환경 제한으로 조회 대기"
+    },
+    "이의동 아파트 전세": {
+      "time": null,
+      "results": [],
+      "status": "미측정 · 검색 환경 제한으로 조회 대기"
+    },
+    "이의동 아파트 매매": {
+      "time": null,
+      "results": [],
+      "status": "미측정 · 검색 환경 제한으로 조회 대기"
+    },
+    "이의동 아파트 월세": {
+      "time": null,
+      "results": [],
+      "status": "미측정 · 검색 환경 제한으로 조회 대기"
+    },
+    "이의동 상가 임대": {
+      "time": null,
+      "results": [],
+      "status": "미측정 · 검색 환경 제한으로 조회 대기"
+    },
+    "이의동 토지 매매": {
+      "time": null,
+      "results": [],
+      "status": "미측정 · 검색 환경 제한으로 조회 대기"
+    },
+    "힐스테이트 광교중앙역 퍼스트 매매": {
+      "time": null,
+      "results": [],
+      "status": "미측정 · 검색 환경 제한으로 조회 대기"
+    },
+    "힐스테이트 광교중앙역 퍼스트 전세": {
+      "time": null,
+      "results": [],
+      "status": "미측정 · 검색 환경 제한으로 조회 대기"
+    },
+    "힐스테이트 광교중앙역 퍼스트 월세": {
+      "time": null,
+      "results": [],
+      "status": "미측정 · 검색 환경 제한으로 조회 대기"
+    },
+    "시흥시 아파트 전세": {
+      "time": null,
+      "results": [],
+      "status": "미측정 · 검색 환경 제한으로 조회 대기"
+    },
+    "시흥시 아파트 매매": {
+      "time": null,
+      "results": [],
+      "status": "미측정 · 검색 환경 제한으로 조회 대기"
+    },
+    "시흥시 아파트 월세": {
+      "time": null,
+      "results": [],
+      "status": "미측정 · 검색 환경 제한으로 조회 대기"
+    },
+    "시흥시 상가 임대": {
+      "time": null,
+      "results": [],
+      "status": "미측정 · 검색 환경 제한으로 조회 대기"
+    },
+    "시흥시 토지 매매": {
+      "time": null,
+      "results": [],
+      "status": "미측정 · 검색 환경 제한으로 조회 대기"
+    },
+    "창원 아파트 전세": {
+      "time": null,
+      "results": [],
+      "status": "미측정 · 검색 환경 제한으로 조회 대기"
+    },
+    "창원 아파트 매매": {
+      "time": null,
+      "results": [],
+      "status": "미측정 · 검색 환경 제한으로 조회 대기"
+    },
+    "창원 아파트 월세": {
+      "time": null,
+      "results": [],
+      "status": "미측정 · 검색 환경 제한으로 조회 대기"
+    },
+    "창원 상가 임대": {
+      "time": null,
+      "results": [],
+      "status": "미측정 · 검색 환경 제한으로 조회 대기"
+    },
+    "창원 토지 매매": {
+      "time": null,
+      "results": [],
+      "status": "미측정 · 검색 환경 제한으로 조회 대기"
+    },
+    "검단신도시 아파트 전세": {
+      "time": null,
+      "results": [],
+      "status": "미측정 · 검색 환경 제한으로 조회 대기"
+    },
+    "검단신도시 아파트 매매": {
+      "time": null,
+      "results": [],
+      "status": "미측정 · 검색 환경 제한으로 조회 대기"
+    },
+    "검단신도시 아파트 월세": {
+      "time": null,
+      "results": [],
+      "status": "미측정 · 검색 환경 제한으로 조회 대기"
+    },
+    "검단신도시 상가 임대": {
+      "time": null,
+      "results": [],
+      "status": "미측정 · 검색 환경 제한으로 조회 대기"
+    },
+    "검단신도시 토지 매매": {
+      "time": null,
+      "results": [],
+      "status": "미측정 · 검색 환경 제한으로 조회 대기"
+    },
+    "대구 아파트 전세": {
+      "time": null,
+      "results": [],
+      "status": "미측정 · 검색 환경 제한으로 조회 대기"
+    },
+    "대구 아파트 매매": {
+      "time": null,
+      "results": [],
+      "status": "미측정 · 검색 환경 제한으로 조회 대기"
+    },
+    "대구 아파트 월세": {
+      "time": null,
+      "results": [],
+      "status": "미측정 · 검색 환경 제한으로 조회 대기"
+    },
+    "대구 상가 임대": {
+      "time": null,
+      "results": [],
+      "status": "미측정 · 검색 환경 제한으로 조회 대기"
+    },
+    "대구 토지 매매": {
+      "time": null,
+      "results": [],
+      "status": "미측정 · 검색 환경 제한으로 조회 대기"
+    },
+    "청담동 아파트 전세": {
+      "time": null,
+      "results": [],
+      "status": "미측정 · 검색 환경 제한으로 조회 대기"
+    },
+    "청담동 아파트 매매": {
+      "time": null,
+      "results": [],
+      "status": "미측정 · 검색 환경 제한으로 조회 대기"
+    },
+    "청담동 아파트 월세": {
+      "time": null,
+      "results": [],
+      "status": "미측정 · 검색 환경 제한으로 조회 대기"
+    },
+    "청담동 상가 임대": {
+      "time": null,
+      "results": [],
+      "status": "미측정 · 검색 환경 제한으로 조회 대기"
+    },
+    "청담동 토지 매매": {
+      "time": null,
+      "results": [],
+      "status": "미측정 · 검색 환경 제한으로 조회 대기"
+    },
+    "하남 아파트 전세": {
+      "time": null,
+      "results": [],
+      "status": "미측정 · 검색 환경 제한으로 조회 대기"
+    },
+    "하남 아파트 매매": {
+      "time": null,
+      "results": [],
+      "status": "미측정 · 검색 환경 제한으로 조회 대기"
+    },
+    "하남 아파트 월세": {
+      "time": null,
+      "results": [],
+      "status": "미측정 · 검색 환경 제한으로 조회 대기"
+    },
+    "하남 상가 임대": {
+      "time": null,
+      "results": [],
+      "status": "미측정 · 검색 환경 제한으로 조회 대기"
+    },
+    "하남 토지 매매": {
+      "time": null,
+      "results": [],
+      "status": "미측정 · 검색 환경 제한으로 조회 대기"
+    },
+    "고덕 아파트 전세": {
+      "time": null,
+      "results": [],
+      "status": "미측정 · 검색 환경 제한으로 조회 대기"
+    },
+    "고덕 아파트 매매": {
+      "time": null,
+      "results": [],
+      "status": "미측정 · 검색 환경 제한으로 조회 대기"
+    },
+    "고덕 아파트 월세": {
+      "time": null,
+      "results": [],
+      "status": "미측정 · 검색 환경 제한으로 조회 대기"
+    },
+    "고덕 상가 임대": {
+      "time": null,
+      "results": [],
+      "status": "미측정 · 검색 환경 제한으로 조회 대기"
+    },
+    "고덕 토지 매매": {
+      "time": null,
+      "results": [],
+      "status": "미측정 · 검색 환경 제한으로 조회 대기"
+    },
+    "부산 아파트 전세": {
+      "time": null,
+      "results": [],
+      "status": "미측정 · 검색 환경 제한으로 조회 대기"
+    },
+    "부산 아파트 매매": {
+      "time": null,
+      "results": [],
+      "status": "미측정 · 검색 환경 제한으로 조회 대기"
+    },
+    "부산 아파트 월세": {
+      "time": null,
+      "results": [],
+      "status": "미측정 · 검색 환경 제한으로 조회 대기"
+    },
+    "부산 상가 임대": {
+      "time": null,
+      "results": [],
+      "status": "미측정 · 검색 환경 제한으로 조회 대기"
+    },
+    "부산 토지 매매": {
+      "time": null,
+      "results": [],
+      "status": "미측정 · 검색 환경 제한으로 조회 대기"
+    },
+    "마포 아파트 전세": {
+      "time": null,
+      "results": [],
+      "status": "미측정 · 검색 환경 제한으로 조회 대기"
+    },
+    "마포 아파트 매매": {
+      "time": null,
+      "results": [],
+      "status": "미측정 · 검색 환경 제한으로 조회 대기"
+    },
+    "마포 아파트 월세": {
+      "time": null,
+      "results": [],
+      "status": "미측정 · 검색 환경 제한으로 조회 대기"
+    },
+    "마포 상가 임대": {
+      "time": null,
+      "results": [],
+      "status": "미측정 · 검색 환경 제한으로 조회 대기"
+    },
+    "마포 토지 매매": {
+      "time": null,
+      "results": [],
+      "status": "미측정 · 검색 환경 제한으로 조회 대기"
+    },
+    "송도동 아파트 전세": {
+      "time": null,
+      "results": [],
+      "status": "미측정 · 검색 환경 제한으로 조회 대기"
+    },
+    "송도동 아파트 매매": {
+      "time": null,
+      "results": [],
+      "status": "미측정 · 검색 환경 제한으로 조회 대기"
+    },
+    "송도동 아파트 월세": {
+      "time": null,
+      "results": [],
+      "status": "미측정 · 검색 환경 제한으로 조회 대기"
+    },
+    "송도동 상가 임대": {
+      "time": null,
+      "results": [],
+      "status": "미측정 · 검색 환경 제한으로 조회 대기"
+    },
+    "송도동 토지 매매": {
+      "time": null,
+      "results": [],
+      "status": "미측정 · 검색 환경 제한으로 조회 대기"
+    },
+    "봉담 아파트 전세": {
+      "time": null,
+      "results": [],
+      "status": "미측정 · 검색 환경 제한으로 조회 대기"
+    },
+    "봉담 아파트 매매": {
+      "time": null,
+      "results": [],
+      "status": "미측정 · 검색 환경 제한으로 조회 대기"
+    },
+    "봉담 아파트 월세": {
+      "time": null,
+      "results": [],
+      "status": "미측정 · 검색 환경 제한으로 조회 대기"
+    },
+    "봉담 상가 임대": {
+      "time": null,
+      "results": [],
+      "status": "미측정 · 검색 환경 제한으로 조회 대기"
+    },
+    "봉담 토지 매매": {
+      "time": null,
+      "results": [],
+      "status": "미측정 · 검색 환경 제한으로 조회 대기"
+    },
+    "봉담자이라피네 매매": {
+      "time": null,
+      "results": [],
+      "status": "미측정 · 검색 환경 제한으로 조회 대기"
+    },
+    "봉담자이라피네 전세": {
+      "time": null,
+      "results": [],
+      "status": "미측정 · 검색 환경 제한으로 조회 대기"
+    },
+    "봉담자이라피네 월세": {
+      "time": null,
+      "results": [],
+      "status": "미측정 · 검색 환경 제한으로 조회 대기"
+    },
+    "봉담자이라젠느 매매": {
+      "time": null,
+      "results": [],
+      "status": "미측정 · 검색 환경 제한으로 조회 대기"
+    },
+    "봉담자이라젠느 전세": {
+      "time": null,
+      "results": [],
+      "status": "미측정 · 검색 환경 제한으로 조회 대기"
+    },
+    "봉담자이라젠느 월세": {
+      "time": null,
+      "results": [],
+      "status": "미측정 · 검색 환경 제한으로 조회 대기"
+    },
+    "동탄역 헤리엇 매매": {
+      "time": null,
+      "results": [],
+      "status": "미측정 · 검색 환경 제한으로 조회 대기"
+    },
+    "동탄역 헤리엇 전세": {
+      "time": null,
+      "results": [],
+      "status": "미측정 · 검색 환경 제한으로 조회 대기"
+    },
+    "동탄역 헤리엇 월세": {
+      "time": null,
+      "results": [],
+      "status": "미측정 · 검색 환경 제한으로 조회 대기"
+    },
+    "논현 아파트 전세": {
+      "time": null,
+      "results": [],
+      "status": "미측정 · 검색 환경 제한으로 조회 대기"
+    },
+    "논현 아파트 매매": {
+      "time": null,
+      "results": [],
+      "status": "미측정 · 검색 환경 제한으로 조회 대기"
+    },
+    "논현 아파트 월세": {
+      "time": null,
+      "results": [],
+      "status": "미측정 · 검색 환경 제한으로 조회 대기"
+    },
+    "논현 상가 임대": {
+      "time": null,
+      "results": [],
+      "status": "미측정 · 검색 환경 제한으로 조회 대기"
+    },
+    "논현 토지 매매": {
+      "time": null,
+      "results": [],
+      "status": "미측정 · 검색 환경 제한으로 조회 대기"
+    },
+    "명지·에코델타시티 아파트 전세": {
+      "time": null,
+      "results": [],
+      "status": "미측정 · 검색 환경 제한으로 조회 대기"
+    },
+    "명지·에코델타시티 아파트 매매": {
+      "time": null,
+      "results": [],
+      "status": "미측정 · 검색 환경 제한으로 조회 대기"
+    },
+    "명지·에코델타시티 아파트 월세": {
+      "time": null,
+      "results": [],
+      "status": "미측정 · 검색 환경 제한으로 조회 대기"
+    },
+    "명지·에코델타시티 상가 임대": {
+      "time": null,
+      "results": [],
+      "status": "미측정 · 검색 환경 제한으로 조회 대기"
+    },
+    "명지·에코델타시티 토지 매매": {
+      "time": null,
+      "results": [],
+      "status": "미측정 · 검색 환경 제한으로 조회 대기"
+    },
+    "갈매 아파트 전세": {
+      "time": null,
+      "results": [],
+      "status": "미측정 · 검색 환경 제한으로 조회 대기"
+    },
+    "갈매 아파트 매매": {
+      "time": null,
+      "results": [],
+      "status": "미측정 · 검색 환경 제한으로 조회 대기"
+    },
+    "갈매 아파트 월세": {
+      "time": null,
+      "results": [],
+      "status": "미측정 · 검색 환경 제한으로 조회 대기"
+    },
+    "갈매 상가 임대": {
+      "time": null,
+      "results": [],
+      "status": "미측정 · 검색 환경 제한으로 조회 대기"
+    },
+    "갈매 토지 매매": {
+      "time": null,
+      "results": [],
+      "status": "미측정 · 검색 환경 제한으로 조회 대기"
+    },
+    "아산 아파트 전세": {
+      "time": null,
+      "results": [],
+      "status": "미측정 · 검색 환경 제한으로 조회 대기"
+    },
+    "아산 아파트 매매": {
+      "time": null,
+      "results": [],
+      "status": "미측정 · 검색 환경 제한으로 조회 대기"
+    },
+    "아산 아파트 월세": {
+      "time": null,
+      "results": [],
+      "status": "미측정 · 검색 환경 제한으로 조회 대기"
+    },
+    "아산 상가 임대": {
+      "time": null,
+      "results": [],
+      "status": "미측정 · 검색 환경 제한으로 조회 대기"
+    },
+    "아산 토지 매매": {
+      "time": null,
+      "results": [],
+      "status": "미측정 · 검색 환경 제한으로 조회 대기"
+    },
+    "운정 아파트 전세": {
+      "time": null,
+      "results": [],
+      "status": "미측정 · 검색 환경 제한으로 조회 대기"
+    },
+    "운정 아파트 매매": {
+      "time": null,
+      "results": [],
+      "status": "미측정 · 검색 환경 제한으로 조회 대기"
+    },
+    "운정 아파트 월세": {
+      "time": null,
+      "results": [],
+      "status": "미측정 · 검색 환경 제한으로 조회 대기"
+    },
+    "운정 상가 임대": {
+      "time": null,
+      "results": [],
+      "status": "미측정 · 검색 환경 제한으로 조회 대기"
+    },
+    "운정 토지 매매": {
+      "time": null,
+      "results": [],
+      "status": "미측정 · 검색 환경 제한으로 조회 대기"
+    },
+    "운정 중흥S클래스 매매": {
+      "time": null,
+      "results": [],
+      "status": "미측정 · 검색 환경 제한으로 조회 대기"
+    },
+    "운정 중흥S클래스 전세": {
+      "time": null,
+      "results": [],
+      "status": "미측정 · 검색 환경 제한으로 조회 대기"
+    },
+    "운정 중흥S클래스 월세": {
+      "time": null,
+      "results": [],
+      "status": "미측정 · 검색 환경 제한으로 조회 대기"
+    },
+    "천안 아파트 전세": {
+      "time": null,
+      "results": [],
+      "status": "미측정 · 검색 환경 제한으로 조회 대기"
+    },
+    "천안 아파트 매매": {
+      "time": null,
+      "results": [],
+      "status": "미측정 · 검색 환경 제한으로 조회 대기"
+    },
+    "천안 아파트 월세": {
+      "time": null,
+      "results": [],
+      "status": "미측정 · 검색 환경 제한으로 조회 대기"
+    },
+    "천안 상가 임대": {
+      "time": null,
+      "results": [],
+      "status": "미측정 · 검색 환경 제한으로 조회 대기"
+    },
+    "천안 토지 매매": {
+      "time": null,
+      "results": [],
+      "status": "미측정 · 검색 환경 제한으로 조회 대기"
+    },
+    "인천논현 아파트 전세": {
+      "time": null,
+      "results": [],
+      "status": "미측정 · 검색 환경 제한으로 조회 대기"
+    },
+    "인천논현 아파트 매매": {
+      "time": null,
+      "results": [],
+      "status": "미측정 · 검색 환경 제한으로 조회 대기"
+    },
+    "인천논현 아파트 월세": {
+      "time": null,
+      "results": [],
+      "status": "미측정 · 검색 환경 제한으로 조회 대기"
+    },
+    "인천논현 상가 임대": {
+      "time": null,
+      "results": [],
+      "status": "미측정 · 검색 환경 제한으로 조회 대기"
+    },
+    "인천논현 토지 매매": {
+      "time": null,
+      "results": [],
+      "status": "미측정 · 검색 환경 제한으로 조회 대기"
+    },
+    "구리갈매 아파트 전세": {
+      "time": null,
+      "results": [],
+      "status": "미측정 · 검색 환경 제한으로 조회 대기"
+    },
+    "구리갈매 아파트 매매": {
+      "time": null,
+      "results": [],
+      "status": "미측정 · 검색 환경 제한으로 조회 대기"
+    },
+    "구리갈매 아파트 월세": {
+      "time": null,
+      "results": [],
+      "status": "미측정 · 검색 환경 제한으로 조회 대기"
+    },
+    "구리갈매 상가 임대": {
+      "time": null,
+      "results": [],
+      "status": "미측정 · 검색 환경 제한으로 조회 대기"
+    },
+    "구리갈매 토지 매매": {
+      "time": null,
+      "results": [],
+      "status": "미측정 · 검색 환경 제한으로 조회 대기"
+    },
+    "광주 아파트 전세": {
+      "time": null,
+      "results": [],
+      "status": "미측정 · 검색 환경 제한으로 조회 대기"
+    },
+    "광주 아파트 매매": {
+      "time": null,
+      "results": [],
+      "status": "미측정 · 검색 환경 제한으로 조회 대기"
+    },
+    "광주 아파트 월세": {
+      "time": null,
+      "results": [],
+      "status": "미측정 · 검색 환경 제한으로 조회 대기"
+    },
+    "광주 상가 임대": {
+      "time": null,
+      "results": [],
+      "status": "미측정 · 검색 환경 제한으로 조회 대기"
+    },
+    "광주 토지 매매": {
+      "time": null,
+      "results": [],
+      "status": "미측정 · 검색 환경 제한으로 조회 대기"
+    },
+    "신흥역 아파트 전세": {
+      "time": null,
+      "results": [],
+      "status": "미측정 · 검색 환경 제한으로 조회 대기"
+    },
+    "신흥역 아파트 매매": {
+      "time": null,
+      "results": [],
+      "status": "미측정 · 검색 환경 제한으로 조회 대기"
+    },
+    "신흥역 아파트 월세": {
+      "time": null,
+      "results": [],
+      "status": "미측정 · 검색 환경 제한으로 조회 대기"
+    },
+    "신흥역 상가 임대": {
+      "time": null,
+      "results": [],
+      "status": "미측정 · 검색 환경 제한으로 조회 대기"
+    },
+    "신흥역 토지 매매": {
+      "time": null,
+      "results": [],
+      "status": "미측정 · 검색 환경 제한으로 조회 대기"
+    },
+    "검단신도시 푸르지오 매매": {
+      "time": null,
+      "results": [],
+      "status": "미측정 · 검색 환경 제한으로 조회 대기"
+    },
+    "검단신도시 푸르지오 전세": {
+      "time": null,
+      "results": [],
+      "status": "미측정 · 검색 환경 제한으로 조회 대기"
+    },
+    "검단신도시 푸르지오 월세": {
+      "time": null,
+      "results": [],
+      "status": "미측정 · 검색 환경 제한으로 조회 대기"
+    },
+    "마곡동 아파트 전세": {
+      "time": null,
+      "results": [],
+      "status": "미측정 · 검색 환경 제한으로 조회 대기"
+    },
+    "마곡동 아파트 매매": {
+      "time": null,
+      "results": [],
+      "status": "미측정 · 검색 환경 제한으로 조회 대기"
+    },
+    "마곡동 아파트 월세": {
+      "time": null,
+      "results": [],
+      "status": "미측정 · 검색 환경 제한으로 조회 대기"
+    },
+    "마곡동 상가 임대": {
+      "time": null,
+      "results": [],
+      "status": "미측정 · 검색 환경 제한으로 조회 대기"
+    },
+    "마곡동 토지 매매": {
+      "time": null,
+      "results": [],
+      "status": "미측정 · 검색 환경 제한으로 조회 대기"
+    },
+    "마곡 르웨스트 매매": {
+      "time": null,
+      "results": [],
+      "status": "미측정 · 검색 환경 제한으로 조회 대기"
+    },
+    "마곡 르웨스트 전세": {
+      "time": null,
+      "results": [],
+      "status": "미측정 · 검색 환경 제한으로 조회 대기"
+    },
+    "도안 아파트 전세": {
+      "time": null,
+      "results": [],
+      "status": "미측정 · 검색 환경 제한으로 조회 대기"
+    },
+    "도안 아파트 매매": {
+      "time": null,
+      "results": [],
+      "status": "미측정 · 검색 환경 제한으로 조회 대기"
+    },
+    "도안 아파트 월세": {
+      "time": null,
+      "results": [],
+      "status": "미측정 · 검색 환경 제한으로 조회 대기"
+    },
+    "도안 상가 임대": {
+      "time": null,
+      "results": [],
+      "status": "미측정 · 검색 환경 제한으로 조회 대기"
+    },
+    "도안 토지 매매": {
+      "time": null,
+      "results": [],
+      "status": "미측정 · 검색 환경 제한으로 조회 대기"
+    },
+    "도안 우미린 트리쉐이드 매매": {
+      "time": null,
+      "results": [],
+      "status": "미측정 · 검색 환경 제한으로 조회 대기"
+    },
+    "도안 우미린 트리쉐이드 전세": {
+      "time": null,
+      "results": [],
+      "status": "미측정 · 검색 환경 제한으로 조회 대기"
+    },
+    "화정동 아파트 전세": {
+      "time": null,
+      "results": [],
+      "status": "미측정 · 검색 환경 제한으로 조회 대기"
+    },
+    "화정동 아파트 매매": {
+      "time": null,
+      "results": [],
+      "status": "미측정 · 검색 환경 제한으로 조회 대기"
+    },
+    "화정동 아파트 월세": {
+      "time": null,
+      "results": [],
+      "status": "미측정 · 검색 환경 제한으로 조회 대기"
+    },
+    "화정동 상가 임대": {
+      "time": null,
+      "results": [],
+      "status": "미측정 · 검색 환경 제한으로 조회 대기"
+    },
+    "화정동 토지 매매": {
+      "time": null,
+      "results": [],
+      "status": "미측정 · 검색 환경 제한으로 조회 대기"
+    },
+    "영종도 아파트 전세": {
+      "time": null,
+      "results": [],
+      "status": "미측정 · 검색 환경 제한으로 조회 대기"
+    },
+    "영종도 아파트 매매": {
+      "time": null,
+      "results": [],
+      "status": "미측정 · 검색 환경 제한으로 조회 대기"
+    },
+    "영종도 아파트 월세": {
+      "time": null,
+      "results": [],
+      "status": "미측정 · 검색 환경 제한으로 조회 대기"
+    },
+    "영종도 상가 임대": {
+      "time": null,
+      "results": [],
+      "status": "미측정 · 검색 환경 제한으로 조회 대기"
+    },
+    "영종도 토지 매매": {
+      "time": null,
+      "results": [],
+      "status": "미측정 · 검색 환경 제한으로 조회 대기"
+    },
+    "원베일리 매매": {
+      "time": "2026-10-15T10:34:51.502Z",
+      "scanned_count": 30,
+      "results": [
+        {
+          "rank": 4,
+          "url": "https://blog.naver.com/hanyangrealestate/224442599015",
+          "title": "한강뷰 아파트 매매 34평 원베일리 한강공원 인접",
+          "author": "한양원베일리공인중개사"
+        },
+        {
+          "rank": 14,
+          "url": "https://blog.naver.com/hanyangrealestate/224441184298",
+          "title": "반포 래미안원베일리 매매 파노라마한강뷰 53평 거실양창 + 오픈발코니 로얄동 로얄층",
+          "author": "한양원베일리공인중개사"
+        },
+        {
+          "rank": 22,
+          "url": "https://blog.naver.com/c-m5940088/224353360134",
+          "title": "래미안원베일리 67평형 실거래가 130억이라고?",
+          "author": "충무원베일리부동산중개법인주식회사"
+        }
+      ],
+      "evidence_scope": "matched_posts_only"
+    },
+    "원베일리 전세": {
+      "time": "2026-10-15T10:36:26.101Z",
+      "scanned_count": 30,
+      "results": [
+        {
+          "rank": 19,
+          "url": "https://blog.naver.com/sh_realestate/224104838970",
+          "title": "반포 래미안 원베일리 vs 트리니원 전세 매매 : 커뮤니티와 조경",
+          "author": "신한부동산공인중개사무소"
+        },
+        {
+          "rank": 22,
+          "url": "https://blog.naver.com/starmskim/224435287374",
+          "title": "래미안원베일리 46평 전세 조용하고 옆으로 한강 보여요",
+          "author": "하나원베일리공인중개사"
+        }
+      ],
+      "evidence_scope": "matched_posts_only"
+    },
+    "반포동 래미안 매매": {
+      "time": "2026-10-15T10:36:27.171Z",
+      "scanned_count": 30,
+      "results": [],
+      "evidence_scope": "matched_posts_only"
+    },
+    "반포동 래미안 전세": {
+      "time": "2026-10-15T10:36:28.598Z",
+      "scanned_count": 30,
+      "results": [],
+      "evidence_scope": "matched_posts_only"
+    },
+    "반포동 래미안 월세": {
+      "time": "2026-10-15T10:36:29.947Z",
+      "scanned_count": 30,
+      "results": [
+        {
+          "rank": 17,
+          "url": "https://blog.naver.com/hylee7011/224428842596",
+          "title": "반포 아파트월세 반포래미안트리니원 전용59A타입 편리한 생활권",
+          "author": "반포세움공인중개사사무소"
+        },
+        {
+          "rank": 28,
+          "url": "https://blog.naver.com/hylee7011/224425701236",
+          "title": "삼성물산 반포래미안트리니원 월세 막힘없는 뷰 착한금액",
+          "author": "반포세움공인중개사사무소"
+        }
+      ],
+      "evidence_scope": "matched_posts_only"
+    },
+    "대장동 토지 매매": {
+      "time": "2026-10-15T10:36:31.258Z",
+      "scanned_count": 30,
+      "results": [
+        {
+          "rank": 1,
+          "url": "https://blog.naver.com/kokkirii8888/224340621552",
+          "title": "판교 대장동 토지 매매 : 상가주택 신축부지 6개 필지 소개",
+          "author": "대장동코끼리공인중개사"
+        }
+      ],
+      "evidence_scope": "matched_posts_only"
+    },
+    "대장동 상가 임대": {
+      "time": "2026-10-15T10:36:32.386Z",
+      "scanned_count": 30,
+      "results": [
+        {
+          "rank": 3,
+          "url": "https://blog.naver.com/kokkirii8888/224434268924",
+          "title": "대장동 스크린골프 자리 임대: 도로변 6타석 전용 약109평(360.12㎡)",
+          "author": "대장동코끼리공인중개사"
+        },
+        {
+          "rank": 8,
+          "url": "https://blog.naver.com/kokkirii8888/224437416682",
+          "title": "분당구 대장동상가: 넓고 내부시설 배치 쉬운 정사각형 월세맛집",
+          "author": "대장동코끼리공인중개사"
+        },
+        {
+          "rank": 9,
+          "url": "https://blog.naver.com/kokkirii8888/224340621552",
+          "title": "판교 대장동 토지 매매 : 상가주택 신축부지 6개 필지 소개",
+          "author": "대장동코끼리공인중개사"
+        }
+      ],
+      "evidence_scope": "matched_posts_only"
+    },
+    "사화동 상가 임대": {
+      "time": "2026-10-15T10:36:33.530Z",
+      "scanned_count": 30,
+      "results": [
+        {
+          "rank": 16,
+          "url": "https://blog.naver.com/alfkvv/224254357664",
+          "title": "창원 사화동 롯데캐슬상가 매매·임대 / 피아노,미술·교습소 추천 매물!!",
+          "author": "사화롯데부자공인중개사사무소"
+        },
+        {
+          "rank": 17,
+          "url": "https://blog.naver.com/alfkvv/224312600783",
+          "title": "창원 사화동 롯데캐슬포레스트 1단지 상가 임대, 임대 최저가부터 전면상가까지 매물 소개합니다.",
+          "author": "사화롯데부자공인중개사사무소"
+        }
+      ],
+      "evidence_scope": "matched_posts_only"
+    },
+    "반포동 아파트 전세": {
+      "time": "2026-10-15T10:36:34.746Z",
+      "scanned_count": 30,
+      "results": [],
+      "evidence_scope": "matched_posts_only"
+    },
+    "반포동 아파트 매매": {
+      "time": "2026-10-15T10:36:36.040Z",
+      "scanned_count": 30,
+      "results": [
+        {
+          "rank": 13,
+          "url": "https://blog.naver.com/hanyangrealestate/224442599015",
+          "title": "한강뷰 아파트 매매 34평 원베일리 한강공원 인접",
+          "author": "한양원베일리공인중개사"
+        }
+      ],
+      "evidence_scope": "matched_posts_only"
+    },
+    "반포동 아파트 월세": {
+      "time": "2026-10-15T10:36:37.236Z",
+      "scanned_count": 30,
+      "results": [],
+      "evidence_scope": "matched_posts_only"
+    },
+    "반포동 상가 임대": {
+      "time": "2026-10-15T10:36:45.094Z",
+      "scanned_count": 30,
+      "results": [
+        {
+          "rank": 29,
+          "url": "https://blog.naver.com/sebok1982/224312512679",
+          "title": "반포동 래미안원베일리상가 월세 2호실통임대",
+          "author": "세복원베일리공인중개사"
+        }
+      ],
+      "evidence_scope": "matched_posts_only"
+    },
+    "반포동 토지 매매": {
+      "time": "2026-10-15T10:37:09.841Z",
+      "scanned_count": 30,
+      "results": [],
+      "evidence_scope": "matched_posts_only"
+    },
+    "래미안퍼스티지 매매": {
+      "time": "2026-10-15T10:37:11.072Z",
+      "scanned_count": 30,
+      "results": [
+        {
+          "rank": 22,
+          "url": "https://blog.naver.com/onebaileytop/224441372189",
+          "title": "래미안퍼스티지 72평 매매 풀옵션 확트인뷰 반래퍼 추천매물",
+          "author": "원베일리탑공인중개사"
+        }
+      ],
+      "evidence_scope": "matched_posts_only"
+    },
+    "래미안퍼스티지 전세": {
+      "time": "2026-10-15T10:37:12.527Z",
+      "scanned_count": 30,
+      "results": [
+        {
+          "rank": 15,
+          "url": "https://blog.naver.com/sebok1982/224414281936",
+          "title": "래미안퍼스티지 128동 전세 조용한 동 입주 협의 가능",
+          "author": "세복원베일리공인중개사"
+        }
+      ],
+      "evidence_scope": "matched_posts_only"
+    },
+    "래미안퍼스티지 월세": {
+      "time": "2026-10-15T10:37:13.587Z",
+      "scanned_count": 30,
+      "results": [
+        {
+          "rank": 18,
+          "url": "https://blog.naver.com/onebaileytop/224420719027",
+          "title": "반포동 래미안퍼스티지 72평 월세 귀한 로얄동 로얄층 풀옵션",
+          "author": "원베일리탑공인중개사"
+        },
+        {
+          "rank": 24,
+          "url": "https://blog.naver.com/onebaileytop/224406030382",
+          "title": "반포동 래미안퍼스티지 72평 월세 귀한 로얄동 로얄층 풀옵션",
+          "author": "원베일리탑공인중개사"
+        }
+      ],
+      "evidence_scope": "matched_posts_only"
+    },
+    "반포자이 매매": {
+      "time": "2026-10-15T10:37:14.920Z",
+      "scanned_count": 30,
+      "results": [],
+      "evidence_scope": "matched_posts_only"
+    },
+    "반포자이 전세": {
+      "time": "2026-10-15T10:37:16.077Z",
+      "scanned_count": 30,
+      "results": [],
+      "evidence_scope": "matched_posts_only"
+    },
+    "반포자이 월세": {
+      "time": "2026-10-15T10:37:17.100Z",
+      "scanned_count": 30,
+      "results": [],
+      "evidence_scope": "matched_posts_only"
+    },
+    "반포래미안트리니원 매매": {
+      "time": "2026-10-15T10:37:18.071Z",
+      "scanned_count": 30,
+      "results": [],
+      "evidence_scope": "matched_posts_only"
+    },
+    "반포래미안트리니원 전세": {
+      "time": "2026-10-15T10:37:19.240Z",
+      "scanned_count": 30,
+      "results": [
+        {
+          "rank": 20,
+          "url": "https://blog.naver.com/starmskim/224442509089",
+          "title": "반포래미안트리니원 40평 전세 관악산뷰 하루종일 밝은 집",
+          "author": "하나원베일리공인중개사"
+        }
+      ],
+      "evidence_scope": "matched_posts_only"
+    },
+    "반포래미안트리니원 월세": {
+      "time": "2026-10-15T10:37:20.393Z",
+      "scanned_count": 30,
+      "results": [],
+      "evidence_scope": "matched_posts_only"
+    },
+    "배곧동 아파트 전세": {
+      "time": "2026-10-15T10:37:21.633Z",
+      "scanned_count": 30,
+      "results": [],
+      "evidence_scope": "matched_posts_only"
+    },
+    "배곧동 아파트 매매": {
+      "time": "2026-10-15T10:37:22.740Z",
+      "scanned_count": 30,
+      "results": [],
+      "evidence_scope": "matched_posts_only"
+    },
+    "배곧동 아파트 월세": {
+      "time": "2026-10-15T10:37:23.922Z",
+      "scanned_count": 30,
+      "results": [],
+      "evidence_scope": "matched_posts_only"
+    },
+    "배곧동 상가 임대": {
+      "time": "2026-10-15T10:37:25.491Z",
+      "scanned_count": 30,
+      "results": [],
+      "evidence_scope": "matched_posts_only"
+    },
+    "배곧동 토지 매매": {
+      "time": "2026-10-15T10:37:26.962Z",
+      "scanned_count": 30,
+      "results": [],
+      "evidence_scope": "matched_posts_only"
+    },
+    "서초구 아파트 전세": {
+      "time": "2026-10-15T10:37:28.057Z",
+      "scanned_count": 30,
+      "results": [],
+      "evidence_scope": "matched_posts_only"
+    },
+    "서초구 아파트 매매": {
+      "time": "2026-10-15T10:37:29.084Z",
+      "scanned_count": 30,
+      "results": [],
+      "evidence_scope": "matched_posts_only"
+    },
+    "서초구 아파트 월세": {
+      "time": "2026-10-15T10:37:30.432Z",
+      "scanned_count": 30,
+      "results": [],
+      "evidence_scope": "matched_posts_only"
+    },
+    "서초구 상가 임대": {
+      "time": "2026-10-15T10:37:31.594Z",
+      "scanned_count": 30,
+      "results": [],
+      "evidence_scope": "matched_posts_only"
+    },
+    "서초구 토지 매매": {
+      "time": "2026-10-15T10:37:32.707Z",
+      "scanned_count": 30,
+      "results": [],
+      "evidence_scope": "matched_posts_only"
+    },
+    "계양구 아파트 전세": {
+      "time": "2026-10-15T10:37:33.817Z",
+      "scanned_count": 30,
+      "results": [],
+      "evidence_scope": "matched_posts_only"
+    },
+    "계양구 아파트 매매": {
+      "time": "2026-10-15T10:37:59.335Z",
+      "scanned_count": 30,
+      "results": [],
+      "evidence_scope": "matched_posts_only"
+    },
+    "계양구 아파트 월세": {
+      "time": "2026-10-15T10:38:00.971Z",
+      "scanned_count": 30,
+      "results": [],
+      "evidence_scope": "matched_posts_only"
+    },
+    "계양구 상가 임대": {
+      "time": "2026-10-15T10:38:02.807Z",
+      "scanned_count": 30,
+      "results": [],
+      "evidence_scope": "matched_posts_only"
+    },
+    "계양구 토지 매매": {
+      "time": "2026-10-15T10:38:04.066Z",
+      "scanned_count": 30,
+      "results": [],
+      "evidence_scope": "matched_posts_only"
+    },
+    "검단 아파트 전세": {
+      "time": "2026-10-15T10:38:05.332Z",
+      "scanned_count": 30,
+      "results": [
+        {
+          "rank": 27,
+          "url": "https://blog.naver.com/pku4499/224428807756",
+          "title": "검단신도시 대단지 프리미엄! 신검단중앙역 센트레빌 15층 남동향 84타입 전세",
+          "author": "네이트부동산"
+        }
+      ],
+      "evidence_scope": "matched_posts_only"
+    },
+    "검단 아파트 매매": {
+      "time": "2026-10-15T10:38:06.670Z",
+      "scanned_count": 30,
+      "results": [],
+      "evidence_scope": "matched_posts_only"
+    },
+    "검단 아파트 월세": {
+      "time": "2026-10-15T10:38:07.784Z",
+      "scanned_count": 30,
+      "results": [
+        {
+          "rank": 26,
+          "url": "https://blog.naver.com/chuhayoon/224398427558",
+          "title": "검단신도시 26년 입주 아파트 전세 및 월세 시세분석",
+          "author": "티파니부동산공인중개사"
+        }
+      ],
+      "evidence_scope": "matched_posts_only"
+    },
+    "검단 상가 임대": {
+      "time": "2026-10-15T10:38:08.999Z",
+      "scanned_count": 30,
+      "results": [],
+      "evidence_scope": "matched_posts_only"
+    },
+    "검단 토지 매매": {
+      "time": "2026-10-15T10:38:10.229Z",
+      "scanned_count": 30,
+      "results": [],
+      "evidence_scope": "matched_posts_only"
+    },
+    "천안아산역 아파트 전세": {
+      "time": "2026-10-15T10:38:11.390Z",
+      "scanned_count": 29,
+      "results": [],
+      "evidence_scope": "matched_posts_only"
+    },
+    "천안아산역 아파트 매매": {
+      "time": "2026-10-15T10:38:12.472Z",
+      "scanned_count": 30,
+      "results": [],
+      "evidence_scope": "matched_posts_only"
+    },
+    "천안아산역 아파트 월세": {
+      "time": "2026-10-15T10:38:13.561Z",
+      "scanned_count": 30,
+      "results": [],
+      "evidence_scope": "matched_posts_only"
+    },
+    "천안아산역 상가 임대": {
+      "time": "2026-10-15T10:38:14.624Z",
+      "scanned_count": 30,
+      "results": [],
+      "evidence_scope": "matched_posts_only"
+    },
+    "천안아산역 토지 매매": {
+      "time": "2026-10-15T10:38:15.734Z",
+      "scanned_count": 30,
+      "results": [],
+      "evidence_scope": "matched_posts_only"
+    },
+    "대장동 아파트 전세": {
+      "time": "2026-10-15T10:38:16.928Z",
+      "scanned_count": 30,
+      "results": [
+        {
+          "rank": 22,
+          "url": "https://blog.naver.com/kokkirii8888/224416373520",
+          "title": "판교TH2 전세 선호도 높은 C1 사생활침해없는 정원뷰 트인뷰 융무 정상입주",
+          "author": "대장동코끼리공인중개사"
+        }
+      ],
+      "evidence_scope": "matched_posts_only"
+    },
+    "대장동 아파트 매매": {
+      "time": "2026-10-15T10:38:18.205Z",
+      "scanned_count": 30,
+      "results": [
+        {
+          "rank": 16,
+          "url": "https://blog.naver.com/kokkirii8888/224316285688",
+          "title": "경기남부광역철도 진행 상황과 판교 대장동 부동산",
+          "author": "대장동코끼리공인중개사"
+        }
+      ],
+      "evidence_scope": "matched_posts_only"
+    },
+    "대장동 아파트 월세": {
+      "time": "2026-10-15T10:38:19.415Z",
+      "scanned_count": 30,
+      "results": [],
+      "evidence_scope": "matched_posts_only"
+    },
+    "동탄 아파트 전세": {
+      "time": "2026-10-15T10:38:20.574Z",
+      "scanned_count": 30,
+      "results": [],
+      "evidence_scope": "matched_posts_only"
+    },
+    "동탄 아파트 매매": {
+      "time": "2026-10-15T10:38:21.703Z",
+      "scanned_count": 30,
+      "results": [],
+      "evidence_scope": "matched_posts_only"
+    },
+    "동탄 아파트 월세": {
+      "time": "2026-10-15T10:38:23.031Z",
+      "scanned_count": 30,
+      "results": [],
+      "evidence_scope": "matched_posts_only"
+    },
+    "동탄 상가 임대": {
+      "time": "2026-10-15T10:38:24.339Z",
+      "scanned_count": 30,
+      "results": [
+        {
+          "rank": 24,
+          "url": "https://blog.naver.com/cherry9366/224389439310",
+          "title": "J.동탄 신동 상가 임대, 업종 꽉 찬 파크릭스 단지 내 1층 임대 매물을 찾는다면?",
+          "author": "정부동산 공인중개사 사무소"
+        }
+      ],
+      "evidence_scope": "matched_posts_only"
+    },
+    "동탄 토지 매매": {
+      "time": "2026-10-15T10:38:25.600Z",
+      "scanned_count": 30,
+      "results": [],
+      "evidence_scope": "matched_posts_only"
+    },
+    "광명시 아파트 전세": {
+      "time": "2026-10-15T10:38:26.632Z",
+      "scanned_count": 30,
+      "results": [
+        {
+          "rank": 1,
+          "url": "https://blog.naver.com/heesun9837/224440070516",
+          "title": "광명 집값 0.39% 상승, 내 아파트도 그만큼 올랐을까요?",
+          "author": "광명부자부동산공인중개사"
+        },
+        {
+          "rank": 21,
+          "url": "https://blog.naver.com/heesun9837/224440320471",
+          "title": "트리우스광명 아파트 전세 38평 대형유일전세 고층 스카이뷰",
+          "author": "광명부자부동산공인중개사"
+        }
+      ],
+      "evidence_scope": "matched_posts_only"
+    },
+    "광명시 아파트 매매": {
+      "time": "2026-10-15T10:38:27.831Z",
+      "scanned_count": 30,
+      "results": [],
+      "evidence_scope": "matched_posts_only"
+    },
+    "광명시 아파트 월세": {
+      "time": "2026-10-15T10:38:28.929Z",
+      "scanned_count": 30,
+      "results": [],
+      "evidence_scope": "matched_posts_only"
+    },
+    "광명시 상가 임대": {
+      "time": "2026-10-15T10:39:06.929Z",
+      "scanned_count": 30,
+      "results": [
+        {
+          "rank": 11,
+          "url": "https://blog.naver.com/heesun9837/224415079475",
+          "title": "광명자이힐스테이트SK뷰 단지내상가",
+          "author": "광명부자부동산공인중개사"
+        }
+      ],
+      "evidence_scope": "matched_posts_only"
+    },
+    "광명시 토지 매매": {
+      "time": "2026-10-15T10:39:08.640Z",
+      "scanned_count": 30,
+      "results": [],
+      "evidence_scope": "matched_posts_only"
+    },
+    "송도 아파트 전세": {
+      "time": "2026-10-15T10:39:10.772Z",
+      "scanned_count": 30,
+      "results": [
+        {
+          "rank": 29,
+          "url": "https://blog.naver.com/songdofocus/224435230487",
+          "title": "연수구 송도아파트전세 송도아트윈푸르지오 84타입 안정적인 저층",
+          "author": "송도포커스공인중개사사무소"
+        }
+      ],
+      "evidence_scope": "matched_posts_only"
+    },
+    "송도 아파트 매매": {
+      "time": "2026-10-15T10:39:11.919Z",
+      "scanned_count": 30,
+      "results": [],
+      "evidence_scope": "matched_posts_only"
+    },
+    "송도 아파트 월세": {
+      "time": "2026-10-15T10:39:13.059Z",
+      "scanned_count": 30,
+      "results": [
+        {
+          "rank": 4,
+          "url": "https://blog.naver.com/songdo_realestate_/224441472499",
+          "title": "더샵송도아크베이 입지 및 시세분석",
+          "author": "레이크명품부동산공인중개사무소"
+        },
+        {
+          "rank": 13,
+          "url": "https://blog.naver.com/leelemon22/224441116795",
+          "title": "더샵송도아크베이 49평 월세! 알파룸·풀에어컨·포세린타일·김치냉장고 11월 말 입주가능",
+          "author": "해수부동산공인중개사사무소"
+        },
+        {
+          "rank": 17,
+          "url": "https://blog.naver.com/foxmk73/224403730841",
+          "title": "송도 전세·월세 상승률 얼마나 올랐을까? 전세 매물 감소와 공구별 분위기",
+          "author": "위너스부동산공인중개사사무소"
+        }
+      ],
+      "evidence_scope": "matched_posts_only"
+    },
+    "송도 상가 임대": {
+      "time": "2026-10-15T10:39:14.296Z",
+      "scanned_count": 30,
+      "results": [],
+      "evidence_scope": "matched_posts_only"
+    },
+    "송도 토지 매매": {
+      "time": "2026-10-15T10:39:15.435Z",
+      "scanned_count": 30,
+      "results": [],
+      "evidence_scope": "matched_posts_only"
+    },
+    "탕정 아파트 전세": {
+      "time": "2026-10-15T10:39:16.577Z",
+      "scanned_count": 30,
+      "results": [],
+      "evidence_scope": "matched_posts_only"
+    },
+    "탕정 아파트 매매": {
+      "time": "2026-10-15T10:39:17.897Z",
+      "scanned_count": 30,
+      "results": [
+        {
+          "rank": 18,
+          "url": "https://blog.naver.com/non2017_/224442814408",
+          "title": "탕정 아파트 매매 호반써밋그랜드마크 선호도 높은 1차 매물",
+          "author": "탕정호반1번지부동산중개사무소"
+        }
+      ],
+      "evidence_scope": "matched_posts_only"
+    },
+    "탕정 아파트 월세": {
+      "time": "2026-10-15T10:39:18.981Z",
+      "scanned_count": 30,
+      "results": [],
+      "evidence_scope": "matched_posts_only"
+    },
+    "탕정 상가 임대": {
+      "time": "2026-10-15T10:39:20.161Z",
+      "scanned_count": 30,
+      "results": [],
+      "evidence_scope": "matched_posts_only"
+    },
+    "탕정 토지 매매": {
+      "time": "2026-10-15T10:39:21.794Z",
+      "scanned_count": 30,
+      "results": [],
+      "evidence_scope": "matched_posts_only"
+    },
+    "사화동 아파트 전세": {
+      "time": "2026-10-15T10:39:22.894Z",
+      "scanned_count": 30,
+      "results": [
+        {
+          "rank": 20,
+          "url": "https://blog.naver.com/alfkvv/224356553109",
+          "title": "[창원 아파트 전세] 사화동 창원롯데캐슬포레스트 1단지 34평 A타입 필로티 2층 (층간소음 0%)",
+          "author": "사화롯데부자공인중개사사무소"
+        }
+      ],
+      "evidence_scope": "matched_posts_only"
+    },
+    "사화동 아파트 매매": {
+      "time": "2026-10-15T10:39:24.126Z",
+      "scanned_count": 30,
+      "results": [],
+      "evidence_scope": "matched_posts_only"
+    },
+    "사화동 아파트 월세": {
+      "time": "2026-10-15T10:39:25.281Z",
+      "scanned_count": 30,
+      "results": [
+        {
+          "rank": 10,
+          "url": "https://blog.naver.com/alfkvv/224315455837",
+          "title": "사화동 창원롯데캐슬포레스트2단지 월세(풀옵션,풀리모델링)",
+          "author": "사화롯데부자공인중개사사무소"
+        }
+      ],
+      "evidence_scope": "matched_posts_only"
+    },
+    "사화동 토지 매매": {
+      "time": "2026-10-15T10:39:26.380Z",
+      "scanned_count": 28,
+      "results": [],
+      "evidence_scope": "matched_posts_only"
+    },
+    "창원 롯데캐슬포레스트 매매": {
+      "time": "2026-10-15T10:39:27.470Z",
+      "scanned_count": 30,
+      "results": [
+        {
+          "rank": 29,
+          "url": "https://blog.naver.com/alfkvv/224377303483",
+          "title": "창원 대단지 상가 어디가 좋을까? 수요일마다 장 서는 대단지 롯데캐슬포레스트 재분양호실 매매·임대 안내",
+          "author": "사화롯데부자공인중개사사무소"
+        }
+      ],
+      "evidence_scope": "matched_posts_only"
+    },
+    "창원 롯데캐슬포레스트 전세": {
+      "time": "2026-10-15T10:39:28.476Z",
+      "scanned_count": 30,
+      "results": [
+        {
+          "rank": 8,
+          "url": "https://blog.naver.com/alfkvv/224391749929",
+          "title": "창원 롯데캐슬 포레스트 1단지, 마지막 41평 전세 2세대 빠르게 만나보세요!!",
+          "author": "사화롯데부자공인중개사사무소"
+        }
+      ],
+      "evidence_scope": "matched_posts_only"
+    },
+    "창원 롯데캐슬포레스트 월세": {
+      "time": "2026-10-15T10:39:29.586Z",
+      "scanned_count": 30,
+      "results": [
+        {
+          "rank": 12,
+          "url": "https://blog.naver.com/alfkvv/224315455837",
+          "title": "사화동 창원롯데캐슬포레스트2단지 월세(풀옵션,풀리모델링)",
+          "author": "사화롯데부자공인중개사사무소"
+        }
+      ],
+      "evidence_scope": "matched_posts_only"
+    },
+    "송파 아파트 전세": {
+      "time": "2026-10-15T10:39:30.724Z",
+      "scanned_count": 30,
+      "results": [],
+      "evidence_scope": "matched_posts_only"
+    },
+    "송파 아파트 매매": {
+      "time": "2026-10-15T10:39:31.833Z",
+      "scanned_count": 30,
+      "results": [],
+      "evidence_scope": "matched_posts_only"
+    },
+    "송파 아파트 월세": {
+      "time": "2026-10-15T10:39:33.162Z",
+      "scanned_count": 30,
+      "results": [],
+      "evidence_scope": "matched_posts_only"
+    },
+    "송파 상가 임대": {
+      "time": "2026-10-15T10:39:34.265Z",
+      "scanned_count": 30,
+      "results": [],
+      "evidence_scope": "matched_posts_only"
+    },
+    "송파 토지 매매": {
+      "time": "2026-10-15T10:39:35.349Z",
+      "scanned_count": 30,
+      "results": [],
+      "evidence_scope": "matched_posts_only"
+    },
+    "평택 아파트 전세": {
+      "time": "2026-10-15T10:39:36.467Z",
+      "scanned_count": 30,
+      "results": [],
+      "evidence_scope": "matched_posts_only"
+    },
+    "구리갈매 임대": {
+      "time": "2026-10-15T10:40:21.907Z",
+      "scanned_count": 30,
+      "results": [
+        {
+          "rank": 3,
+          "url": "https://blog.naver.com/sk8er1216/224442459359",
+          "title": "구리갈매 휴밸나인 드라이브인 임대 근생자리 사무실 사용가능",
+          "author": "미래부동산공인중개사"
+        }
+      ],
+      "evidence_scope": "matched_posts_only"
+    },
+    "구리갈매 월세": {
+      "time": "2026-10-15T10:40:23.404Z",
+      "scanned_count": 30,
+      "results": [
+        {
+          "rank": 2,
+          "url": "https://blog.naver.com/sk8er1216/224442459359",
+          "title": "구리갈매 휴밸나인 드라이브인 임대 근생자리 사무실 사용가능",
+          "author": "미래부동산공인중개사"
+        }
+      ],
+      "evidence_scope": "matched_posts_only"
+    },
+    "광주 임대": {
+      "time": "2026-10-15T10:40:24.730Z",
+      "scanned_count": 30,
+      "results": [],
+      "evidence_scope": "matched_posts_only"
+    },
+    "광주 월세": {
+      "time": "2026-10-15T10:40:26.010Z",
+      "scanned_count": 29,
+      "results": [],
+      "evidence_scope": "matched_posts_only"
+    },
+    "신흥역 임대": {
+      "time": "2026-10-15T10:40:27.058Z",
+      "scanned_count": 30,
+      "results": [],
+      "evidence_scope": "matched_posts_only"
+    },
+    "신흥역 월세": {
+      "time": "2026-10-15T10:40:28.245Z",
+      "scanned_count": 30,
+      "results": [],
+      "evidence_scope": "matched_posts_only"
+    },
+    "중원구 임대": {
+      "time": "2026-10-15T10:40:29.394Z",
+      "scanned_count": 30,
+      "results": [],
+      "evidence_scope": "matched_posts_only"
+    },
+    "중원구 월세": {
+      "time": "2026-10-15T10:40:30.483Z",
+      "scanned_count": 30,
+      "results": [],
+      "evidence_scope": "matched_posts_only"
+    },
+    "마곡동 임대": {
+      "time": "2026-10-15T10:40:31.568Z",
+      "scanned_count": 23,
+      "results": [],
+      "evidence_scope": "matched_posts_only"
+    },
+    "마곡동 월세": {
+      "time": "2026-10-15T10:40:32.647Z",
+      "scanned_count": 30,
+      "results": [
+        {
+          "rank": 26,
+          "url": "https://blog.naver.com/lgm777ok/224390781190",
+          "title": "강서오피스텔_단기임대_마곡럭스나인 N동_즉시입주 가능, 단기 월세 & 일시선납, 9호선 마곡나루역 급행 & 공항철도 초역세권!",
+          "author": "마곡르웨스트공인중개사사무소"
+        },
+        {
+          "rank": 30,
+          "url": "https://blog.naver.com/lgm777ok/224413547097",
+          "title": "마곡동 단지 내 상가 월세_음식점 운영 중, 마곡나루역 3분, 기업종사자와 유동인구 확보된 자리!",
+          "author": "마곡르웨스트공인중개사사무소"
+        }
+      ],
+      "evidence_scope": "matched_posts_only"
+    },
+    "마곡 르웨스트 임대": {
+      "time": "2026-10-15T10:40:33.985Z",
+      "scanned_count": 30,
+      "results": [
+        {
+          "rank": 16,
+          "url": "https://blog.naver.com/lgm777ok/224424776259",
+          "title": "서울 시니어타운, 마곡 VL르웨스트 입주 보증금·생활비는? 타입별 특징과 혜택·서비스 총정리",
+          "author": "마곡르웨스트공인중개사사무소"
+        },
+        {
+          "rank": 18,
+          "url": "https://blog.naver.com/lgm777ok/224374061687",
+          "title": "마곡 롯데캐슬 르웨스트 분양｜69·83A타입 내부 사진 _ 분양혜택 가격 안내드립니다!!!",
+          "author": "마곡르웨스트공인중개사사무소"
+        }
+      ],
+      "evidence_scope": "matched_posts_only"
+    },
+    "마곡 르웨스트 월세": {
+      "time": "2026-10-15T10:40:35.041Z",
+      "scanned_count": 30,
+      "results": [
+        {
+          "rank": 4,
+          "url": "https://blog.naver.com/lgm777ok/224435115173",
+          "title": "마곡오피스텔_롯데캐슬르웨스트 월세_최고의 공원, 북한산뷰 /드레스룸 /넓은 전용공간 /트리플 초역세권 직통 /원스톱 생활권",
+          "author": "마곡르웨스트공인중개사사무소"
+        },
+        {
+          "rank": 6,
+          "url": "https://blog.naver.com/lgm777ok/224407103550",
+          "title": "마곡 강추매물_롯데캐슬르웨스트 월세_전입 가능, 융무, 46타입, 9호선·공항철도·5호선 역세권, 편의 시설 다양, 서울 숲세권!",
+          "author": "마곡르웨스트공인중개사사무소"
+        },
+        {
+          "rank": 9,
+          "url": "https://blog.naver.com/lgm777ok/224374061687",
+          "title": "마곡 롯데캐슬 르웨스트 분양｜69·83A타입 내부 사진 _ 분양혜택 가격 안내드립니다!!!",
+          "author": "마곡르웨스트공인중개사사무소"
+        }
+      ],
+      "evidence_scope": "matched_posts_only"
+    },
+    "도안 임대": {
+      "time": "2026-10-15T10:40:36.086Z",
+      "scanned_count": 28,
+      "results": [
+        {
+          "rank": 9,
+          "url": "https://blog.naver.com/theonebudong/224433943265",
+          "title": "도안 푸르지오 디아델 분양권 매매, 민간임대까지 김소장에게 문의 주세요!",
+          "author": "도안더원우미린트리쉐이드공인중개사사무소"
+        }
+      ],
+      "evidence_scope": "matched_posts_only"
+    },
+    "도안 월세": {
+      "time": "2026-10-15T10:40:37.932Z",
+      "scanned_count": 30,
+      "results": [
+        {
+          "rank": 4,
+          "url": "https://blog.naver.com/theonebudong/224442544185",
+          "title": "대전 도안우미린트리쉐이드월세 귀한 대형평수 전세가능 학교가까운동",
+          "author": "도안더원우미린트리쉐이드공인중개사사무소"
+        }
+      ],
+      "evidence_scope": "matched_posts_only"
+    },
+    "도안 우미린 트리쉐이드 임대": {
+      "time": "2026-10-15T10:40:39.463Z",
+      "scanned_count": 30,
+      "results": [
+        {
+          "rank": 15,
+          "url": "https://blog.naver.com/theonebudong/224427051102",
+          "title": "도안우미린트리쉐이드 상가 입점 소식 ☕ 파리바게뜨·텐퍼센트·학원과 84A 급매물, 중도금대출 연장 소식까지!",
+          "author": "도안더원우미린트리쉐이드공인중개사사무소"
+        },
+        {
+          "rank": 24,
+          "url": "https://blog.naver.com/theonebudong/224376280930",
+          "title": "도안 우미린 트리쉐이드 상가 매매 임대, 주차장연결 1층 강추자리 빠른 선점하세요!!! 병원·학원 ·브런치카페 추천",
+          "author": "도안더원우미린트리쉐이드공인중개사사무소"
+        }
+      ],
+      "evidence_scope": "matched_posts_only"
+    },
+    "도안 우미린 트리쉐이드 월세": {
+      "time": "2026-10-15T10:40:41.067Z",
+      "scanned_count": 30,
+      "results": [
+        {
+          "rank": 3,
+          "url": "https://blog.naver.com/theonebudong/224442544185",
+          "title": "대전 도안우미린트리쉐이드월세 귀한 대형평수 전세가능 학교가까운동",
+          "author": "도안더원우미린트리쉐이드공인중개사사무소"
+        },
+        {
+          "rank": 16,
+          "url": "https://blog.naver.com/budongsanmatjip/224440019354",
+          "title": "용계동 도안우미린트리쉐이드 113.89㎡ 아파트 매매 대단지",
+          "author": "《 도안더원우미린트리쉐이드 부동산》010-2727-1140"
+        },
+        {
+          "rank": 26,
+          "url": "https://blog.naver.com/theonebudong/224392154289",
+          "title": "도안신도시 도안우미린트리쉐이드월세 고층 로얄동 에어컨5 중문(거래완료)",
+          "author": "도안더원우미린트리쉐이드공인중개사사무소"
+        }
+      ],
+      "evidence_scope": "matched_posts_only"
+    },
+    "화정동 임대": {
+      "time": "2026-10-15T10:40:42.969Z",
+      "scanned_count": 30,
+      "results": [],
+      "evidence_scope": "matched_posts_only"
+    },
+    "화정동 월세": {
+      "time": "2026-10-15T10:40:44.387Z",
+      "scanned_count": 14,
+      "results": [],
+      "evidence_scope": "matched_posts_only"
+    }
+  },
+  "offices": [
+    {
+      "name": "신한부동산공인중개사",
+      "keywords": [
+        "반포동 임대",
+        "반포동 월세",
+        "반포동 아파트 전세",
+        "반포동 아파트 매매",
+        "반포동 아파트 월세",
+        "반포동 상가 임대",
+        "반포동 토지 매매",
+        "원베일리 매매",
+        "원베일리 전세",
+        "원베일리 월세",
+        "반포동 래미안 매매",
+        "반포동 래미안 전세",
+        "반포동 래미안 월세",
+        "래미안퍼스티지 매매",
+        "래미안퍼스티지 전세",
+        "래미안퍼스티지 월세",
+        "반포자이 매매",
+        "반포자이 전세",
+        "반포자이 월세",
+        "반포래미안트리니원 매매",
+        "반포래미안트리니원 전세",
+        "반포래미안트리니원 월세"
+      ],
+      "matches": [
+        {
+          "keyword": "원베일리 전세",
+          "rank": 19,
+          "url": "https://blog.naver.com/sh_realestate/224104838970",
+          "title": "반포 래미안 원베일리 vs 트리니원 전세 매매 : 커뮤니티와 조경",
+          "author": "신한부동산공인중개사무소",
+          "time": "2026-10-15T10:36:26.101Z"
+        }
+      ]
+    },
+    {
+      "name": "센타컨설팅",
+      "keywords": [
+        "배곧동 임대",
+        "배곧동 월세",
+        "배곧동 아파트 전세",
+        "배곧동 아파트 매매",
+        "배곧동 아파트 월세",
+        "배곧동 상가 임대",
+        "배곧동 토지 매매"
+      ],
+      "matches": []
+    },
+    {
+      "name": "원공인중개사",
+      "keywords": [
+        "서초구 임대",
+        "서초구 월세",
+        "서초구 아파트 전세",
+        "서초구 아파트 매매",
+        "서초구 아파트 월세",
+        "서초구 상가 임대",
+        "서초구 토지 매매"
+      ],
+      "matches": []
+    },
+    {
+      "name": "천사부동산공인중개사",
+      "keywords": [
+        "계양구 임대",
+        "계양구 월세",
+        "계양구 아파트 전세",
+        "계양구 아파트 매매",
+        "계양구 아파트 월세",
+        "계양구 상가 임대",
+        "계양구 토지 매매"
+      ],
+      "matches": []
+    },
+    {
+      "name": "티파니부동산공인중개사",
+      "keywords": [
+        "검단 임대",
+        "검단 월세",
+        "검단 아파트 전세",
+        "검단 아파트 매매",
+        "검단 아파트 월세",
+        "검단 상가 임대",
+        "검단 토지 매매"
+      ],
+      "matches": [
+        {
+          "keyword": "검단 아파트 월세",
+          "rank": 26,
+          "url": "https://blog.naver.com/chuhayoon/224398427558",
+          "title": "검단신도시 26년 입주 아파트 전세 및 월세 시세분석",
+          "author": "티파니부동산공인중개사",
+          "time": "2026-10-15T10:38:07.784Z"
+        }
+      ]
+    },
+    {
+      "name": "천안아산역화신부동산공인중개사",
+      "keywords": [
+        "천안아산역 임대",
+        "천안아산역 월세",
+        "배방 임대",
+        "배방 월세",
+        "천안아산역 아파트 전세",
+        "천안아산역 아파트 매매",
+        "천안아산역 아파트 월세",
+        "천안아산역 상가 임대",
+        "천안아산역 토지 매매"
+      ],
+      "matches": [
+        {
+          "keyword": "배방 월세",
+          "rank": 21,
+          "url": "https://blog.naver.com/heo5331577/224440301200",
+          "title": "미소지움더플레이스1717 오피스텔 월세 남동향뻥뷰 사업자환영",
+          "author": "천안아산역화신부동산공인중개사",
+          "time": "2026-10-15T09:30:57.334Z"
+        }
+      ]
+    },
+    {
+      "name": "반포세화공인중개사",
+      "keywords": [
+        "반포동 임대",
+        "반포동 월세",
+        "반포동 아파트 전세",
+        "반포동 아파트 매매",
+        "반포동 아파트 월세",
+        "반포동 상가 임대",
+        "반포동 토지 매매",
+        "원베일리 매매",
+        "원베일리 전세",
+        "원베일리 월세",
+        "반포동 래미안 매매",
+        "반포동 래미안 전세",
+        "반포동 래미안 월세",
+        "래미안퍼스티지 매매",
+        "래미안퍼스티지 전세",
+        "래미안퍼스티지 월세",
+        "반포자이 매매",
+        "반포자이 전세",
+        "반포자이 월세",
+        "반포래미안트리니원 매매",
+        "반포래미안트리니원 전세",
+        "반포래미안트리니원 월세"
+      ],
+      "matches": []
+    },
+    {
+      "name": "대장동코끼리공인중개사",
+      "keywords": [
+        "대장동 임대",
+        "대장동 월세",
+        "대장동 아파트 전세",
+        "대장동 아파트 매매",
+        "대장동 아파트 월세",
+        "대장동 상가 임대",
+        "대장동 토지 매매"
+      ],
+      "matches": [
+        {
+          "keyword": "대장동 임대",
+          "rank": 1,
+          "url": "https://blog.naver.com/kokkirii8888/224340621552",
+          "title": "판교 대장동 토지 매매 : 상가주택 신축부지 6개 필지 소개",
+          "author": "대장동코끼리공인중개사",
+          "time": "2026-10-15T09:30:58.786Z"
+        },
+        {
+          "keyword": "대장동 임대",
+          "rank": 8,
+          "url": "https://blog.naver.com/kokkirii8888/224434268924",
+          "title": "대장동 스크린골프 자리 임대: 도로변 6타석 전용 약109평(360.12㎡)",
+          "author": "대장동코끼리공인중개사",
+          "time": "2026-10-15T09:30:58.786Z"
+        },
+        {
+          "keyword": "대장동 임대",
+          "rank": 18,
+          "url": "https://blog.naver.com/kokkirii8888/224417122980",
+          "title": "대장동 1층 무권리 상가 임대 : 사거리 코너 + 횡단보도 앞 전용 102.5㎡(약31평)",
+          "author": "대장동코끼리공인중개사",
+          "time": "2026-10-15T09:30:58.786Z"
+        },
+        {
+          "keyword": "대장동 월세",
+          "rank": 7,
+          "url": "https://blog.naver.com/kokkirii8888/224437416682",
+          "title": "분당구 대장동상가: 넓고 내부시설 배치 쉬운 정사각형 월세맛집",
+          "author": "대장동코끼리공인중개사",
+          "time": "2026-10-15T09:31:00.240Z"
+        },
+        {
+          "keyword": "대장동 아파트 전세",
+          "rank": 22,
+          "url": "https://blog.naver.com/kokkirii8888/224416373520",
+          "title": "판교TH2 전세 선호도 높은 C1 사생활침해없는 정원뷰 트인뷰 융무 정상입주",
+          "author": "대장동코끼리공인중개사",
+          "time": "2026-10-15T10:38:16.928Z"
+        },
+        {
+          "keyword": "대장동 아파트 매매",
+          "rank": 16,
+          "url": "https://blog.naver.com/kokkirii8888/224316285688",
+          "title": "경기남부광역철도 진행 상황과 판교 대장동 부동산",
+          "author": "대장동코끼리공인중개사",
+          "time": "2026-10-15T10:38:18.205Z"
+        },
+        {
+          "keyword": "대장동 상가 임대",
+          "rank": 3,
+          "url": "https://blog.naver.com/kokkirii8888/224434268924",
+          "title": "대장동 스크린골프 자리 임대: 도로변 6타석 전용 약109평(360.12㎡)",
+          "author": "대장동코끼리공인중개사",
+          "time": "2026-10-15T10:36:32.386Z"
+        },
+        {
+          "keyword": "대장동 상가 임대",
+          "rank": 8,
+          "url": "https://blog.naver.com/kokkirii8888/224437416682",
+          "title": "분당구 대장동상가: 넓고 내부시설 배치 쉬운 정사각형 월세맛집",
+          "author": "대장동코끼리공인중개사",
+          "time": "2026-10-15T10:36:32.386Z"
+        },
+        {
+          "keyword": "대장동 상가 임대",
+          "rank": 9,
+          "url": "https://blog.naver.com/kokkirii8888/224340621552",
+          "title": "판교 대장동 토지 매매 : 상가주택 신축부지 6개 필지 소개",
+          "author": "대장동코끼리공인중개사",
+          "time": "2026-10-15T10:36:32.386Z"
+        },
+        {
+          "keyword": "대장동 토지 매매",
+          "rank": 1,
+          "url": "https://blog.naver.com/kokkirii8888/224340621552",
+          "title": "판교 대장동 토지 매매 : 상가주택 신축부지 6개 필지 소개",
+          "author": "대장동코끼리공인중개사",
+          "time": "2026-10-15T10:36:31.258Z"
+        }
+      ]
+    },
+    {
+      "name": "앨리탑공인중개사",
+      "keywords": [
+        "동탄 임대",
+        "동탄 월세",
+        "동탄 아파트 전세",
+        "동탄 아파트 매매",
+        "동탄 아파트 월세",
+        "동탄 상가 임대",
+        "동탄 토지 매매"
+      ],
+      "matches": []
+    },
+    {
+      "name": "광명부자부동산공인중개사",
+      "keywords": [
+        "광명시 임대",
+        "광명시 월세",
+        "광명시 아파트 전세",
+        "광명시 아파트 매매",
+        "광명시 아파트 월세",
+        "광명시 상가 임대",
+        "광명시 토지 매매"
+      ],
+      "matches": [
+        {
+          "keyword": "광명시 아파트 전세",
+          "rank": 1,
+          "url": "https://blog.naver.com/heesun9837/224440070516",
+          "title": "광명 집값 0.39% 상승, 내 아파트도 그만큼 올랐을까요?",
+          "author": "광명부자부동산공인중개사",
+          "time": "2026-10-15T10:38:26.632Z"
+        },
+        {
+          "keyword": "광명시 아파트 전세",
+          "rank": 21,
+          "url": "https://blog.naver.com/heesun9837/224440320471",
+          "title": "트리우스광명 아파트 전세 38평 대형유일전세 고층 스카이뷰",
+          "author": "광명부자부동산공인중개사",
+          "time": "2026-10-15T10:38:26.632Z"
+        },
+        {
+          "keyword": "광명시 상가 임대",
+          "rank": 11,
+          "url": "https://blog.naver.com/heesun9837/224415079475",
+          "title": "광명자이힐스테이트SK뷰 단지내상가",
+          "author": "광명부자부동산공인중개사",
+          "time": "2026-10-15T10:39:06.929Z"
+        }
+      ]
+    },
+    {
+      "name": "멘토공인중개사",
+      "keywords": [
+        "송도 임대",
+        "송도 월세",
+        "송도 아파트 전세",
+        "송도 아파트 매매",
+        "송도 아파트 월세",
+        "송도 상가 임대",
+        "송도 토지 매매"
+      ],
+      "matches": []
+    },
+    {
+      "name": "탕정호반1번지부동산중개사무소",
+      "keywords": [
+        "탕정 임대",
+        "탕정 월세",
+        "탕정 아파트 전세",
+        "탕정 아파트 매매",
+        "탕정 아파트 월세",
+        "탕정 상가 임대",
+        "탕정 토지 매매"
+      ],
+      "matches": [
+        {
+          "keyword": "탕정 아파트 매매",
+          "rank": 18,
+          "url": "https://blog.naver.com/non2017_/224442814408",
+          "title": "탕정 아파트 매매 호반써밋그랜드마크 선호도 높은 1차 매물",
+          "author": "탕정호반1번지부동산중개사무소",
+          "time": "2026-10-15T10:39:17.897Z"
+        }
+      ]
+    },
+    {
+      "name": "더테라스단지내에스에스공인중개사",
+      "keywords": [
+        "탕정 임대",
+        "탕정 월세",
+        "탕정 아파트 전세",
+        "탕정 아파트 매매",
+        "탕정 아파트 월세",
+        "탕정 상가 임대",
+        "탕정 토지 매매"
+      ],
+      "matches": []
+    },
+    {
+      "name": "스카이부동산공인중개사",
+      "keywords": [
+        "동탄 임대",
+        "동탄 월세",
+        "동탄 아파트 전세",
+        "동탄 아파트 매매",
+        "동탄 아파트 월세",
+        "동탄 상가 임대",
+        "동탄 토지 매매"
+      ],
+      "matches": []
+    },
+    {
+      "name": "레이크명품부동산공인중개사",
+      "keywords": [
+        "송도 임대",
+        "송도 월세",
+        "송도 아파트 전세",
+        "송도 아파트 매매",
+        "송도 아파트 월세",
+        "송도 상가 임대",
+        "송도 토지 매매"
+      ],
+      "matches": [
+        {
+          "keyword": "송도 월세",
+          "rank": 28,
+          "url": "https://blog.naver.com/songdo_realestate_/224441472499",
+          "title": "더샵송도아크베이 입지 및 시세분석",
+          "author": "레이크명품부동산공인중개사무소",
+          "time": "2026-10-15T09:31:10.035Z"
+        },
+        {
+          "keyword": "송도 아파트 월세",
+          "rank": 4,
+          "url": "https://blog.naver.com/songdo_realestate_/224441472499",
+          "title": "더샵송도아크베이 입지 및 시세분석",
+          "author": "레이크명품부동산공인중개사무소",
+          "time": "2026-10-15T10:39:13.059Z"
+        }
+      ]
+    },
+    {
+      "name": "하나원베일리공인중개사",
+      "keywords": [
+        "반포동 임대",
+        "반포동 월세",
+        "원베일리 임대",
+        "원베일리 월세",
+        "반포동 아파트 전세",
+        "반포동 아파트 매매",
+        "반포동 아파트 월세",
+        "반포동 상가 임대",
+        "반포동 토지 매매",
+        "원베일리 매매",
+        "원베일리 전세",
+        "반포동 래미안 매매",
+        "반포동 래미안 전세",
+        "반포동 래미안 월세",
+        "래미안퍼스티지 매매",
+        "래미안퍼스티지 전세",
+        "래미안퍼스티지 월세",
+        "반포자이 매매",
+        "반포자이 전세",
+        "반포자이 월세",
+        "반포래미안트리니원 매매",
+        "반포래미안트리니원 전세",
+        "반포래미안트리니원 월세"
+      ],
+      "matches": [
+        {
+          "keyword": "원베일리 전세",
+          "rank": 22,
+          "url": "https://blog.naver.com/starmskim/224435287374",
+          "title": "래미안원베일리 46평 전세 조용하고 옆으로 한강 보여요",
+          "author": "하나원베일리공인중개사",
+          "time": "2026-10-15T10:36:26.101Z"
+        },
+        {
+          "keyword": "반포래미안트리니원 전세",
+          "rank": 20,
+          "url": "https://blog.naver.com/starmskim/224442509089",
+          "title": "반포래미안트리니원 40평 전세 관악산뷰 하루종일 밝은 집",
+          "author": "하나원베일리공인중개사",
+          "time": "2026-10-15T10:37:19.240Z"
+        }
+      ]
+    },
+    {
+      "name": "사화롯데부자공인중개사",
+      "keywords": [
+        "사화동 임대",
+        "사화동 월세",
+        "사화동 아파트 전세",
+        "사화동 아파트 매매",
+        "사화동 아파트 월세",
+        "사화동 상가 임대",
+        "사화동 토지 매매",
+        "창원 롯데캐슬포레스트 매매",
+        "창원 롯데캐슬포레스트 전세",
+        "창원 롯데캐슬포레스트 월세"
+      ],
+      "matches": [
+        {
+          "keyword": "사화동 임대",
+          "rank": 12,
+          "url": "https://blog.naver.com/alfkvv/224312600783",
+          "title": "창원 사화동 롯데캐슬포레스트 1단지 상가 임대, 임대 최저가부터 전면상가까지 매물 소개합니다.",
+          "author": "사화롯데부자공인중개사사무소",
+          "time": "2026-10-15T09:31:17.672Z"
+        },
+        {
+          "keyword": "사화동 임대",
+          "rank": 23,
+          "url": "https://blog.naver.com/alfkvv/224254357664",
+          "title": "창원 사화동 롯데캐슬상가 매매·임대 / 피아노,미술·교습소 추천 매물!!",
+          "author": "사화롯데부자공인중개사사무소",
+          "time": "2026-10-15T09:31:17.672Z"
+        },
+        {
+          "keyword": "사화동 월세",
+          "rank": 10,
+          "url": "https://blog.naver.com/alfkvv/224315455837",
+          "title": "사화동 창원롯데캐슬포레스트2단지 월세(풀옵션,풀리모델링)",
+          "author": "사화롯데부자공인중개사사무소",
+          "time": "2026-10-15T09:31:19.099Z"
+        },
+        {
+          "keyword": "사화동 아파트 전세",
+          "rank": 20,
+          "url": "https://blog.naver.com/alfkvv/224356553109",
+          "title": "[창원 아파트 전세] 사화동 창원롯데캐슬포레스트 1단지 34평 A타입 필로티 2층 (층간소음 0%)",
+          "author": "사화롯데부자공인중개사사무소",
+          "time": "2026-10-15T10:39:22.894Z"
+        },
+        {
+          "keyword": "사화동 아파트 월세",
+          "rank": 10,
+          "url": "https://blog.naver.com/alfkvv/224315455837",
+          "title": "사화동 창원롯데캐슬포레스트2단지 월세(풀옵션,풀리모델링)",
+          "author": "사화롯데부자공인중개사사무소",
+          "time": "2026-10-15T10:39:25.281Z"
+        },
+        {
+          "keyword": "사화동 상가 임대",
+          "rank": 16,
+          "url": "https://blog.naver.com/alfkvv/224254357664",
+          "title": "창원 사화동 롯데캐슬상가 매매·임대 / 피아노,미술·교습소 추천 매물!!",
+          "author": "사화롯데부자공인중개사사무소",
+          "time": "2026-10-15T10:36:33.530Z"
+        },
+        {
+          "keyword": "사화동 상가 임대",
+          "rank": 17,
+          "url": "https://blog.naver.com/alfkvv/224312600783",
+          "title": "창원 사화동 롯데캐슬포레스트 1단지 상가 임대, 임대 최저가부터 전면상가까지 매물 소개합니다.",
+          "author": "사화롯데부자공인중개사사무소",
+          "time": "2026-10-15T10:36:33.530Z"
+        },
+        {
+          "keyword": "창원 롯데캐슬포레스트 매매",
+          "rank": 29,
+          "url": "https://blog.naver.com/alfkvv/224377303483",
+          "title": "창원 대단지 상가 어디가 좋을까? 수요일마다 장 서는 대단지 롯데캐슬포레스트 재분양호실 매매·임대 안내",
+          "author": "사화롯데부자공인중개사사무소",
+          "time": "2026-10-15T10:39:27.470Z"
+        },
+        {
+          "keyword": "창원 롯데캐슬포레스트 전세",
+          "rank": 8,
+          "url": "https://blog.naver.com/alfkvv/224391749929",
+          "title": "창원 롯데캐슬 포레스트 1단지, 마지막 41평 전세 2세대 빠르게 만나보세요!!",
+          "author": "사화롯데부자공인중개사사무소",
+          "time": "2026-10-15T10:39:28.476Z"
+        },
+        {
+          "keyword": "창원 롯데캐슬포레스트 월세",
+          "rank": 12,
+          "url": "https://blog.naver.com/alfkvv/224315455837",
+          "title": "사화동 창원롯데캐슬포레스트2단지 월세(풀옵션,풀리모델링)",
+          "author": "사화롯데부자공인중개사사무소",
+          "time": "2026-10-15T10:39:29.586Z"
+        }
+      ]
+    },
+    {
+      "name": "에코김민아부동산공인중개사",
+      "keywords": [],
+      "matches": []
+    },
+    {
+      "name": "세복원베일리공인중개사",
+      "keywords": [
+        "반포동 임대",
+        "반포동 월세",
+        "원베일리 임대",
+        "원베일리 월세",
+        "반포동 아파트 전세",
+        "반포동 아파트 매매",
+        "반포동 아파트 월세",
+        "반포동 상가 임대",
+        "반포동 토지 매매",
+        "원베일리 매매",
+        "원베일리 전세",
+        "반포동 래미안 매매",
+        "반포동 래미안 전세",
+        "반포동 래미안 월세",
+        "래미안퍼스티지 매매",
+        "래미안퍼스티지 전세",
+        "래미안퍼스티지 월세",
+        "반포자이 매매",
+        "반포자이 전세",
+        "반포자이 월세",
+        "반포래미안트리니원 매매",
+        "반포래미안트리니원 전세",
+        "반포래미안트리니원 월세"
+      ],
+      "matches": [
+        {
+          "keyword": "원베일리 임대",
+          "rank": 10,
+          "url": "https://blog.naver.com/sebok1982/224312512679",
+          "title": "반포동 래미안원베일리상가 월세 2호실통임대",
+          "author": "세복원베일리공인중개사",
+          "time": "2026-10-15T09:31:14.770Z"
+        },
+        {
+          "keyword": "원베일리 월세",
+          "rank": 19,
+          "url": "https://blog.naver.com/sebok1982/224312512679",
+          "title": "반포동 래미안원베일리상가 월세 2호실통임대",
+          "author": "세복원베일리공인중개사",
+          "time": "2026-10-15T09:31:16.282Z"
+        },
+        {
+          "keyword": "반포동 상가 임대",
+          "rank": 29,
+          "url": "https://blog.naver.com/sebok1982/224312512679",
+          "title": "반포동 래미안원베일리상가 월세 2호실통임대",
+          "author": "세복원베일리공인중개사",
+          "time": "2026-10-15T10:36:45.094Z"
+        },
+        {
+          "keyword": "래미안퍼스티지 전세",
+          "rank": 15,
+          "url": "https://blog.naver.com/sebok1982/224414281936",
+          "title": "래미안퍼스티지 128동 전세 조용한 동 입주 협의 가능",
+          "author": "세복원베일리공인중개사",
+          "time": "2026-10-15T10:37:12.527Z"
+        }
+      ]
+    },
+    {
+      "name": "한양원베일리공인중개사",
+      "keywords": [
+        "반포동 임대",
+        "반포동 월세",
+        "원베일리 임대",
+        "원베일리 월세",
+        "반포동 아파트 전세",
+        "반포동 아파트 매매",
+        "반포동 아파트 월세",
+        "반포동 상가 임대",
+        "반포동 토지 매매",
+        "원베일리 매매",
+        "원베일리 전세",
+        "반포동 래미안 매매",
+        "반포동 래미안 전세",
+        "반포동 래미안 월세",
+        "래미안퍼스티지 매매",
+        "래미안퍼스티지 전세",
+        "래미안퍼스티지 월세",
+        "반포자이 매매",
+        "반포자이 전세",
+        "반포자이 월세",
+        "반포래미안트리니원 매매",
+        "반포래미안트리니원 전세",
+        "반포래미안트리니원 월세"
+      ],
+      "matches": [
+        {
+          "keyword": "원베일리 월세",
+          "rank": 8,
+          "url": "https://blog.naver.com/hanyangrealestate/224435263319",
+          "title": "반포 한강뷰 월세 래미안원베일리 24평 주인거주 관리되어깔끔 입주, 금액협의가능",
+          "author": "한양원베일리공인중개사",
+          "time": "2026-10-15T09:31:16.282Z"
+        },
+        {
+          "keyword": "원베일리 월세",
+          "rank": 29,
+          "url": "https://blog.naver.com/hanyangrealestate/224434073439",
+          "title": "반포34평아파트 월세 래미안원베일리 102동 트인뷰 깨끗한 상태 실사진有",
+          "author": "한양원베일리공인중개사",
+          "time": "2026-10-15T09:31:16.282Z"
+        },
+        {
+          "keyword": "반포동 아파트 매매",
+          "rank": 13,
+          "url": "https://blog.naver.com/hanyangrealestate/224442599015",
+          "title": "한강뷰 아파트 매매 34평 원베일리 한강공원 인접",
+          "author": "한양원베일리공인중개사",
+          "time": "2026-10-15T10:36:36.040Z"
+        },
+        {
+          "keyword": "원베일리 매매",
+          "rank": 4,
+          "url": "https://blog.naver.com/hanyangrealestate/224442599015",
+          "title": "한강뷰 아파트 매매 34평 원베일리 한강공원 인접",
+          "author": "한양원베일리공인중개사",
+          "time": "2026-10-15T10:34:51.502Z"
+        },
+        {
+          "keyword": "원베일리 매매",
+          "rank": 14,
+          "url": "https://blog.naver.com/hanyangrealestate/224441184298",
+          "title": "반포 래미안원베일리 매매 파노라마한강뷰 53평 거실양창 + 오픈발코니 로얄동 로얄층",
+          "author": "한양원베일리공인중개사",
+          "time": "2026-10-15T10:34:51.502Z"
+        }
+      ]
+    },
+    {
+      "name": "대신공인중개사",
+      "keywords": [
+        "송파 임대",
+        "송파 월세",
+        "송파 아파트 전세",
+        "송파 아파트 매매",
+        "송파 아파트 월세",
+        "송파 상가 임대",
+        "송파 토지 매매"
+      ],
+      "matches": []
+    },
+    {
+      "name": "아미부동산공인중개사",
+      "keywords": [
+        "평택 임대",
+        "평택 월세",
+        "평택 아파트 전세",
+        "평택 아파트 매매",
+        "평택 아파트 월세",
+        "평택 상가 임대",
+        "평택 토지 매매"
+      ],
+      "matches": []
+    },
+    {
+      "name": "명가(02-2066-8880)공인중개사",
+      "keywords": [
+        "광명 임대",
+        "광명 월세",
+        "광명 아파트 전세",
+        "광명 아파트 매매",
+        "광명 아파트 월세",
+        "광명 상가 임대",
+        "광명 토지 매매"
+      ],
+      "matches": []
+    },
+    {
+      "name": "수자인단지내리치공인중개사",
+      "keywords": [
+        "의정부 임대",
+        "의정부 월세",
+        "의정부 아파트 전세",
+        "의정부 아파트 매매",
+        "의정부 아파트 월세",
+        "의정부 상가 임대",
+        "의정부 토지 매매"
+      ],
+      "matches": []
+    },
+    {
+      "name": "동탄역더원부동산공인중개사",
+      "keywords": [
+        "동탄역 임대",
+        "동탄역 월세",
+        "동탄역 더원 임대",
+        "동탄역 더원 월세",
+        "동탄역 아파트 전세",
+        "동탄역 아파트 매매",
+        "동탄역 아파트 월세",
+        "동탄역 상가 임대",
+        "동탄역 토지 매매"
+      ],
+      "matches": []
+    },
+    {
+      "name": "원베일리탑공인중개사",
+      "keywords": [
+        "반포동 임대",
+        "반포동 월세",
+        "원베일리 임대",
+        "원베일리 월세",
+        "반포동 아파트 전세",
+        "반포동 아파트 매매",
+        "반포동 아파트 월세",
+        "반포동 상가 임대",
+        "반포동 토지 매매",
+        "원베일리 매매",
+        "원베일리 전세",
+        "반포동 래미안 매매",
+        "반포동 래미안 전세",
+        "반포동 래미안 월세",
+        "래미안퍼스티지 매매",
+        "래미안퍼스티지 전세",
+        "래미안퍼스티지 월세",
+        "반포자이 매매",
+        "반포자이 전세",
+        "반포자이 월세",
+        "반포래미안트리니원 매매",
+        "반포래미안트리니원 전세",
+        "반포래미안트리니원 월세"
+      ],
+      "matches": [
+        {
+          "keyword": "래미안퍼스티지 매매",
+          "rank": 22,
+          "url": "https://blog.naver.com/onebaileytop/224441372189",
+          "title": "래미안퍼스티지 72평 매매 풀옵션 확트인뷰 반래퍼 추천매물",
+          "author": "원베일리탑공인중개사",
+          "time": "2026-10-15T10:37:11.072Z"
+        },
+        {
+          "keyword": "래미안퍼스티지 월세",
+          "rank": 18,
+          "url": "https://blog.naver.com/onebaileytop/224420719027",
+          "title": "반포동 래미안퍼스티지 72평 월세 귀한 로얄동 로얄층 풀옵션",
+          "author": "원베일리탑공인중개사",
+          "time": "2026-10-15T10:37:13.587Z"
+        },
+        {
+          "keyword": "래미안퍼스티지 월세",
+          "rank": 24,
+          "url": "https://blog.naver.com/onebaileytop/224406030382",
+          "title": "반포동 래미안퍼스티지 72평 월세 귀한 로얄동 로얄층 풀옵션",
+          "author": "원베일리탑공인중개사",
+          "time": "2026-10-15T10:37:13.587Z"
+        }
+      ]
+    },
+    {
+      "name": "네이트공인중개사",
+      "keywords": [
+        "검단 임대",
+        "검단 월세",
+        "검단 아파트 전세",
+        "검단 아파트 매매",
+        "검단 아파트 월세",
+        "검단 상가 임대",
+        "검단 토지 매매"
+      ],
+      "matches": [
+        {
+          "keyword": "검단 아파트 전세",
+          "rank": 27,
+          "url": "https://blog.naver.com/pku4499/224428807756",
+          "title": "검단신도시 대단지 프리미엄! 신검단중앙역 센트레빌 15층 남동향 84타입 전세",
+          "author": "네이트부동산",
+          "time": "2026-10-15T10:38:05.332Z"
+        }
+      ]
+    },
+    {
+      "name": "충무원베일리부동산중개법인 주식회사",
+      "keywords": [
+        "반포동 임대",
+        "반포동 월세",
+        "원베일리 임대",
+        "원베일리 월세",
+        "반포동 아파트 전세",
+        "반포동 아파트 매매",
+        "반포동 아파트 월세",
+        "반포동 상가 임대",
+        "반포동 토지 매매",
+        "원베일리 매매",
+        "원베일리 전세",
+        "반포동 래미안 매매",
+        "반포동 래미안 전세",
+        "반포동 래미안 월세",
+        "래미안퍼스티지 매매",
+        "래미안퍼스티지 전세",
+        "래미안퍼스티지 월세",
+        "반포자이 매매",
+        "반포자이 전세",
+        "반포자이 월세",
+        "반포래미안트리니원 매매",
+        "반포래미안트리니원 전세",
+        "반포래미안트리니원 월세"
+      ],
+      "matches": [
+        {
+          "keyword": "원베일리 임대",
+          "rank": 20,
+          "url": "https://blog.naver.com/c-m5940088/224299576683",
+          "title": "래미안원베일리 5월 호가 및 실거래가 정보 안내",
+          "author": "충무원베일리부동산중개법인주식회사",
+          "time": "2026-10-15T09:31:14.770Z"
+        },
+        {
+          "keyword": "원베일리 매매",
+          "rank": 22,
+          "url": "https://blog.naver.com/c-m5940088/224353360134",
+          "title": "래미안원베일리 67평형 실거래가 130억이라고?",
+          "author": "충무원베일리부동산중개법인주식회사",
+          "time": "2026-10-15T10:34:51.502Z"
+        }
+      ]
+    },
+    {
+      "name": "e편한퍼스트공인중개사",
+      "keywords": [
+        "부평 임대",
+        "부평 월세",
+        "부평 아파트 전세",
+        "부평 아파트 매매",
+        "부평 아파트 월세",
+        "부평 상가 임대",
+        "부평 토지 매매"
+      ],
+      "matches": []
+    },
+    {
+      "name": "베스트부동산공인중개사",
+      "keywords": [
+        "청량리 임대",
+        "청량리 월세",
+        "청량리 아파트 전세",
+        "청량리 아파트 매매",
+        "청량리 아파트 월세",
+        "청량리 상가 임대",
+        "청량리 토지 매매"
+      ],
+      "matches": []
+    },
+    {
+      "name": "하이포레나(010-5814-3690)공인중개사",
+      "keywords": [
+        "광명 임대",
+        "광명 월세",
+        "광명 아파트 전세",
+        "광명 아파트 매매",
+        "광명 아파트 월세",
+        "광명 상가 임대",
+        "광명 토지 매매"
+      ],
+      "matches": []
+    },
+    {
+      "name": "최고부동산공인중개사",
+      "keywords": [
+        "서초구 임대",
+        "서초구 월세",
+        "서초구 아파트 전세",
+        "서초구 아파트 매매",
+        "서초구 아파트 월세",
+        "서초구 상가 임대",
+        "서초구 토지 매매"
+      ],
+      "matches": []
+    },
+    {
+      "name": "태양공인중개사",
+      "keywords": [
+        "동탄 임대",
+        "동탄 월세",
+        "동탄 아파트 전세",
+        "동탄 아파트 매매",
+        "동탄 아파트 월세",
+        "동탄 상가 임대",
+        "동탄 토지 매매"
+      ],
+      "matches": [
+        {
+          "keyword": "동탄 월세",
+          "rank": 11,
+          "url": "https://blog.naver.com/yupark789/224441479787",
+          "title": "동탄2지식산업센터 월세 현대실리콘앨리동탄 실25 드라이브인 호실",
+          "author": "태양공인중개사사무소",
+          "time": "2026-10-15T09:31:03.723Z"
+        }
+      ]
+    },
+    {
+      "name": "신흥부자공인중개사",
+      "keywords": [
+        "성남 임대",
+        "성남 월세",
+        "성남 아파트 전세",
+        "성남 아파트 매매",
+        "성남 아파트 월세",
+        "성남 상가 임대",
+        "성남 토지 매매"
+      ],
+      "matches": [
+        {
+          "keyword": "성남 임대",
+          "rank": 3,
+          "url": "https://blog.naver.com/buja_story45/224442300694",
+          "title": "성남 재개발 임대주택 비율 감소 12% → 10%로 조정",
+          "author": "신흥부자공인중개사사무소",
+          "time": "2026-10-15T09:32:05.215Z"
+        }
+      ]
+    },
+    {
+      "name": "창릉강남공인중개사",
+      "keywords": [
+        "창릉지구 임대",
+        "창릉지구 월세",
+        "덕양구 임대",
+        "덕양구 월세",
+        "창릉지구 아파트 전세",
+        "창릉지구 아파트 매매",
+        "창릉지구 아파트 월세",
+        "창릉지구 상가 임대",
+        "창릉지구 토지 매매"
+      ],
+      "matches": []
+    },
+    {
+      "name": "리치(단지내)아이파크자이공인중개사",
+      "keywords": [
+        "수원 임대",
+        "수원 월세",
+        "수원 아파트 전세",
+        "수원 아파트 매매",
+        "수원 아파트 월세",
+        "수원 상가 임대",
+        "수원 토지 매매"
+      ],
+      "matches": []
+    },
+    {
+      "name": "힐스테이트광교중앙역퍼스트부동산중개사무소",
+      "keywords": [
+        "이의동 임대",
+        "이의동 월세",
+        "광교중앙역 힐스테이트 퍼스트 임대",
+        "광교중앙역 힐스테이트 퍼스트 월세",
+        "이의동 아파트 전세",
+        "이의동 아파트 매매",
+        "이의동 아파트 월세",
+        "이의동 상가 임대",
+        "이의동 토지 매매",
+        "힐스테이트 광교중앙역 퍼스트 매매",
+        "힐스테이트 광교중앙역 퍼스트 전세",
+        "힐스테이트 광교중앙역 퍼스트 월세"
+      ],
+      "matches": [
+        {
+          "keyword": "광교중앙역 힐스테이트 퍼스트 임대",
+          "rank": 28,
+          "url": "https://blog.naver.com/hillfirst114/223674460995",
+          "title": "광교 상가 임대 힐스테이트 광교중앙역 퍼스트 1층 대로변, 유동인구 많은 매물",
+          "author": "힐스테이트광교중앙역 퍼스트부동산중개",
+          "time": "2026-10-15T09:32:20.917Z"
+        },
+        {
+          "keyword": "광교중앙역 힐스테이트 퍼스트 월세",
+          "rank": 5,
+          "url": "https://blog.naver.com/hillfirst114/224064162792",
+          "title": "광교 상가 월세 힐스테이트 광교중앙역 퍼스트 버스환승센터 연결!!",
+          "author": "힐스테이트광교중앙역 퍼스트부동산중개",
+          "time": "2026-10-15T09:32:22.695Z"
+        },
+        {
+          "keyword": "광교중앙역 힐스테이트 퍼스트 월세",
+          "rank": 14,
+          "url": "https://blog.naver.com/hillfirst114/224065443879",
+          "title": "수원 영통구 상가 월세 힐스테이트광교중앙역퍼스트 3층 코너 도로변 노출 굿 의원 등 추천드리는 매물!",
+          "author": "힐스테이트광교중앙역 퍼스트부동산중개",
+          "time": "2026-10-15T09:32:22.695Z"
+        }
+      ]
+    },
+    {
+      "name": "시흥대박공인중개사",
+      "keywords": [
+        "시흥시 임대",
+        "시흥시 월세",
+        "시흥시 아파트 전세",
+        "시흥시 아파트 매매",
+        "시흥시 아파트 월세",
+        "시흥시 상가 임대",
+        "시흥시 토지 매매"
+      ],
+      "matches": []
+    },
+    {
+      "name": "선빈공인중개사",
+      "keywords": [
+        "창원 임대",
+        "창원 월세",
+        "창원 아파트 전세",
+        "창원 아파트 매매",
+        "창원 아파트 월세",
+        "창원 상가 임대",
+        "창원 토지 매매"
+      ],
+      "matches": []
+    },
+    {
+      "name": "해수부동산공인중개사",
+      "keywords": [
+        "송도 임대",
+        "송도 월세",
+        "송도 아파트 전세",
+        "송도 아파트 매매",
+        "송도 아파트 월세",
+        "송도 상가 임대",
+        "송도 토지 매매"
+      ],
+      "matches": [
+        {
+          "keyword": "송도 월세",
+          "rank": 20,
+          "url": "https://blog.naver.com/leelemon22/224441116795",
+          "title": "더샵송도아크베이 49평 월세! 알파룸·풀에어컨·포세린타일·김치냉장고 11월 말 입주가능",
+          "author": "해수부동산공인중개사사무소",
+          "time": "2026-10-15T09:31:10.035Z"
+        },
+        {
+          "keyword": "송도 아파트 월세",
+          "rank": 13,
+          "url": "https://blog.naver.com/leelemon22/224441116795",
+          "title": "더샵송도아크베이 49평 월세! 알파룸·풀에어컨·포세린타일·김치냉장고 11월 말 입주가능",
+          "author": "해수부동산공인중개사사무소",
+          "time": "2026-10-15T10:39:13.059Z"
+        }
+      ]
+    },
+    {
+      "name": "최강검단부동산공인중개사",
+      "keywords": [
+        "검단신도시 임대",
+        "검단신도시 월세",
+        "서구 임대",
+        "서구 월세",
+        "검단신도시 아파트 전세",
+        "검단신도시 아파트 매매",
+        "검단신도시 아파트 월세",
+        "검단신도시 상가 임대",
+        "검단신도시 토지 매매"
+      ],
+      "matches": [
+        {
+          "keyword": "검단신도시 월세",
+          "rank": 20,
+          "url": "https://blog.naver.com/chlduswn80/224440385516",
+          "title": "검단신도시 디에트르더힐 34평 월세 에어컨 5대 알파룸 중문 가든뷰",
+          "author": "최강검단부동산",
+          "time": "2026-10-15T09:33:11.346Z"
+        }
+      ]
+    },
+    {
+      "name": "4차메트로포레공인중개사",
+      "keywords": [
+        "의정부 임대",
+        "의정부 월세",
+        "의정부 아파트 전세",
+        "의정부 아파트 매매",
+        "의정부 아파트 월세",
+        "의정부 상가 임대",
+        "의정부 토지 매매"
+      ],
+      "matches": []
+    },
+    {
+      "name": "동탄이음터부동산공인중개사",
+      "keywords": [
+        "동탄 임대",
+        "동탄 월세",
+        "동탄 아파트 전세",
+        "동탄 아파트 매매",
+        "동탄 아파트 월세",
+        "동탄 상가 임대",
+        "동탄 토지 매매"
+      ],
+      "matches": []
+    },
+    {
+      "name": "우남단지내공인중개사",
+      "keywords": [
+        "동탄 임대",
+        "동탄 월세",
+        "동탄 아파트 전세",
+        "동탄 아파트 매매",
+        "동탄 아파트 월세",
+        "동탄 상가 임대",
+        "동탄 토지 매매"
+      ],
+      "matches": []
+    },
+    {
+      "name": "㈜해뜰터부동산중개법인",
+      "keywords": [
+        "의정부 임대",
+        "의정부 월세",
+        "의정부 아파트 전세",
+        "의정부 아파트 매매",
+        "의정부 아파트 월세",
+        "의정부 상가 임대",
+        "의정부 토지 매매"
+      ],
+      "matches": []
+    },
+    {
+      "name": "사께오부동산중개어나드",
+      "keywords": [
+        "대구 임대",
+        "대구 월세",
+        "대구 아파트 전세",
+        "대구 아파트 매매",
+        "대구 아파트 월세",
+        "대구 상가 임대",
+        "대구 토지 매매"
+      ],
+      "matches": []
+    },
+    {
+      "name": "송도포커스공인중개사",
+      "keywords": [
+        "송도 임대",
+        "송도 월세",
+        "송도 아파트 전세",
+        "송도 아파트 매매",
+        "송도 아파트 월세",
+        "송도 상가 임대",
+        "송도 토지 매매"
+      ],
+      "matches": [
+        {
+          "keyword": "송도 아파트 전세",
+          "rank": 29,
+          "url": "https://blog.naver.com/songdofocus/224435230487",
+          "title": "연수구 송도아파트전세 송도아트윈푸르지오 84타입 안정적인 저층",
+          "author": "송도포커스공인중개사사무소",
+          "time": "2026-10-15T10:39:10.772Z"
+        }
+      ]
+    },
+    {
+      "name": "청담부동산공인중개사",
+      "keywords": [
+        "청담동 임대",
+        "청담동 월세",
+        "청담동 아파트 전세",
+        "청담동 아파트 매매",
+        "청담동 아파트 월세",
+        "청담동 상가 임대",
+        "청담동 토지 매매"
+      ],
+      "matches": []
+    },
+    {
+      "name": "성공부동산공인중개사",
+      "keywords": [
+        "하남 임대",
+        "하남 월세",
+        "하남 아파트 전세",
+        "하남 아파트 매매",
+        "하남 아파트 월세",
+        "하남 상가 임대",
+        "하남 토지 매매"
+      ],
+      "matches": []
+    },
+    {
+      "name": "대광로제비앙공인중개사",
+      "keywords": [
+        "고덕 임대",
+        "고덕 월세",
+        "고덕 아파트 전세",
+        "고덕 아파트 매매",
+        "고덕 아파트 월세",
+        "고덕 상가 임대",
+        "고덕 토지 매매"
+      ],
+      "matches": []
+    },
+    {
+      "name": "동아부동산공인중개사",
+      "keywords": [
+        "부산 임대",
+        "부산 월세",
+        "부산 아파트 전세",
+        "부산 아파트 매매",
+        "부산 아파트 월세",
+        "부산 상가 임대",
+        "부산 토지 매매"
+      ],
+      "matches": []
+    },
+    {
+      "name": "명당공인중개사",
+      "keywords": [
+        "부산 임대",
+        "부산 월세",
+        "부산 아파트 전세",
+        "부산 아파트 매매",
+        "부산 아파트 월세",
+        "부산 상가 임대",
+        "부산 토지 매매"
+      ],
+      "matches": []
+    },
+    {
+      "name": "자이세영공인중개사",
+      "keywords": [
+        "마포 임대",
+        "마포 월세",
+        "마포 아파트 전세",
+        "마포 아파트 매매",
+        "마포 아파트 월세",
+        "마포 상가 임대",
+        "마포 토지 매매"
+      ],
+      "matches": []
+    },
+    {
+      "name": "송도랜드114공인중개사",
+      "keywords": [
+        "송도동 임대",
+        "송도동 월세",
+        "송도동 아파트 전세",
+        "송도동 아파트 매매",
+        "송도동 아파트 월세",
+        "송도동 상가 임대",
+        "송도동 토지 매매"
+      ],
+      "matches": []
+    },
+    {
+      "name": "제1공인중개사",
+      "keywords": [
+        "송파 임대",
+        "송파 월세",
+        "송파 아파트 전세",
+        "송파 아파트 매매",
+        "송파 아파트 월세",
+        "송파 상가 임대",
+        "송파 토지 매매"
+      ],
+      "matches": []
+    },
+    {
+      "name": "가원공인중개사",
+      "keywords": [
+        "동탄 임대",
+        "동탄 월세",
+        "동탄 아파트 전세",
+        "동탄 아파트 매매",
+        "동탄 아파트 월세",
+        "동탄 상가 임대",
+        "동탄 토지 매매"
+      ],
+      "matches": []
+    },
+    {
+      "name": "봉담꿀단지자이중흥공인중개사",
+      "keywords": [
+        "봉담 임대",
+        "봉담 월세",
+        "봉담 자이중흥 임대",
+        "봉담 자이중흥 월세",
+        "봉담 아파트 전세",
+        "봉담 아파트 매매",
+        "봉담 아파트 월세",
+        "봉담 상가 임대",
+        "봉담 토지 매매",
+        "봉담자이라피네 매매",
+        "봉담자이라피네 전세",
+        "봉담자이라피네 월세",
+        "봉담자이라젠느 매매",
+        "봉담자이라젠느 전세",
+        "봉담자이라젠느 월세"
+      ],
+      "matches": [
+        {
+          "keyword": "봉담 자이중흥 임대",
+          "rank": 3,
+          "url": "https://blog.naver.com/kkul_danji7/224411033535",
+          "title": "화성봉담3지구 예상 사업 기간은? 보상을 위한 후속 절차 진행 중!",
+          "author": "봉담꿀단지자이중흥공인중개사사무소",
+          "time": "2026-10-15T09:33:41.858Z"
+        },
+        {
+          "keyword": "봉담 자이중흥 임대",
+          "rank": 6,
+          "url": "https://blog.naver.com/kkul_danji7/224316263961",
+          "title": "봉담자이라젠느 시행사 임대 상가 및 분양 잔여 상가 안내",
+          "author": "봉담꿀단지자이중흥공인중개사사무소",
+          "time": "2026-10-15T09:33:41.858Z"
+        },
+        {
+          "keyword": "봉담 자이중흥 임대",
+          "rank": 19,
+          "url": "https://blog.naver.com/kkul_danji7/224330453911",
+          "title": "화성봉담3 공공주택지구 지정변경 및 지구계획 승인 정보는?",
+          "author": "봉담꿀단지자이중흥공인중개사사무소",
+          "time": "2026-10-15T09:33:41.858Z"
+        },
+        {
+          "keyword": "봉담 자이중흥 월세",
+          "rank": 8,
+          "url": "https://blog.naver.com/kkul_danji7/224383405926",
+          "title": "경기 화성 봉담자이라피네단지내상가월세 양도 타업종 가능 신축단지 고정수요",
+          "author": "봉담꿀단지자이중흥공인중개사사무소",
+          "time": "2026-10-15T09:33:43.504Z"
+        },
+        {
+          "keyword": "봉담 자이중흥 월세",
+          "rank": 10,
+          "url": "https://blog.naver.com/kkul_danji7/224373807506",
+          "title": "봉담동화지구 공동주택 및 학교 등 정보 안내",
+          "author": "봉담꿀단지자이중흥공인중개사사무소",
+          "time": "2026-10-15T09:33:43.504Z"
+        },
+        {
+          "keyword": "봉담 자이중흥 월세",
+          "rank": 19,
+          "url": "https://blog.naver.com/kkul_danji7/224316263961",
+          "title": "봉담자이라젠느 시행사 임대 상가 및 분양 잔여 상가 안내",
+          "author": "봉담꿀단지자이중흥공인중개사사무소",
+          "time": "2026-10-15T09:33:43.504Z"
+        }
+      ]
+    },
+    {
+      "name": "반포세움공인중개사",
+      "keywords": [
+        "반포동 임대",
+        "반포동 월세",
+        "반포동 아파트 전세",
+        "반포동 아파트 매매",
+        "반포동 아파트 월세",
+        "반포동 상가 임대",
+        "반포동 토지 매매",
+        "원베일리 매매",
+        "원베일리 전세",
+        "원베일리 월세",
+        "반포동 래미안 매매",
+        "반포동 래미안 전세",
+        "반포동 래미안 월세",
+        "래미안퍼스티지 매매",
+        "래미안퍼스티지 전세",
+        "래미안퍼스티지 월세",
+        "반포자이 매매",
+        "반포자이 전세",
+        "반포자이 월세",
+        "반포래미안트리니원 매매",
+        "반포래미안트리니원 전세",
+        "반포래미안트리니원 월세"
+      ],
+      "matches": [
+        {
+          "keyword": "반포동 래미안 월세",
+          "rank": 17,
+          "url": "https://blog.naver.com/hylee7011/224428842596",
+          "title": "반포 아파트월세 반포래미안트리니원 전용59A타입 편리한 생활권",
+          "author": "반포세움공인중개사사무소",
+          "time": "2026-10-15T10:36:29.947Z"
+        },
+        {
+          "keyword": "반포동 래미안 월세",
+          "rank": 28,
+          "url": "https://blog.naver.com/hylee7011/224425701236",
+          "title": "삼성물산 반포래미안트리니원 월세 막힘없는 뷰 착한금액",
+          "author": "반포세움공인중개사사무소",
+          "time": "2026-10-15T10:36:29.947Z"
+        }
+      ]
+    },
+    {
+      "name": "동탄역뉴헤리엇공인중개사",
+      "keywords": [
+        "동탄역 임대",
+        "동탄역 월세",
+        "동탄역 뉴헤리엇 임대",
+        "동탄역 뉴헤리엇 월세",
+        "동탄역 아파트 전세",
+        "동탄역 아파트 매매",
+        "동탄역 아파트 월세",
+        "동탄역 상가 임대",
+        "동탄역 토지 매매",
+        "동탄역 헤리엇 매매",
+        "동탄역 헤리엇 전세",
+        "동탄역 헤리엇 월세"
+      ],
+      "matches": [
+        {
+          "keyword": "동탄역 뉴헤리엇 임대",
+          "rank": 18,
+          "url": "https://blog.naver.com/heriot1135/223805154894",
+          "title": "동탄역헤리움센트럴3차 월세 임대 남향 도보 동탄역 블라인드 설치 매물",
+          "author": "동탄역뉴헤리엇공인중개사사무소",
+          "time": "2026-10-15T09:33:45.112Z"
+        },
+        {
+          "keyword": "동탄역 뉴헤리엇 임대",
+          "rank": 25,
+          "url": "https://blog.naver.com/heriot1135/223252677669",
+          "title": "화성 아파트단기임대 동탄역헤리엇 풀옵션 매물",
+          "author": "동탄역뉴헤리엇공인중개사사무소",
+          "time": "2026-10-15T09:33:45.112Z"
+        },
+        {
+          "keyword": "동탄역 뉴헤리엇 월세",
+          "rank": 24,
+          "url": "https://blog.naver.com/heriot1135/223846109060",
+          "title": "동탄역헤리엇 월세 전입가능 풀옵션 시원한 조망",
+          "author": "동탄역뉴헤리엇공인중개사사무소",
+          "time": "2026-10-15T09:33:53.933Z"
+        },
+        {
+          "keyword": "동탄역 뉴헤리엇 월세",
+          "rank": 27,
+          "url": "https://blog.naver.com/heriot1135/224385707062",
+          "title": "동탄역헤리엇 월세 동탄역 도보권 신축급 컨디션 풀시스템 에어컨 방 4개",
+          "author": "동탄역뉴헤리엇공인중개사사무소",
+          "time": "2026-10-15T09:33:53.933Z"
+        },
+        {
+          "keyword": "동탄역 뉴헤리엇 월세",
+          "rank": 29,
+          "url": "https://blog.naver.com/heriot1135/223606781455",
+          "title": "동탄역헤리엇 월세 이마트트레이더스 옆 동탄역도보가능 금액 조율 가능 매물",
+          "author": "동탄역뉴헤리엇공인중개사사무소",
+          "time": "2026-10-15T09:33:53.933Z"
+        }
+      ]
+    },
+    {
+      "name": "유호스마일공인중개사",
+      "keywords": [
+        "논현 임대",
+        "논현 월세",
+        "논현 아파트 전세",
+        "논현 아파트 매매",
+        "논현 아파트 월세",
+        "논현 상가 임대",
+        "논현 토지 매매"
+      ],
+      "matches": []
+    },
+    {
+      "name": "미스터홈즈부동산중개명지에코델타센터",
+      "keywords": [
+        "명지·에코델타시티 임대",
+        "명지·에코델타시티 월세",
+        "명지 에코델타시티 임대",
+        "명지 에코델타시티 월세",
+        "명지·에코델타시티 아파트 전세",
+        "명지·에코델타시티 아파트 매매",
+        "명지·에코델타시티 아파트 월세",
+        "명지·에코델타시티 상가 임대",
+        "명지·에코델타시티 토지 매매"
+      ],
+      "matches": [
+        {
+          "keyword": "명지·에코델타시티 월세",
+          "rank": 28,
+          "url": "https://blog.naver.com/homes2455/224426850810",
+          "title": "에코델타시티 푸르지오 센터파크 급매 아이키우기 좋은 집 정남향 풀옵션 가격 너무 좋아요:)",
+          "author": "미스터홈즈명지에코델타센터",
+          "time": "2026-10-15T09:34:00.235Z"
+        }
+      ]
+    },
+    {
+      "name": "드파인다온공인중개사",
+      "keywords": [
+        "부산 임대",
+        "부산 월세",
+        "부산 아파트 전세",
+        "부산 아파트 매매",
+        "부산 아파트 월세",
+        "부산 상가 임대",
+        "부산 토지 매매"
+      ],
+      "matches": []
+    },
+    {
+      "name": "미소뷰공인중개사",
+      "keywords": [
+        "갈매 임대",
+        "갈매 월세",
+        "갈매 아파트 전세",
+        "갈매 아파트 매매",
+        "갈매 아파트 월세",
+        "갈매 상가 임대",
+        "갈매 토지 매매"
+      ],
+      "matches": [
+        {
+          "keyword": "갈매 월세",
+          "rank": 4,
+          "url": "https://blog.naver.com/housing1110/224439069759",
+          "title": "구리갈매 휴밸나인 전용32P 탁트인 불암산뷰 사무실 임대",
+          "author": "미소뷰 부동산 지식산업센터,공장",
+          "time": "2026-10-15T09:34:06.192Z"
+        },
+        {
+          "keyword": "갈매 월세",
+          "rank": 21,
+          "url": "https://blog.naver.com/housing1110/224343346312",
+          "title": "구리갈매 금강펜테리움IX타워 기숙사 35타입 월세 투룸 복층 풀옵션에 탁 트인 뷰까지 가능한 매물",
+          "author": "미소뷰 부동산 지식산업센터,공장",
+          "time": "2026-10-15T09:34:06.192Z"
+        },
+        {
+          "keyword": "갈매 월세",
+          "rank": 25,
+          "url": "https://blog.naver.com/housing1110/224368073930",
+          "title": "구리갈매 휴밸나인 기숙사 월세 복층 원룸 실9P 풀옵션",
+          "author": "미소뷰 부동산 지식산업센터,공장",
+          "time": "2026-10-15T09:34:06.192Z"
+        }
+      ]
+    },
+    {
+      "name": "위너스부동산공인중개사",
+      "keywords": [
+        "송도 임대",
+        "송도 월세",
+        "송도 아파트 전세",
+        "송도 아파트 매매",
+        "송도 아파트 월세",
+        "송도 상가 임대",
+        "송도 토지 매매"
+      ],
+      "matches": [
+        {
+          "keyword": "송도 아파트 월세",
+          "rank": 17,
+          "url": "https://blog.naver.com/foxmk73/224403730841",
+          "title": "송도 전세·월세 상승률 얼마나 올랐을까? 전세 매물 감소와 공구별 분위기",
+          "author": "위너스부동산공인중개사사무소",
+          "time": "2026-10-15T10:39:13.059Z"
+        }
+      ]
+    },
+    {
+      "name": "해온공인중개사",
+      "keywords": [
+        "아산 임대",
+        "아산 월세",
+        "아산 아파트 전세",
+        "아산 아파트 매매",
+        "아산 아파트 월세",
+        "아산 상가 임대",
+        "아산 토지 매매"
+      ],
+      "matches": []
+    },
+    {
+      "name": "운정중흥 탑부동산 공인중개사",
+      "keywords": [
+        "운정 임대",
+        "운정 월세",
+        "운정 중흥 임대",
+        "운정 중흥 월세",
+        "운정 아파트 전세",
+        "운정 아파트 매매",
+        "운정 아파트 월세",
+        "운정 상가 임대",
+        "운정 토지 매매",
+        "운정 중흥S클래스 매매",
+        "운정 중흥S클래스 전세",
+        "운정 중흥S클래스 월세"
+      ],
+      "matches": [
+        {
+          "keyword": "운정 중흥 임대",
+          "rank": 7,
+          "url": "https://blog.naver.com/fever1126/224373143778",
+          "title": "[GTX-A 초역세권] 운정중앙역 제일풍경채(A46) 단지 정보 및 전월세 시세 안내",
+          "author": "운정중흥탑부동산공인중개사사무소",
+          "time": "2026-10-15T09:34:14.272Z"
+        },
+        {
+          "keyword": "운정 중흥 임대",
+          "rank": 16,
+          "url": "https://blog.naver.com/fever1126/224261034206",
+          "title": "운정중흥S클래스 단지내 상가 임대, 프랜차이즈 카페추천",
+          "author": "운정중흥탑부동산공인중개사사무소",
+          "time": "2026-10-15T09:34:14.272Z"
+        },
+        {
+          "keyword": "운정 중흥 임대",
+          "rank": 26,
+          "url": "https://blog.naver.com/fever1126/224305668437",
+          "title": "[단지내상가]운정3제일풍경채 A46BL 단지내상가 임대안내",
+          "author": "운정중흥탑부동산공인중개사사무소",
+          "time": "2026-10-15T09:34:14.272Z"
+        },
+        {
+          "keyword": "운정 중흥 월세",
+          "rank": 1,
+          "url": "https://blog.naver.com/fever1126/224428123567",
+          "title": "운정중앙역이지더원 평형별 전월세 시세 및 실거래가는?",
+          "author": "운정중흥탑부동산공인중개사사무소",
+          "time": "2026-10-15T09:34:15.745Z"
+        },
+        {
+          "keyword": "운정 중흥 월세",
+          "rank": 17,
+          "url": "https://blog.naver.com/fever1126/224411167277",
+          "title": "파주 동패동 초롱꽃8단지중흥S클래스월세 로얄동 로얄층 햇살좋은집 전자계약가능",
+          "author": "운정중흥탑부동산공인중개사사무소",
+          "time": "2026-10-15T09:34:15.745Z"
+        },
+        {
+          "keyword": "운정 중흥 월세",
+          "rank": 20,
+          "url": "https://blog.naver.com/fever1126/224337426169",
+          "title": "운정중앙역 이지더원 전월세 시세 정보",
+          "author": "운정중흥탑부동산공인중개사사무소",
+          "time": "2026-10-15T09:34:15.745Z"
+        }
+      ]
+    },
+    {
+      "name": "명품부동산공인중개사",
+      "keywords": [
+        "천안 임대",
+        "천안 월세",
+        "천안 아파트 전세",
+        "천안 아파트 매매",
+        "천안 아파트 월세",
+        "천안 상가 임대",
+        "천안 토지 매매"
+      ],
+      "matches": []
+    },
+    {
+      "name": "대한공인중개사",
+      "keywords": [
+        "광명 임대",
+        "광명 월세",
+        "광명 아파트 전세",
+        "광명 아파트 매매",
+        "광명 아파트 월세",
+        "광명 상가 임대",
+        "광명 토지 매매"
+      ],
+      "matches": []
+    },
+    {
+      "name": "에코114공인중개사",
+      "keywords": [
+        "인천논현 임대",
+        "인천논현 월세",
+        "인천논현 아파트 전세",
+        "인천논현 아파트 매매",
+        "인천논현 아파트 월세",
+        "인천논현 상가 임대",
+        "인천논현 토지 매매"
+      ],
+      "matches": []
+    },
+    {
+      "name": "에코스마일공인중개사",
+      "keywords": [
+        "부산 임대",
+        "부산 월세",
+        "부산 아파트 전세",
+        "부산 아파트 매매",
+        "부산 아파트 월세",
+        "부산 상가 임대",
+        "부산 토지 매매"
+      ],
+      "matches": []
+    },
+    {
+      "name": "미래부동산공인중개사",
+      "keywords": [
+        "구리갈매 임대",
+        "구리갈매 월세",
+        "구리갈매 아파트 전세",
+        "구리갈매 아파트 매매",
+        "구리갈매 아파트 월세",
+        "구리갈매 상가 임대",
+        "구리갈매 토지 매매"
+      ],
+      "matches": [
+        {
+          "keyword": "구리갈매 임대",
+          "rank": 3,
+          "url": "https://blog.naver.com/sk8er1216/224442459359",
+          "title": "구리갈매 휴밸나인 드라이브인 임대 근생자리 사무실 사용가능",
+          "author": "미래부동산공인중개사",
+          "time": "2026-10-15T10:40:21.907Z"
+        },
+        {
+          "keyword": "구리갈매 월세",
+          "rank": 2,
+          "url": "https://blog.naver.com/sk8er1216/224442459359",
+          "title": "구리갈매 휴밸나인 드라이브인 임대 근생자리 사무실 사용가능",
+          "author": "미래부동산공인중개사",
+          "time": "2026-10-15T10:40:23.404Z"
+        }
+      ]
+    },
+    {
+      "name": "123자이포레나공인중개사",
+      "keywords": [
+        "광주 임대",
+        "광주 월세",
+        "광주 아파트 전세",
+        "광주 아파트 매매",
+        "광주 아파트 월세",
+        "광주 상가 임대",
+        "광주 토지 매매"
+      ],
+      "matches": []
+    },
+    {
+      "name": "제니스프로공인중개사",
+      "keywords": [
+        "광주 임대",
+        "광주 월세",
+        "광주 아파트 전세",
+        "광주 아파트 매매",
+        "광주 아파트 월세",
+        "광주 상가 임대",
+        "광주 토지 매매"
+      ],
+      "matches": []
+    },
+    {
+      "name": "신흥역코끼리공인중개사",
+      "keywords": [
+        "신흥역 임대",
+        "신흥역 월세",
+        "중원구 임대",
+        "중원구 월세",
+        "신흥역 아파트 전세",
+        "신흥역 아파트 매매",
+        "신흥역 아파트 월세",
+        "신흥역 상가 임대",
+        "신흥역 토지 매매"
+      ],
+      "matches": []
+    },
+    {
+      "name": "정부동산공인중개사",
+      "keywords": [
+        "동탄 임대",
+        "동탄 월세",
+        "동탄 아파트 전세",
+        "동탄 아파트 매매",
+        "동탄 아파트 월세",
+        "동탄 상가 임대",
+        "동탄 토지 매매"
+      ],
+      "matches": [
+        {
+          "keyword": "동탄 상가 임대",
+          "rank": 24,
+          "url": "https://blog.naver.com/cherry9366/224389439310",
+          "title": "J.동탄 신동 상가 임대, 업종 꽉 찬 파크릭스 단지 내 1층 임대 매물을 찾는다면?",
+          "author": "정부동산 공인중개사 사무소",
+          "time": "2026-10-15T10:38:24.339Z"
+        }
+      ]
+    },
+    {
+      "name": "검단푸르지오단지내공인중개사",
+      "keywords": [
+        "검단신도시 임대",
+        "검단신도시 월세",
+        "서구 임대",
+        "서구 월세",
+        "검단신도시 아파트 전세",
+        "검단신도시 아파트 매매",
+        "검단신도시 아파트 월세",
+        "검단신도시 상가 임대",
+        "검단신도시 토지 매매",
+        "검단신도시 푸르지오 매매",
+        "검단신도시 푸르지오 전세",
+        "검단신도시 푸르지오 월세"
+      ],
+      "matches": [
+        {
+          "keyword": "검단신도시 월세",
+          "rank": 30,
+          "url": "https://blog.naver.com/aesky5006/224440315088",
+          "title": "검단신도시 오피스텔 롯데캐슬 넥스티엘 2차 실거주로는 어떨까요?",
+          "author": "검단푸르지오단지내공인중개사",
+          "time": "2026-10-15T09:33:11.346Z"
+        }
+      ]
+    },
+    {
+      "name": "세인공인중개사",
+      "keywords": [
+        "부산 임대",
+        "부산 월세",
+        "부산 아파트 전세",
+        "부산 아파트 매매",
+        "부산 아파트 월세",
+        "부산 상가 임대",
+        "부산 토지 매매"
+      ],
+      "matches": []
+    },
+    {
+      "name": "제니스최고부동산공인중개사",
+      "keywords": [
+        "광주 임대",
+        "광주 월세",
+        "광주 아파트 전세",
+        "광주 아파트 매매",
+        "광주 아파트 월세",
+        "광주 상가 임대",
+        "광주 토지 매매"
+      ],
+      "matches": []
+    },
+    {
+      "name": "마곡르웨스트공인중개사",
+      "keywords": [
+        "마곡동 임대",
+        "마곡동 월세",
+        "마곡 르웨스트 임대",
+        "마곡 르웨스트 월세",
+        "마곡동 아파트 전세",
+        "마곡동 아파트 매매",
+        "마곡동 아파트 월세",
+        "마곡동 상가 임대",
+        "마곡동 토지 매매",
+        "마곡 르웨스트 매매",
+        "마곡 르웨스트 전세"
+      ],
+      "matches": [
+        {
+          "keyword": "마곡동 월세",
+          "rank": 26,
+          "url": "https://blog.naver.com/lgm777ok/224390781190",
+          "title": "강서오피스텔_단기임대_마곡럭스나인 N동_즉시입주 가능, 단기 월세 & 일시선납, 9호선 마곡나루역 급행 & 공항철도 초역세권!",
+          "author": "마곡르웨스트공인중개사사무소",
+          "time": "2026-10-15T10:40:32.647Z"
+        },
+        {
+          "keyword": "마곡동 월세",
+          "rank": 30,
+          "url": "https://blog.naver.com/lgm777ok/224413547097",
+          "title": "마곡동 단지 내 상가 월세_음식점 운영 중, 마곡나루역 3분, 기업종사자와 유동인구 확보된 자리!",
+          "author": "마곡르웨스트공인중개사사무소",
+          "time": "2026-10-15T10:40:32.647Z"
+        },
+        {
+          "keyword": "마곡 르웨스트 임대",
+          "rank": 16,
+          "url": "https://blog.naver.com/lgm777ok/224424776259",
+          "title": "서울 시니어타운, 마곡 VL르웨스트 입주 보증금·생활비는? 타입별 특징과 혜택·서비스 총정리",
+          "author": "마곡르웨스트공인중개사사무소",
+          "time": "2026-10-15T10:40:33.985Z"
+        },
+        {
+          "keyword": "마곡 르웨스트 임대",
+          "rank": 18,
+          "url": "https://blog.naver.com/lgm777ok/224374061687",
+          "title": "마곡 롯데캐슬 르웨스트 분양｜69·83A타입 내부 사진 _ 분양혜택 가격 안내드립니다!!!",
+          "author": "마곡르웨스트공인중개사사무소",
+          "time": "2026-10-15T10:40:33.985Z"
+        },
+        {
+          "keyword": "마곡 르웨스트 월세",
+          "rank": 4,
+          "url": "https://blog.naver.com/lgm777ok/224435115173",
+          "title": "마곡오피스텔_롯데캐슬르웨스트 월세_최고의 공원, 북한산뷰 /드레스룸 /넓은 전용공간 /트리플 초역세권 직통 /원스톱 생활권",
+          "author": "마곡르웨스트공인중개사사무소",
+          "time": "2026-10-15T10:40:35.041Z"
+        },
+        {
+          "keyword": "마곡 르웨스트 월세",
+          "rank": 6,
+          "url": "https://blog.naver.com/lgm777ok/224407103550",
+          "title": "마곡 강추매물_롯데캐슬르웨스트 월세_전입 가능, 융무, 46타입, 9호선·공항철도·5호선 역세권, 편의 시설 다양, 서울 숲세권!",
+          "author": "마곡르웨스트공인중개사사무소",
+          "time": "2026-10-15T10:40:35.041Z"
+        },
+        {
+          "keyword": "마곡 르웨스트 월세",
+          "rank": 9,
+          "url": "https://blog.naver.com/lgm777ok/224374061687",
+          "title": "마곡 롯데캐슬 르웨스트 분양｜69·83A타입 내부 사진 _ 분양혜택 가격 안내드립니다!!!",
+          "author": "마곡르웨스트공인중개사사무소",
+          "time": "2026-10-15T10:40:35.041Z"
+        }
+      ]
+    },
+    {
+      "name": "한들시티단지내공인중개사",
+      "keywords": [
+        "검단신도시 임대",
+        "검단신도시 월세",
+        "서구 임대",
+        "서구 월세",
+        "검단신도시 아파트 전세",
+        "검단신도시 아파트 매매",
+        "검단신도시 아파트 월세",
+        "검단신도시 상가 임대",
+        "검단신도시 토지 매매"
+      ],
+      "matches": []
+    },
+    {
+      "name": "The송도공인중개사",
+      "keywords": [
+        "송도동 임대",
+        "송도동 월세",
+        "송도동 아파트 전세",
+        "송도동 아파트 매매",
+        "송도동 아파트 월세",
+        "송도동 상가 임대",
+        "송도동 토지 매매"
+      ],
+      "matches": []
+    },
+    {
+      "name": "도안더원우미린트리쉐이드공인중개사",
+      "keywords": [
+        "도안 임대",
+        "도안 월세",
+        "도안 우미린 트리쉐이드 임대",
+        "도안 우미린 트리쉐이드 월세",
+        "도안 아파트 전세",
+        "도안 아파트 매매",
+        "도안 아파트 월세",
+        "도안 상가 임대",
+        "도안 토지 매매",
+        "도안 우미린 트리쉐이드 매매",
+        "도안 우미린 트리쉐이드 전세"
+      ],
+      "matches": [
+        {
+          "keyword": "도안 임대",
+          "rank": 9,
+          "url": "https://blog.naver.com/theonebudong/224433943265",
+          "title": "도안 푸르지오 디아델 분양권 매매, 민간임대까지 김소장에게 문의 주세요!",
+          "author": "도안더원우미린트리쉐이드공인중개사사무소",
+          "time": "2026-10-15T10:40:36.086Z"
+        },
+        {
+          "keyword": "도안 월세",
+          "rank": 4,
+          "url": "https://blog.naver.com/theonebudong/224442544185",
+          "title": "대전 도안우미린트리쉐이드월세 귀한 대형평수 전세가능 학교가까운동",
+          "author": "도안더원우미린트리쉐이드공인중개사사무소",
+          "time": "2026-10-15T10:40:37.932Z"
+        },
+        {
+          "keyword": "도안 우미린 트리쉐이드 임대",
+          "rank": 15,
+          "url": "https://blog.naver.com/theonebudong/224427051102",
+          "title": "도안우미린트리쉐이드 상가 입점 소식 ☕ 파리바게뜨·텐퍼센트·학원과 84A 급매물, 중도금대출 연장 소식까지!",
+          "author": "도안더원우미린트리쉐이드공인중개사사무소",
+          "time": "2026-10-15T10:40:39.463Z"
+        },
+        {
+          "keyword": "도안 우미린 트리쉐이드 임대",
+          "rank": 24,
+          "url": "https://blog.naver.com/theonebudong/224376280930",
+          "title": "도안 우미린 트리쉐이드 상가 매매 임대, 주차장연결 1층 강추자리 빠른 선점하세요!!! 병원·학원 ·브런치카페 추천",
+          "author": "도안더원우미린트리쉐이드공인중개사사무소",
+          "time": "2026-10-15T10:40:39.463Z"
+        },
+        {
+          "keyword": "도안 우미린 트리쉐이드 월세",
+          "rank": 3,
+          "url": "https://blog.naver.com/theonebudong/224442544185",
+          "title": "대전 도안우미린트리쉐이드월세 귀한 대형평수 전세가능 학교가까운동",
+          "author": "도안더원우미린트리쉐이드공인중개사사무소",
+          "time": "2026-10-15T10:40:41.067Z"
+        },
+        {
+          "keyword": "도안 우미린 트리쉐이드 월세",
+          "rank": 16,
+          "url": "https://blog.naver.com/budongsanmatjip/224440019354",
+          "title": "용계동 도안우미린트리쉐이드 113.89㎡ 아파트 매매 대단지",
+          "author": "《 도안더원우미린트리쉐이드 부동산》010-2727-1140",
+          "time": "2026-10-15T10:40:41.067Z"
+        },
+        {
+          "keyword": "도안 우미린 트리쉐이드 월세",
+          "rank": 26,
+          "url": "https://blog.naver.com/theonebudong/224392154289",
+          "title": "도안신도시 도안우미린트리쉐이드월세 고층 로얄동 에어컨5 중문(거래완료)",
+          "author": "도안더원우미린트리쉐이드공인중개사사무소",
+          "time": "2026-10-15T10:40:41.067Z"
+        }
+      ]
+    },
+    {
+      "name": "달빛센트럴자이(단지내)공인중개사",
+      "keywords": [
+        "화정동 임대",
+        "화정동 월세",
+        "화정 달빛센트럴자이 임대",
+        "화정 달빛센트럴자이 월세",
+        "화정동 아파트 전세",
+        "화정동 아파트 매매",
+        "화정동 아파트 월세",
+        "화정동 상가 임대",
+        "화정동 토지 매매"
+      ],
+      "matches": []
+    },
+    {
+      "name": "아이파크자이 한산(234-1234)공인중개사",
+      "keywords": [],
+      "matches": []
+    },
+    {
+      "name": "SK성공부동산공인중개사",
+      "keywords": [
+        "영종도 임대",
+        "영종도 월세",
+        "영종도 아파트 전세",
+        "영종도 아파트 매매",
+        "영종도 아파트 월세",
+        "영종도 상가 임대",
+        "영종도 토지 매매"
+      ],
+      "matches": []
+    }
+  ]
+}
