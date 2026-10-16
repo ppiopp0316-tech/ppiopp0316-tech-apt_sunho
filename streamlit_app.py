@@ -5,6 +5,7 @@ from urllib.parse import unquote, quote
 import pandas as pd
 import requests
 import streamlit as st
+from apt_sections import render_charts, render_table
 
 BASE_DIR = Path(__file__).parent
 SUPPLEMENT_PATH = BASE_DIR / 'supplemental_verified.csv'
@@ -298,6 +299,7 @@ def render_apartment_db():
               f['주소'].fillna('').str.contains(k, case=False, regex=False) |
               f['시공사'].fillna('').str.contains(k, case=False, regex=False)]
     st.subheader(f'검색 결과 · {len(f):,}개 단지')
+    render_charts(f)
     mt, tt = st.tabs(['📱 모바일 보기', '📋 표 보기'])
     with mt:
         for _, r in f.head(200).iterrows():
@@ -316,22 +318,10 @@ def render_apartment_db():
                         st.write('원 공고명:', original_name)
                     st.link_button('공식 원문 보기', r['원문'], use_container_width=True)
     with tt:
-        table_f = f[['입주예정월','시도','시군구','단지명','세대수','시공사','출처','검증상태','최근확인','원문']].copy()
-        table_f['단지명'] = f.apply(naver_apt_url, axis=1)
-        st.dataframe(
-            table_f,
-            column_config={
-                '단지명': st.column_config.LinkColumn(
-                    '단지명',
-                    help='클릭하면 네이버 부동산 지도에서 중개사 표시가 켜진 상태로 엽니다.',
-                    display_text=r'.*#(.*)$'
-                ),
-                '원문': st.column_config.LinkColumn('원문', display_text='공식 원문')
-            },
-            use_container_width=True,
-            hide_index=True,
-            height=600
-        )
+        table_f = f.copy()
+        if not table_f.empty:
+            table_f['_naver_url'] = table_f.apply(naver_apt_url, axis=1)
+        render_table(table_f)
     st.download_button('⬇️ 현재 검색결과 Excel 다운로드', excel_bytes(f, '입주DB'), file_name=f'전국_300세대이상_입주예정_{date.today()}.xlsx', mime='application/vnd.openxmlformats-officedocument.spreadsheetml.sheet', use_container_width=True)
     if errs:
         with st.expander('일부 출처 오류'):
