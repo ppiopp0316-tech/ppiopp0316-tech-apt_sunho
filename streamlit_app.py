@@ -597,34 +597,35 @@ def render_managed_offices():
     rows = []
     for _, office in raw.iterrows():
         p = proof.get(office['업체명'], {'keywords': [], 'matches': []})
-        matches = sorted(p['matches'], key=lambda m: m['rank'])
+        matches = sorted([m for m in p['matches'] if m['rank'] <= 10], key=lambda m: m['rank'])
         measured = [q for q in p['keywords'] if snap['queries'].get(q, {}).get('time')]
         best = matches[0] if matches else {}
         keyword_ranks = {}
         for hit in matches:
-            keyword_ranks.setdefault(hit['keyword'], hit['rank'])
+            if len(keyword_ranks) < 5:
+                keyword_ranks.setdefault(hit['keyword'], hit['rank'])
         exposed_keywords = ', '.join(f"{q} ({r}위)" for q, r in keyword_ranks.items())
         if matches:
-            status = '상위 10위 확인' if best['rank'] <= 10 else '상위 30개 내 확인'
+            status = f'10위 이내 {len(keyword_ranks)}개 확인' + (' · 3개 미만' if len(keyword_ranks) < 3 else '')
         elif not p['keywords']:
             status = '주소 확인 필요'
         elif not measured:
             status = '미측정 · 조회 대기'
         else:
-            status = '조회 결과 내 업체 미식별'
+            status = '10위 이내 확인 키워드 없음'
         if measured and len(measured) < len(p['keywords']):
             status += ' · 일부 미측정'
         times = [snap['queries'][q]['time'] for q in measured]
         rows.append({'업체명': office['업체명'], '지역주소': office['지역주소'], '영업담당자': office['영업담당자'],
-                     '측정상태': status, '실제 노출키워드': exposed_keywords, '최고순위': best.get('rank'), '확인검색어': best.get('keyword', ''),
+                     '측정상태': status, '실제 노출키워드': exposed_keywords, '확인키워드수': len(keyword_ranks), '최고순위': best.get('rank'), '확인검색어': best.get('keyword', ''),
                      '게시물': best.get('url', ''), '측정검색어수': f"{len(measured)}/{len(p['keywords'])}",
                      '측정시각(KST)': stamp(max(times)) if times else ''})
     summary = pd.DataFrame(rows)
-    st.caption(snap['method'] + ' · 2026-10-15 측정 스냅샷')
+    st.caption('네이버 블로그 · PC 비로그인 · 관련도순 · 광고 제외 · 2026-10-15~16 실측. 10위 이내 검색어만 업체별 최대 5개 표시합니다.')
     a, b, c, d = st.columns(4)
     a.metric('관리업체', len(raw))
     b.metric('실측 검색어', f"{snap['measuredQueries']}/{snap['totalQueries']}")
-    c.metric('노출 확인 업체', int(summary['최고순위'].notna().sum()))
+    c.metric('3~5개 확보 업체', int(summary['확인키워드수'].ge(3).sum()))
     d.metric('10위 이내 업체', int(summary['최고순위'].le(10).sum()))
     remaining = snap['totalQueries'] - snap['measuredQueries']
     if remaining:
@@ -632,7 +633,7 @@ def render_managed_offices():
     with st.expander('미측정 · 조회 대기 표시의 의미'):
         st.write('여러 검색어를 연속 조회한 브라우저·네트워크에 네이버가 일시적으로 검색을 제한한 것입니다. 업체의 블로그 제재, 검색 누락 또는 광고 실패 판정이 아닙니다. 순위와 실제 노출키워드는 결과를 직접 확인한 경우만 표시합니다.')
     st.caption('측정 범위: 지역별 토지 매매 · 상가 임대 · 아파트 매매/전세/월세 · 확인 가능한 단지명+매매/전세/월세. 단지명은 업체명 자체가 아닌 부동산 단지 검색어입니다.')
-    st.caption('작성자명과 업체명을 대조했습니다. 운영 블로그가 별칭을 쓰는 업체의 미식별은 30위 밖 확정이 아닙니다. 실제 유입수·문의수는 이 순위에 포함되지 않습니다.')
+    st.caption('작성자명과 업체명을 대조했습니다. 운영 블로그가 별칭을 쓰는 업체의 미식별은 10위 밖 확정이 아닙니다. 3개 미만은 확인된 개수만 표시합니다. 실제 유입수·문의수는 이 순위에 포함되지 않습니다.')
     search = st.text_input('업체명·지역·영업담당자 검색', key='rank_search')
     only_found = st.checkbox('노출 확인 업체만 보기', key='rank_only_found')
     show = summary.copy()
@@ -641,8 +642,10 @@ def render_managed_offices():
     if only_found:
         show = show[show['최고순위'].notna()]
     show = show.sort_values('최고순위', na_position='last', kind='stable')
+    show = show[['업체명', '영업담당자', '실제 노출키워드', '확인키워드수', '측정상태', '최고순위', '지역주소', '게시물', '측정검색어수', '측정시각(KST)']]
     st.dataframe(show, hide_index=True, use_container_width=True, height=520,
-                 column_config={'게시물': st.column_config.LinkColumn('근거 게시물', display_text='게시물 보기'),
+                 column_config={'실제 노출키워드': st.column_config.TextColumn('10위 이내 노출키워드 (최대 5개)', width='large'),
+                                '게시물': st.column_config.LinkColumn('근거 게시물', display_text='게시물 보기'),
                                 '최고순위': st.column_config.NumberColumn('최고순위', format='%d위')})
     st.download_button('실측 결과 CSV 다운로드', summary.to_csv(index=False).encode('utf-8-sig'),
                        file_name='네이버_실측순위_2026-10-15.csv', mime='text/csv')
@@ -652,15 +655,15 @@ def render_managed_offices():
     detail = []
     for q in p['keywords']:
         measured = snap['queries'].get(q, {})
-        hits = sorted([m for m in p['matches'] if m['keyword'] == q], key=lambda m: m['rank'])
+        hits = sorted([m for m in p['matches'] if m['keyword'] == q and m['rank'] <= 10], key=lambda m: m['rank'])
         hit = hits[0] if hits else {}
         if not measured.get('time'):
             result = '미측정 · 조회 대기'
         elif hits:
             result = f"{hit['rank']}위 · 해당 업체 {len(hits)}개 게시물 확인"
         else:
-            result = f"표시 {measured.get('scanned_count', len(measured['results']))}개 내 업체 미식별"
-        detail.append({'검색어': q, '측정결과': result, '작성자': hit.get('author', ''),
+            result = '10위 이내 확인 게시물 없음'
+        detail.append({'검색어': q, '측정결과': result, '블로그 작성자(검색결과)': hit.get('author', ''),
                        '게시물제목': hit.get('title', ''), '게시물': hit.get('url', ''),
                        '측정시각(KST)': stamp(measured.get('time'))})
     if detail:
@@ -673,7 +676,7 @@ def render_managed_offices():
                 record = snap['queries'][query]
                 if record.get('evidence_scope') == 'matched_posts_only':
                     st.caption(f"실제 조회한 게시물 {record.get('scanned_count', 0)}개 중 관리업체와 작성자가 일치한 근거 게시물입니다.")
-                audit = pd.DataFrame(record['results']).rename(columns={'rank':'순위','author':'작성자','title':'게시물제목','url':'게시물'})
+                audit = pd.DataFrame([r for r in record['results'] if r['rank'] <= 10], columns=['rank', 'author', 'title', 'url']).rename(columns={'rank':'순위','author':'블로그 작성자(검색결과)','title':'게시물제목','url':'게시물'})
                 st.dataframe(audit, hide_index=True, use_container_width=True, height=450,
                              column_config={'게시물': st.column_config.LinkColumn('게시물', display_text='게시물 보기')})
     else:
@@ -690,7 +693,9 @@ with st.sidebar:
 
 if page == '🏢 아파트 입주 DB':
     render_apartment_db()
+elif page == '🏠 신규 부동산 DB':
+    render_broker_db()
 else:
-    render_broker_db() if page == '🏠 신규 부동산 DB' else render_managed_offices()
+    render_managed_offices()
 
 st.caption('전국입주 DB · 공식/공공 원천데이터 기반')
