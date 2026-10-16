@@ -16,8 +16,63 @@ LH_URL = 'https://apply.lh.or.kr/lhapply/apply/noti/sp/list.do?mi=1042&sUppAisTp
 st.set_page_config(page_title='전국입주 DB', page_icon='🏢', layout='wide')
 st.markdown('''
 <style>
-.block-container{padding-top:1rem}.apt-card,.broker-card{border:1px solid rgba(128,128,128,.25);border-radius:14px;padding:14px;margin-bottom:12px}.movein{font-size:1.08rem;font-weight:800}.apt-name,.broker-name{font-size:1.05rem;font-weight:700;margin:4px 0 8px}.meta{font-size:.92rem;line-height:1.65}.hot{font-weight:800}.source-box{padding:.7rem 1rem;border-radius:12px;border:1px solid rgba(128,128,128,.25);margin:.3rem 0 1rem}
-@media(max-width:768px){.block-container{padding-left:.7rem;padding-right:.7rem}h1{font-size:1.5rem!important}}
+@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR:wght@400;500;600;700&family=IBM+Plex+Mono:wght@500;600&display=swap');
+
+/* ── 글씨체: IBM Plex Sans KR (아이콘 글꼴은 건드리지 않음) ── */
+.stApp, .stApp h1, .stApp h2, .stApp h3, .stApp h4, .stApp p, .stApp li, .stApp label,
+.stApp input, .stApp textarea, .stApp button, .stApp td, .stApp th,
+.stApp [data-testid="stMarkdownContainer"], .stApp [data-testid="stCaptionContainer"],
+.stApp [data-testid="stMetricLabel"], .stApp [data-baseweb="select"] div,
+.stApp [data-baseweb="tab"], .stApp [data-testid="stAlert"] {
+  font-family: 'IBM Plex Sans KR', sans-serif;
+}
+
+/* ── 페이지 ── */
+.block-container{padding-top:1.6rem; max-width:1280px}
+.stApp h1{font-size:30px!important; font-weight:700!important; letter-spacing:-.6px; color:#141A22}
+.stApp h2, .stApp h3{font-weight:700!important; letter-spacing:-.3px; color:#141A22}
+.stApp [data-testid="stCaptionContainer"]{color:#5B6470}
+
+/* ── 사이드바 ── */
+[data-testid="stSidebar"]{background:#FFFFFF; border-right:1px solid #DDE0DA}
+[data-testid="stSidebar"] h2{font-size:17px!important}
+
+/* ── 숫자 요약(metric) → 흰 카드 ── */
+[data-testid="stMetric"]{background:#FFFFFF; border:1px solid #DDE0DA; border-radius:14px; padding:18px 20px}
+[data-testid="stMetricLabel"] p{font-size:14px!important; font-weight:500; color:#4A535E}
+[data-testid="stMetricValue"], [data-testid="stMetricValue"] div{font-family:'IBM Plex Mono', monospace!important; font-weight:600; letter-spacing:-1px; color:#141A22}
+
+/* ── 입력칸 ── */
+.stApp [data-baseweb="select"] > div, .stApp [data-baseweb="input"], .stApp [data-baseweb="base-input"]{
+  border-radius:10px!important; border-color:#C9CEC6!important; background:#FFFFFF}
+
+/* ── 버튼 ── */
+.stApp .stDownloadButton button, .stApp .stButton button, .stApp .stLinkButton a{
+  border-radius:10px; border:1px solid #C9CEC6; background:#FFFFFF; color:#141A22; font-weight:600; min-height:44px}
+.stApp .stDownloadButton button:hover, .stApp .stButton button:hover, .stApp .stLinkButton a:hover{
+  border-color:#1E3A6E; color:#1E3A6E}
+
+/* ── 탭 ── */
+.stApp [data-baseweb="tab"]{font-weight:600}
+
+/* ── 표(dataframe) 테두리 ── */
+.stApp [data-testid="stDataFrame"]{border:1px solid #DDE0DA; border-radius:14px; overflow:hidden; background:#FFFFFF}
+
+/* ── 모바일 보기 카드 ── */
+.apt-card,.broker-card{background:#FFFFFF; border:1px solid #DDE0DA; border-radius:14px; padding:18px 20px; margin-bottom:12px}
+.movein{font-family:'IBM Plex Mono', monospace; font-size:.95rem; font-weight:600; color:#1E3A6E}
+.apt-name,.broker-name{font-size:1.1rem; font-weight:700; margin:6px 0 10px}
+.apt-name a,.broker-name a{color:#141A22!important; text-decoration:none; border-bottom:1px solid #C9CEC6}
+.apt-name a:hover,.broker-name a:hover{color:#1E3A6E!important; border-color:#1E3A6E}
+.meta{font-size:.92rem; line-height:1.7; color:#4A535E}
+.hot{font-weight:800}
+.source-box{padding:.8rem 1rem; border-radius:14px; border:1px solid #DDE0DA; background:#FFFFFF; margin:.3rem 0 1rem}
+
+@media(max-width:768px){
+  .block-container{padding-left:.8rem; padding-right:.8rem}
+  .stApp h1{font-size:1.5rem!important}
+  [data-testid="stMetric"]{padding:14px 16px}
+}
 </style>''', unsafe_allow_html=True)
 
 
