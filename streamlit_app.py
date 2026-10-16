@@ -8,7 +8,7 @@ import streamlit as st
 
 BASE_DIR = Path(__file__).parent
 SUPPLEMENT_PATH = BASE_DIR / 'supplemental_verified.csv'
-BROKER_LOCAL_PATH = BASE_DIR / 'broker_offices.csv'
+BROKER_LOCAL_PATH = BASE_DIR / 'broker_offices.csv.gz'
 APPLYHOME_API = 'https://api.odcloud.kr/api/ApplyhomeInfoDetailSvc/v1/getAPTLttotPblancDetail'
 LH_URL = 'https://apply.lh.or.kr/lhapply/apply/noti/sp/list.do?mi=1042&sUppAisTpCd=06'
 
@@ -374,7 +374,7 @@ def normalize_broker_df(raw):
     for c in out.columns:
         if c not in ('개설등록일자', '위도', '경도'):
             out[c] = out[c].fillna('').astype(str).str.strip()
-    out['개설등록일자_dt'] = pd.to_datetime(out['개설등록일자'], errors='coerce')
+    out['개설등록일자_dt'] = pd.to_datetime(out['개설등록일자'], errors='coerce', format='mixed')
     # 1900-01-01 등 지자체의 무효 기본값은 신규판정에서 제외
     out.loc[out['개설등록일자_dt'] < pd.Timestamp('1980-01-01'), '개설등록일자_dt'] = pd.NaT
     out['주소'] = out['소재지지번주소'].where(out['소재지지번주소'].str.strip() != '', out['소재지도로명주소'])
@@ -467,7 +467,7 @@ def load_broker_source(uploaded=None):
         return normalize_broker_df(raw), 'BROKER_DATA_URL 자동연계'
     if BROKER_LOCAL_PATH.exists():
         raw = pd.read_csv(BROKER_LOCAL_PATH, encoding='utf-8-sig')
-        return normalize_broker_df(raw), '프로젝트 broker_offices.csv'
+        return normalize_broker_df(raw), '공공데이터포털 공식 자료 · 2026-10-16 수집'
     return pd.DataFrame(), '연결 대기'
 
 
@@ -498,11 +498,11 @@ def broker_area_stats(df, days=30, min_count=3):
 
 def render_broker_db():
     st.title('🏠 신규 부동산중개사무소 DB')
-    st.caption('개설등록일 기준 · 같은 지역에서 신규 중개사무소가 집중 발생하는 곳을 자동 탐지')
+    st.caption('공식 개설등록일 기준 · 지역별 최근 등록 현황과 업체 연락처 조회')
 
     with st.sidebar:
         st.header('🏠 신규 부동산 조건')
-        days = st.slider('신규 판정 기간', 1, 90, 30, key='broker_days')
+        days = st.slider('최근 등록 조회 기간', 1, 365, 30, key='broker_days')
         min_count = st.number_input('지역별 최소 신규 수', min_value=1, max_value=50, value=3, step=1, key='broker_min')
         uploaded = st.file_uploader('중개사무소 CSV/XLSX 임시 업로드', type=['csv','xlsx','xls'], key='broker_upload')
 
@@ -519,27 +519,52 @@ def render_broker_db():
         st.info('필요 컬럼: 중개사무소명, 개설등록번호, 개설등록일자, 소재지도로명주소/지번주소. 대표자명·전화번호는 있으면 함께 표시됩니다.')
         return
 
+    meta_path = BASE_DIR / 'broker_source_meta.json'
+    if meta_path.exists() and uploaded is None:
+        meta = json.loads(meta_path.read_text(encoding='utf-8'))
+        st.warning(f"공식 포털 다운로드 한도에 따라 {meta['raw_rows']:,}건을 수집한 자료입니다. 전국 전체를 포함하지 않으며, 등록·폐업 변동의 실시간 자료가 아닙니다.")
+        st.caption('수집일: ' + meta['retrieved_at'] + ' · 출처: ' + meta['url'])
+    st.caption('개설등록일은 행정상 등록일이며 실제 영업 시작일과 다를 수 있습니다. 전화번호 누락은 미확인으로 표시합니다.')
+
     valid_dates = df['개설등록일자_dt'].notna().sum()
     latest_data_date = ''
     if '데이터기준일자' in df and df['데이터기준일자'].astype(str).str.strip().ne('').any():
-        latest_data_date = pd.to_datetime(df['데이터기준일자'], errors='coerce').max()
+        latest_data_date = pd.to_datetime(df['데이터기준일자'], errors='coerce', format='mixed').max()
         latest_data_date = latest_data_date.strftime('%Y-%m-%d') if pd.notna(latest_data_date) else ''
 
     stats, recent = broker_area_stats(df, int(days), int(min_count))
     today_ts = pd.Timestamp(date.today())
     c1,c2,c3,c4 = st.columns(4)
-    c1.metric('전체 중개사무소', f'{len(df):,}개')
+    c1.metric('수집된 중개사무소', f'{len(df):,}개')
     c2.metric(f'최근 {days}일 신규', f'{len(recent):,}개')
     c3.metric(f'{min_count}개 이상 지역', f'{len(stats):,}곳')
-    c4.metric('오늘 개설', f"{(df['개설등록일자_dt'] == today_ts).sum():,}개")
+    c4.metric('오늘 등록일인 업체', f"{(df['개설등록일자_dt'] == today_ts).sum():,}개")
 
     if latest_data_date:
-        st.caption(f'원천데이터 기준일자: {latest_data_date} · 유효한 개설등록일자 {valid_dates:,}건')
+        st.caption(f"지역별 원천자료 기준일: {df['데이터기준일자'].min()} ~ {latest_data_date} · 유효 등록일 {valid_dates:,}건")
     else:
         st.caption(f'유효한 개설등록일자 {valid_dates:,}건')
 
+    st.subheader('중개사무소 목록 · 최근 등록일순')
+    region_options = ['전체'] + sorted(df['시도'].dropna().unique().tolist())
+    selected_sido = st.selectbox('조회 시도', region_options, key='broker_list_sido')
+    keyword = st.text_input('업체명·주소 검색', key='broker_list_keyword')
+    recent_only = st.checkbox(f'최근 {days}일 등록 업체만 보기', value=False, key='broker_list_recent')
+    listing = (recent if recent_only else df).copy()
+    if selected_sido != '전체':
+        listing = listing[listing['시도'].eq(selected_sido)]
+    if keyword.strip():
+        listing = listing[listing['중개사무소명'].str.contains(keyword.strip(), regex=False) | listing['주소'].str.contains(keyword.strip(), regex=False)]
+    listing = listing.sort_values('개설등록일자_dt', ascending=False)
+    list_cols = ['개설등록일자', '중개사무소명', '대표자명', '전화번호', '소재지도로명주소', '소재지지번주소', '개설등록번호', '데이터기준일자']
+    table = listing[list_cols].replace('', '미확인')
+    st.caption(f'조회 결과 {len(table):,}개 · 화면에는 최대 1,000개 표시, CSV는 조회 결과 전체 포함')
+    st.dataframe(table.head(1000), hide_index=True, use_container_width=True, height=450)
+    st.download_button('조회 업체 CSV 다운로드', table.to_csv(index=False).encode('utf-8-sig'), file_name='신규부동산_공식자료.csv', mime='text/csv')
+    if recent.empty:
+        st.info(f'수집 자료에서 최근 {days}일 등록 업체를 확인하지 못했습니다. 최근 등록 필터를 해제하면 기존 업체를 볼 수 있습니다.')
     if stats.empty:
-        st.info(f'최근 {days}일 동안 같은 지역에 신규 {min_count}개 이상인 곳이 현재 데이터에는 없습니다.')
+        st.info(f'수집 자료에서 최근 {days}일 등록 {min_count}개 이상인 지역은 확인되지 않았습니다.')
         return
 
     st.subheader(f'🔥 최근 {days}일 신규 {min_count}개 이상 지역')
