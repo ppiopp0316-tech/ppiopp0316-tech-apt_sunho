@@ -556,7 +556,7 @@ def render_broker_db():
     if keyword.strip():
         listing = listing[listing['중개사무소명'].str.contains(keyword.strip(), regex=False) | listing['주소'].str.contains(keyword.strip(), regex=False)]
     listing = listing.sort_values('개설등록일자_dt', ascending=False)
-    list_cols = ['개설등록일자', '중개사무소명', '대표자명', '전화번호', '소재지도로명주소', '소재지지번주소', '개설등록번호', '데이터기준일자']
+    list_cols = ['개설등록일자', '중개사무소명', '대표자명', '전화번호', '소재지도로명주소', '개설등록번호', '데이터기준일자']
     table = listing[list_cols].replace('', '미확인')
     st.caption(f'조회 결과 {len(table):,}개 · 화면에는 최대 1,000개 표시, CSV는 조회 결과 전체 포함')
     st.dataframe(table.head(1000), hide_index=True, use_container_width=True, height=450)
@@ -582,7 +582,7 @@ def render_broker_db():
     d2.metric('최근 7일', f"{int(row['7일신규'])}개")
     d3.metric('오늘', f"{int(row['오늘신규'])}개")
 
-    cols = ['개설등록일자','중개사무소명','대표자명','전화번호','개설등록번호','소재지도로명주소','소재지지번주소','개업공인중개사종별구분']
+    cols = ['개설등록일자','중개사무소명','대표자명','전화번호','개설등록번호','소재지도로명주소','개업공인중개사종별구분']
     st.dataframe(detail[cols], use_container_width=True, hide_index=True, height=min(600, 80 + len(detail)*35))
     st.download_button('⬇️ 선택 지역 업체 Excel', excel_bytes(detail[cols], '중개사무소'), file_name=f"{re.sub(r'[^가-힣A-Za-z0-9_-]','_',region)}_신규중개사무소_{date.today()}.xlsx", mime='application/vnd.openxmlformats-officedocument.spreadsheetml.sheet', use_container_width=True)
 
