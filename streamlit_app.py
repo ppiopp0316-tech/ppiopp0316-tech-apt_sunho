@@ -1,22 +1,78 @@
-import io, re
+import io, re, json
 from datetime import date, timedelta
 from pathlib import Path
 from urllib.parse import unquote, quote
 import pandas as pd
 import requests
 import streamlit as st
+from apt_sections import render_charts, render_table
 
 BASE_DIR = Path(__file__).parent
 SUPPLEMENT_PATH = BASE_DIR / 'supplemental_verified.csv'
-BROKER_LOCAL_PATH = BASE_DIR / 'broker_offices.csv'
+BROKER_LOCAL_PATH = BASE_DIR / 'broker_offices.csv.gz'
 APPLYHOME_API = 'https://api.odcloud.kr/api/ApplyhomeInfoDetailSvc/v1/getAPTLttotPblancDetail'
 LH_URL = 'https://apply.lh.or.kr/lhapply/apply/noti/sp/list.do?mi=1042&sUppAisTpCd=06'
 
 st.set_page_config(page_title='전국입주 DB', page_icon='🏢', layout='wide')
 st.markdown('''
 <style>
-.block-container{padding-top:1rem}.apt-card,.broker-card{border:1px solid rgba(128,128,128,.25);border-radius:14px;padding:14px;margin-bottom:12px}.movein{font-size:1.08rem;font-weight:800}.apt-name,.broker-name{font-size:1.05rem;font-weight:700;margin:4px 0 8px}.meta{font-size:.92rem;line-height:1.65}.hot{font-weight:800}.source-box{padding:.7rem 1rem;border-radius:12px;border:1px solid rgba(128,128,128,.25);margin:.3rem 0 1rem}
-@media(max-width:768px){.block-container{padding-left:.7rem;padding-right:.7rem}h1{font-size:1.5rem!important}}
+@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR:wght@400;500;600;700&family=IBM+Plex+Mono:wght@500;600&display=swap');
+
+/* ── 글씨체: IBM Plex Sans KR (아이콘 글꼴은 건드리지 않음) ── */
+.stApp, .stApp h1, .stApp h2, .stApp h3, .stApp h4, .stApp p, .stApp li, .stApp label,
+.stApp input, .stApp textarea, .stApp button, .stApp td, .stApp th,
+.stApp [data-testid="stMarkdownContainer"], .stApp [data-testid="stCaptionContainer"],
+.stApp [data-testid="stMetricLabel"], .stApp [data-baseweb="select"] div,
+.stApp [data-baseweb="tab"], .stApp [data-testid="stAlert"] {
+  font-family: 'IBM Plex Sans KR', sans-serif;
+}
+
+/* ── 페이지 ── */
+.block-container{padding-top:1.6rem; max-width:1280px}
+.stApp h1{font-size:30px!important; font-weight:700!important; letter-spacing:-.6px; color:#141A22}
+.stApp h2, .stApp h3{font-weight:700!important; letter-spacing:-.3px; color:#141A22}
+.stApp [data-testid="stCaptionContainer"]{color:#5B6470}
+
+/* ── 사이드바 ── */
+[data-testid="stSidebar"]{background:#FFFFFF; border-right:1px solid #DDE0DA}
+[data-testid="stSidebar"] h2{font-size:17px!important}
+
+/* ── 숫자 요약(metric) → 흰 카드 ── */
+[data-testid="stMetric"]{background:#FFFFFF; border:1px solid #DDE0DA; border-radius:14px; padding:18px 20px}
+[data-testid="stMetricLabel"] p{font-size:14px!important; font-weight:500; color:#4A535E}
+[data-testid="stMetricValue"], [data-testid="stMetricValue"] div{font-family:'IBM Plex Mono', monospace!important; font-weight:600; letter-spacing:-1px; color:#141A22}
+
+/* ── 입력칸 ── */
+.stApp [data-baseweb="select"] > div, .stApp [data-baseweb="input"], .stApp [data-baseweb="base-input"]{
+  border-radius:10px!important; border-color:#C9CEC6!important; background:#FFFFFF}
+
+/* ── 버튼 ── */
+.stApp .stDownloadButton button, .stApp .stButton button, .stApp .stLinkButton a{
+  border-radius:10px; border:1px solid #C9CEC6; background:#FFFFFF; color:#141A22; font-weight:600; min-height:44px}
+.stApp .stDownloadButton button:hover, .stApp .stButton button:hover, .stApp .stLinkButton a:hover{
+  border-color:#1E3A6E; color:#1E3A6E}
+
+/* ── 탭 ── */
+.stApp [data-baseweb="tab"]{font-weight:600}
+
+/* ── 표(dataframe) 테두리 ── */
+.stApp [data-testid="stDataFrame"]{border:1px solid #DDE0DA; border-radius:14px; overflow:hidden; background:#FFFFFF}
+
+/* ── 모바일 보기 카드 ── */
+.apt-card,.broker-card{background:#FFFFFF; border:1px solid #DDE0DA; border-radius:14px; padding:18px 20px; margin-bottom:12px}
+.movein{font-family:'IBM Plex Mono', monospace; font-size:.95rem; font-weight:600; color:#1E3A6E}
+.apt-name,.broker-name{font-size:1.1rem; font-weight:700; margin:6px 0 10px}
+.apt-name a,.broker-name a{color:#141A22!important; text-decoration:none; border-bottom:1px solid #C9CEC6}
+.apt-name a:hover,.broker-name a:hover{color:#1E3A6E!important; border-color:#1E3A6E}
+.meta{font-size:.92rem; line-height:1.7; color:#4A535E}
+.hot{font-weight:800}
+.source-box{padding:.8rem 1rem; border-radius:14px; border:1px solid #DDE0DA; background:#FFFFFF; margin:.3rem 0 1rem}
+
+@media(max-width:768px){
+  .block-container{padding-left:.8rem; padding-right:.8rem}
+  .stApp h1{font-size:1.5rem!important}
+  [data-testid="stMetric"]{padding:14px 16px}
+}
 </style>''', unsafe_allow_html=True)
 
 
@@ -298,6 +354,7 @@ def render_apartment_db():
               f['주소'].fillna('').str.contains(k, case=False, regex=False) |
               f['시공사'].fillna('').str.contains(k, case=False, regex=False)]
     st.subheader(f'검색 결과 · {len(f):,}개 단지')
+    render_charts(f)
     mt, tt = st.tabs(['📱 모바일 보기', '📋 표 보기'])
     with mt:
         for _, r in f.head(200).iterrows():
@@ -316,22 +373,10 @@ def render_apartment_db():
                         st.write('원 공고명:', original_name)
                     st.link_button('공식 원문 보기', r['원문'], use_container_width=True)
     with tt:
-        table_f = f[['입주예정월','시도','시군구','단지명','세대수','시공사','출처','검증상태','최근확인','원문']].copy()
-        table_f['단지명'] = f.apply(naver_apt_url, axis=1)
-        st.dataframe(
-            table_f,
-            column_config={
-                '단지명': st.column_config.LinkColumn(
-                    '단지명',
-                    help='클릭하면 네이버 부동산 지도에서 중개사 표시가 켜진 상태로 엽니다.',
-                    display_text=r'.*#(.*)$'
-                ),
-                '원문': st.column_config.LinkColumn('원문', display_text='공식 원문')
-            },
-            use_container_width=True,
-            hide_index=True,
-            height=600
-        )
+        table_f = f.copy()
+        if not table_f.empty:
+            table_f['_naver_url'] = table_f.apply(naver_apt_url, axis=1)
+        render_table(table_f)
     st.download_button('⬇️ 현재 검색결과 Excel 다운로드', excel_bytes(f, '입주DB'), file_name=f'전국_300세대이상_입주예정_{date.today()}.xlsx', mime='application/vnd.openxmlformats-officedocument.spreadsheetml.sheet', use_container_width=True)
     if errs:
         with st.expander('일부 출처 오류'):
@@ -374,7 +419,7 @@ def normalize_broker_df(raw):
     for c in out.columns:
         if c not in ('개설등록일자', '위도', '경도'):
             out[c] = out[c].fillna('').astype(str).str.strip()
-    out['개설등록일자_dt'] = pd.to_datetime(out['개설등록일자'], errors='coerce')
+    out['개설등록일자_dt'] = pd.to_datetime(out['개설등록일자'], errors='coerce', format='mixed')
     # 1900-01-01 등 지자체의 무효 기본값은 신규판정에서 제외
     out.loc[out['개설등록일자_dt'] < pd.Timestamp('1980-01-01'), '개설등록일자_dt'] = pd.NaT
     out['주소'] = out['소재지지번주소'].where(out['소재지지번주소'].str.strip() != '', out['소재지도로명주소'])
@@ -467,7 +512,7 @@ def load_broker_source(uploaded=None):
         return normalize_broker_df(raw), 'BROKER_DATA_URL 자동연계'
     if BROKER_LOCAL_PATH.exists():
         raw = pd.read_csv(BROKER_LOCAL_PATH, encoding='utf-8-sig')
-        return normalize_broker_df(raw), '프로젝트 broker_offices.csv'
+        return normalize_broker_df(raw), '공공데이터포털 공식 자료 · 2026-10-16 수집'
     return pd.DataFrame(), '연결 대기'
 
 
@@ -498,11 +543,11 @@ def broker_area_stats(df, days=30, min_count=3):
 
 def render_broker_db():
     st.title('🏠 신규 부동산중개사무소 DB')
-    st.caption('개설등록일 기준 · 같은 지역에서 신규 중개사무소가 집중 발생하는 곳을 자동 탐지')
+    st.caption('공식 개설등록일 기준 · 지역별 최근 등록 현황과 업체 연락처 조회')
 
     with st.sidebar:
         st.header('🏠 신규 부동산 조건')
-        days = st.slider('신규 판정 기간', 1, 90, 30, key='broker_days')
+        days = st.slider('최근 등록 조회 기간', 1, 365, 30, key='broker_days')
         min_count = st.number_input('지역별 최소 신규 수', min_value=1, max_value=50, value=3, step=1, key='broker_min')
         uploaded = st.file_uploader('중개사무소 CSV/XLSX 임시 업로드', type=['csv','xlsx','xls'], key='broker_upload')
 
@@ -519,27 +564,52 @@ def render_broker_db():
         st.info('필요 컬럼: 중개사무소명, 개설등록번호, 개설등록일자, 소재지도로명주소/지번주소. 대표자명·전화번호는 있으면 함께 표시됩니다.')
         return
 
+    meta_path = BASE_DIR / 'broker_source_meta.json'
+    if meta_path.exists() and uploaded is None:
+        meta = json.loads(meta_path.read_text(encoding='utf-8'))
+        st.warning(f"공식 포털 다운로드 한도에 따라 {meta['raw_rows']:,}건을 수집한 자료입니다. 전국 전체를 포함하지 않으며, 등록·폐업 변동의 실시간 자료가 아닙니다.")
+        st.caption('수집일: ' + meta['retrieved_at'] + ' · 출처: ' + meta['url'])
+    st.caption('개설등록일은 행정상 등록일이며 실제 영업 시작일과 다를 수 있습니다. 전화번호 누락은 미확인으로 표시합니다.')
+
     valid_dates = df['개설등록일자_dt'].notna().sum()
     latest_data_date = ''
     if '데이터기준일자' in df and df['데이터기준일자'].astype(str).str.strip().ne('').any():
-        latest_data_date = pd.to_datetime(df['데이터기준일자'], errors='coerce').max()
+        latest_data_date = pd.to_datetime(df['데이터기준일자'], errors='coerce', format='mixed').max()
         latest_data_date = latest_data_date.strftime('%Y-%m-%d') if pd.notna(latest_data_date) else ''
 
     stats, recent = broker_area_stats(df, int(days), int(min_count))
     today_ts = pd.Timestamp(date.today())
     c1,c2,c3,c4 = st.columns(4)
-    c1.metric('전체 중개사무소', f'{len(df):,}개')
+    c1.metric('수집된 중개사무소', f'{len(df):,}개')
     c2.metric(f'최근 {days}일 신규', f'{len(recent):,}개')
     c3.metric(f'{min_count}개 이상 지역', f'{len(stats):,}곳')
-    c4.metric('오늘 개설', f"{(df['개설등록일자_dt'] == today_ts).sum():,}개")
+    c4.metric('오늘 등록일인 업체', f"{(df['개설등록일자_dt'] == today_ts).sum():,}개")
 
     if latest_data_date:
-        st.caption(f'원천데이터 기준일자: {latest_data_date} · 유효한 개설등록일자 {valid_dates:,}건')
+        st.caption(f"지역별 원천자료 기준일: {df['데이터기준일자'].min()} ~ {latest_data_date} · 유효 등록일 {valid_dates:,}건")
     else:
         st.caption(f'유효한 개설등록일자 {valid_dates:,}건')
 
+    st.subheader('중개사무소 목록 · 최근 등록일순')
+    region_options = ['전체'] + sorted(df['시도'].dropna().unique().tolist())
+    selected_sido = st.selectbox('조회 시도', region_options, key='broker_list_sido')
+    keyword = st.text_input('업체명·주소 검색', key='broker_list_keyword')
+    recent_only = st.checkbox(f'최근 {days}일 등록 업체만 보기', value=False, key='broker_list_recent')
+    listing = (recent if recent_only else df).copy()
+    if selected_sido != '전체':
+        listing = listing[listing['시도'].eq(selected_sido)]
+    if keyword.strip():
+        listing = listing[listing['중개사무소명'].str.contains(keyword.strip(), regex=False) | listing['주소'].str.contains(keyword.strip(), regex=False)]
+    listing = listing.sort_values('개설등록일자_dt', ascending=False)
+    list_cols = ['개설등록일자', '중개사무소명', '대표자명', '전화번호', '소재지도로명주소', '개설등록번호', '데이터기준일자']
+    table = listing[list_cols].replace('', '미확인')
+    st.caption(f'조회 결과 {len(table):,}개 · 화면에는 최대 1,000개 표시, CSV는 조회 결과 전체 포함')
+    st.dataframe(table.head(1000), hide_index=True, use_container_width=True, height=450)
+    st.download_button('조회 업체 CSV 다운로드', table.to_csv(index=False).encode('utf-8-sig'), file_name='신규부동산_공식자료.csv', mime='text/csv')
+    if recent.empty:
+        st.info(f'수집 자료에서 최근 {days}일 등록 업체를 확인하지 못했습니다. 최근 등록 필터를 해제하면 기존 업체를 볼 수 있습니다.')
     if stats.empty:
-        st.info(f'최근 {days}일 동안 같은 지역에 신규 {min_count}개 이상인 곳이 현재 데이터에는 없습니다.')
+        st.info(f'수집 자료에서 최근 {days}일 등록 {min_count}개 이상인 지역은 확인되지 않았습니다.')
         return
 
     st.subheader(f'🔥 최근 {days}일 신규 {min_count}개 이상 지역')
@@ -557,7 +627,7 @@ def render_broker_db():
     d2.metric('최근 7일', f"{int(row['7일신규'])}개")
     d3.metric('오늘', f"{int(row['오늘신규'])}개")
 
-    cols = ['개설등록일자','중개사무소명','대표자명','전화번호','개설등록번호','소재지도로명주소','소재지지번주소','개업공인중개사종별구분']
+    cols = ['개설등록일자','중개사무소명','대표자명','전화번호','개설등록번호','소재지도로명주소','개업공인중개사종별구분']
     st.dataframe(detail[cols], use_container_width=True, hide_index=True, height=min(600, 80 + len(detail)*35))
     st.download_button('⬇️ 선택 지역 업체 Excel', excel_bytes(detail[cols], '중개사무소'), file_name=f"{re.sub(r'[^가-힣A-Za-z0-9_-]','_',region)}_신규중개사무소_{date.today()}.xlsx", mime='application/vnd.openxmlformats-officedocument.spreadsheetml.sheet', use_container_width=True)
 
@@ -574,70 +644,128 @@ BROKER_DATA_URL = "CSV 또는 JSON 원천데이터 URL"
         ''')
 
 
+def render_managed_offices():
+    st.title('📒 애드플래닝 관리업체 · 실제 네이버 노출순위')
+    raw = pd.read_csv(BASE_DIR / 'managed_offices.csv', sep='|', encoding='utf-8-sig').fillna('')
+    path = BASE_DIR / 'naver_rankings.json'
+    if not path.exists():
+        st.info('측정 자료를 불러오는 중입니다.')
+        st.dataframe(raw, hide_index=True, use_container_width=True)
+        return
+    snap = json.loads(path.read_text(encoding='utf-8'))
+    office_proof = {o['name']: o for o in snap['offices']}
+    for extra_path in sorted(BASE_DIR.glob('naver_rank_extension_*.json')):
+        extra = json.loads(extra_path.read_text(encoding='utf-8'))
+        snap['queries'].update(extra.get('queries', {}))
+        office_proof.update({o['name']: o for o in extra.get('offices', [])})
+    snap['offices'] = list(office_proof.values())
+    snap['measuredQueries'] = sum(bool(v.get('time')) for v in snap['queries'].values())
+    snap['totalQueries'] = len(snap['queries'])
+    proof = {o['name']: o for o in snap['offices']}
+    def stamp(value):
+        return pd.to_datetime(value, utc=True).tz_convert('Asia/Seoul').strftime('%Y-%m-%d %H:%M:%S') if value else ''
+    rows = []
+    for _, office in raw.iterrows():
+        p = proof.get(office['업체명'], {'keywords': [], 'matches': []})
+        matches = sorted([m for m in p['matches'] if m['rank'] <= 10], key=lambda m: m['rank'])
+        measured = [q for q in p['keywords'] if snap['queries'].get(q, {}).get('time')]
+        best = matches[0] if matches else {}
+        keyword_ranks = {}
+        for hit in matches:
+            if len(keyword_ranks) < 5:
+                keyword_ranks.setdefault(hit['keyword'], hit['rank'])
+        exposed_keywords = ', '.join(f"{q} ({r}위)" for q, r in keyword_ranks.items())
+        if matches:
+            status = f'10위 이내 {len(keyword_ranks)}개 확인' + (' · 3개 미만' if len(keyword_ranks) < 3 else '')
+        elif not p['keywords']:
+            status = '주소 확인 필요'
+        elif not measured:
+            status = '미측정 · 조회 대기'
+        else:
+            status = '10위 이내 확인 키워드 없음'
+        if measured and len(measured) < len(p['keywords']):
+            status += ' · 일부 미측정'
+        times = [snap['queries'][q]['time'] for q in measured]
+        rows.append({'업체명': office['업체명'], '지역주소': office['지역주소'], '영업담당자': office['영업담당자'],
+                     '측정상태': status, '실제 노출키워드': exposed_keywords, '확인키워드수': len(keyword_ranks), '최고순위': best.get('rank'), '확인검색어': best.get('keyword', ''),
+                     '게시물': best.get('url', ''), '측정검색어수': f"{len(measured)}/{len(p['keywords'])}",
+                     '측정시각(KST)': stamp(max(times)) if times else ''})
+    summary = pd.DataFrame(rows)
+    st.caption('네이버 블로그 · PC 비로그인 · 관련도순 · 광고 제외 · 2026-10-15~16 실측. 10위 이내 검색어만 업체별 최대 5개 표시합니다.')
+    a, b, c, d = st.columns(4)
+    a.metric('관리업체', len(raw))
+    b.metric('실측 검색어', f"{snap['measuredQueries']}/{snap['totalQueries']}")
+    c.metric('3~5개 확보 업체', int(summary['확인키워드수'].ge(3).sum()))
+    d.metric('10위 이내 업체', int(summary['최고순위'].le(10).sum()))
+    remaining = snap['totalQueries'] - snap['measuredQueries']
+    if remaining:
+        st.warning(f'확장한 검색어 중 {remaining}개는 아직 미측정입니다. 검색 환경의 연속 조회 제한으로 조회가 대기 중이며, 해당 업체나 블로그가 제재받았다는 뜻이 아닙니다.')
+    with st.expander('미측정 · 조회 대기 표시의 의미'):
+        st.write('여러 검색어를 연속 조회한 브라우저·네트워크에 네이버가 일시적으로 검색을 제한한 것입니다. 업체의 블로그 제재, 검색 누락 또는 광고 실패 판정이 아닙니다. 순위와 실제 노출키워드는 결과를 직접 확인한 경우만 표시합니다.')
+    st.caption('측정 범위: 지역별 토지 매매 · 상가 임대 · 아파트 매매/전세/월세 · 확인 가능한 단지명+매매/전세/월세. 단지명은 업체명 자체가 아닌 부동산 단지 검색어입니다.')
+    st.caption('작성자명과 업체명을 대조했습니다. 운영 블로그가 별칭을 쓰는 업체의 미식별은 10위 밖 확정이 아닙니다. 3개 미만은 확인된 개수만 표시합니다. 실제 유입수·문의수는 이 순위에 포함되지 않습니다.')
+    search = st.text_input('업체명·지역·영업담당자 검색', key='rank_search')
+    only_found = st.checkbox('노출 확인 업체만 보기', key='rank_only_found')
+    show = summary.copy()
+    if search.strip():
+        show = show[show[['업체명', '지역주소', '영업담당자']].astype(str).apply(lambda col: col.str.contains(search.strip(), case=False, regex=False)).any(axis=1)]
+    if only_found:
+        show = show[show['최고순위'].notna()]
+    show = show.sort_values('최고순위', na_position='last', kind='stable')
+    show = show[['업체명', '영업담당자', '실제 노출키워드', '확인키워드수', '측정상태', '최고순위', '지역주소', '게시물', '측정검색어수', '측정시각(KST)']]
+    st.dataframe(show, hide_index=True, use_container_width=True, height=520,
+                 column_config={'실제 노출키워드': st.column_config.TextColumn('10위 이내 노출키워드 (최대 5개)', width='large'),
+                                '게시물': st.column_config.LinkColumn('근거 게시물', display_text='게시물 보기'),
+                                '최고순위': st.column_config.NumberColumn('최고순위', format='%d위')})
+    st.download_button('실측 결과 CSV 다운로드', summary.to_csv(index=False).encode('utf-8-sig'),
+                       file_name='네이버_실측순위_2026-10-15.csv', mime='text/csv')
+    st.subheader('업체별 검색어 측정 상세')
+    selected = st.selectbox('업체 선택', summary.sort_values('최고순위', na_position='last', kind='stable')['업체명'].tolist(), key='rank_office')
+    p = proof.get(selected, {'keywords': [], 'matches': []})
+    detail = []
+    for q in p['keywords']:
+        measured = snap['queries'].get(q, {})
+        hits = sorted([m for m in p['matches'] if m['keyword'] == q and m['rank'] <= 10], key=lambda m: m['rank'])
+        hit = hits[0] if hits else {}
+        if not measured.get('time'):
+            result = '미측정 · 조회 대기'
+        elif hits:
+            result = f"{hit['rank']}위 · 해당 업체 {len(hits)}개 게시물 확인"
+        else:
+            result = '10위 이내 확인 게시물 없음'
+        detail.append({'검색어': q, '측정결과': result, '블로그 작성자(검색결과)': hit.get('author', ''),
+                       '게시물제목': hit.get('title', ''), '게시물': hit.get('url', ''),
+                       '측정시각(KST)': stamp(measured.get('time'))})
+    if detail:
+        st.dataframe(pd.DataFrame(detail), hide_index=True, use_container_width=True,
+                     column_config={'게시물': st.column_config.LinkColumn('근거 게시물', display_text='게시물 보기')})
+        checked = [q for q in p['keywords'] if snap['queries'].get(q, {}).get('time')]
+        if checked:
+            with st.expander('실측 근거 게시물 보기'):
+                query = st.selectbox('실측 검색어', checked, key='rank_audit_query')
+                record = snap['queries'][query]
+                if record.get('evidence_scope') == 'matched_posts_only':
+                    st.caption(f"실제 조회한 게시물 {record.get('scanned_count', 0)}개 중 관리업체와 작성자가 일치한 근거 게시물입니다.")
+                audit = pd.DataFrame([r for r in record['results'] if r['rank'] <= 10], columns=['rank', 'author', 'title', 'url']).rename(columns={'rank':'순위','author':'블로그 작성자(검색결과)','title':'게시물제목','url':'게시물'})
+                st.dataframe(audit, hide_index=True, use_container_width=True, height=450,
+                             column_config={'게시물': st.column_config.LinkColumn('게시물', display_text='게시물 보기')})
+    else:
+        st.info('주소가 확인되지 않아 지역 검색어를 측정하지 못했습니다.')
+    with st.expander('관리업체 주소·영업담당자·검색어 후보'):
+        st.dataframe(raw, hide_index=True, use_container_width=True)
 
-# ------------------------- 지식산업센터 입주예정 DB -------------------------
-KIC_PATH = BASE_DIR / 'knowledge_industry_centers.csv'
-KIC_COLUMNS = ['센터명', '시도', '시군구', '주소', '입주예정일', '준공예정일', '시공사', '시행사', '연락처', '확인출처', '원문URL', '최근확인일', '검증상태']
-
-def render_knowledge_industry_db():
-    st.title('🏭 전국 지식산업센터 입주예정 DB')
-    st.caption('전국 · 오늘부터 12개월 이내 · 확인된 입주예정일 기준')
-    if not KIC_PATH.exists():
-        st.warning('knowledge_industry_centers.csv 파일이 없습니다. 앱과 같은 폴더에 업로드해 주세요.')
-        return
-    try:
-        raw = pd.read_csv(KIC_PATH, encoding='utf-8-sig', dtype=str).fillna('')
-    except Exception as e:
-        st.error(f'지식산업센터 CSV를 읽지 못했습니다: {e}')
-        return
-    missing = [c for c in KIC_COLUMNS if c not in raw.columns]
-    if missing:
-        st.error('CSV 필수 컬럼 누락: ' + ', '.join(missing))
-        return
-    if raw.empty:
-        st.info('현재 등록된 검증 완료 입주예정 데이터가 없습니다. CSV에 공식 출처를 확인한 센터를 추가하면 자동으로 표시됩니다.')
-        st.download_button('⬇️ DB 입력 양식 다운로드', KIC_PATH.read_bytes(), file_name='knowledge_industry_centers.csv', mime='text/csv')
-        return
-    f = raw.copy()
-    f['_date'] = pd.to_datetime(f['입주예정일'].str.strip(), errors='coerce')
-    today = pd.Timestamp(date.today())
-    until = today + pd.DateOffset(months=12)
-    f = f[f['_date'].between(today, until)].copy()
-    f = f.sort_values(['_date','시도','센터명'])
-    with st.sidebar:
-        st.header('🏭 지식산업센터 검색')
-        area = st.selectbox('지역', ['전체'] + sorted(f['시도'].loc[f['시도'].ne('')].unique().tolist()), key='kic_area')
-        keyword = st.text_input('센터명 / 주소 검색', key='kic_keyword')
-    if area != '전체':
-        f = f[f['시도'] == area]
-    if keyword.strip():
-        match = f['센터명'].str.contains(keyword.strip(), case=False, regex=False) | f['주소'].str.contains(keyword.strip(), case=False, regex=False)
-        f = f[match]
-    st.metric('향후 12개월 입주예정', f"{len(f):,}개")
-    if f.empty:
-        st.info('선택한 조건에 해당하는 확인된 입주예정 센터가 없습니다.')
-        return
-    f['입주까지'] = f['_date'].map(lambda d: f"D-{(d-today).days}")
-    display_cols = ['입주예정일','입주까지','센터명','시도','시군구','주소','시공사','시행사','연락처','검증상태','확인출처','원문URL']
-    st.dataframe(f[display_cols], use_container_width=True, hide_index=True,
-                 column_config={'원문URL': st.column_config.LinkColumn('확인 원문')})
-    st.download_button('⬇️ 현재 검색결과 Excel 다운로드',
-        excel_bytes(f[KIC_COLUMNS], '지식산업센터'),
-        file_name=f'지식산업센터_입주예정_{date.today()}.xlsx',
-        mime='application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
-        use_container_width=True)
 
 
 with st.sidebar:
     st.header('📂 전국입주 DB')
-    page = st.radio('메뉴', ['🏢 아파트 입주 DB', '🏭 지식산업센터 DB', '🏠 신규 부동산 DB'], key='main_page')
+    page = st.radio('메뉴', ['🏢 아파트 입주 DB', '🏠 신규 부동산 DB', '📒 애드플래닝 관리업체'], key='main_page')
     st.divider()
 
 if page == '🏢 아파트 입주 DB':
     render_apartment_db()
-elif page == '🏭 지식산업센터 DB':
-    render_knowledge_industry_db()
-else:
+elif page == '🏠 신규 부동산 DB':
     render_broker_db()
+else:
+    render_managed_offices()
 
 st.caption('전국입주 DB · 공식/공공 원천데이터 기반')
