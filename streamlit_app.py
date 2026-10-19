@@ -10,6 +10,7 @@ from apt_sections import render_charts, render_table
 BASE_DIR = Path(__file__).parent
 SUPPLEMENT_PATH = BASE_DIR / 'supplemental_verified.csv'
 BROKER_LOCAL_PATH = BASE_DIR / 'broker_offices.csv.gz'
+KIC_PATH = BASE_DIR / 'knowledge_industry_centers.csv'
 APPLYHOME_API = 'https://api.odcloud.kr/api/ApplyhomeInfoDetailSvc/v1/getAPTLttotPblancDetail'
 LH_URL = 'https://apply.lh.or.kr/lhapply/apply/noti/sp/list.do?mi=1042&sUppAisTpCd=06'
 
@@ -644,6 +645,83 @@ BROKER_DATA_URL = "CSV 또는 JSON 원천데이터 URL"
         ''')
 
 
+
+# ------------------------- 지식산업센터 입주예정 DB -------------------------
+KIC_COLUMNS = [
+    '센터명', '시도', '시군구', '주소', '사업상태', '허가일', '착공일',
+    '준공예정일', '사용승인일', '입주시작일', '시행사', '시공사', '연락처',
+    '공식출처', '출처URL', '최근확인', '검증상태'
+]
+
+
+def load_kic_db():
+    if not KIC_PATH.exists():
+        return pd.DataFrame(columns=KIC_COLUMNS)
+    df = pd.read_csv(KIC_PATH, dtype=str, encoding='utf-8-sig').fillna('')
+    for col in KIC_COLUMNS:
+        if col not in df.columns:
+            df[col] = ''
+    return df[KIC_COLUMNS].copy()
+
+
+def render_kic_db():
+    st.title('🏭 전국 지식산업센터 입주예정 DB')
+    st.caption('전국 · 향후 12개월 입주예정 우선 · 공사 중 신규 사업 포함 · 공식 근거 확인 자료만 등록')
+    df = load_kic_db()
+    if df.empty:
+        st.info('공식 자료 검증을 완료한 지식산업센터가 아직 등록되지 않았습니다. knowledge_industry_centers.csv에 검증된 행을 추가하면 표시됩니다.')
+        st.caption('과거 준공·입주 완료 센터를 임의로 포함하지 않습니다. 준공예정일과 실제 입주시작일은 별도로 관리합니다.')
+        return
+
+    today = pd.Timestamp(date.today()).normalize()
+    horizon = today + pd.DateOffset(months=12)
+    for col in ('준공예정일', '입주시작일', '사용승인일'):
+        df[col + '_dt'] = pd.to_datetime(df[col], errors='coerce')
+    # 실제 입주시작일이 있는 경우 이를 우선하며, 없을 때만 준공예정일로 후보를 분류한다.
+    # 과거 사용승인 완료 자료라도 미래 입주가 공식 확인되면 보존한다.
+    move = df['입주시작일_dt']
+    completion = df['준공예정일_dt']
+    approved = df['사용승인일_dt']
+    future_move = move.ge(today) & move.le(horizon)
+    future_completion = move.isna() & completion.ge(today) & completion.le(horizon)
+    under_construction = (df['사업상태'].str.contains('공사|착공|건설|허가', regex=True, na=False)
+                          & move.isna() & (approved.isna() | approved.ge(today))
+                          & (completion.isna() | completion.ge(today)))
+    df = df[future_move | future_completion | under_construction].copy()
+    df['구분'] = '공사 중 · 일정 미확인'
+    df.loc[future_completion.loc[df.index], '구분'] = '준공 예정 · 입주일 미확인'
+    df.loc[future_move.loc[df.index], '구분'] = '입주 예정'
+    if df.empty:
+        st.info('현재 기준 향후 12개월 입주예정 또는 진행 중으로 확인되는 센터가 없습니다.')
+        return
+
+    with st.sidebar:
+        st.header('🏭 지식산업센터 검색 조건')
+        region = st.selectbox('시도', ['전체'] + sorted(x for x in df['시도'].unique() if x), key='kic_region')
+        status = st.selectbox('일정 구분', ['전체', '입주 예정', '준공 예정 · 입주일 미확인', '공사 중 · 일정 미확인'], key='kic_status')
+        keyword = st.text_input('센터명·주소·시행사·시공사 검색', key='kic_keyword')
+    if region != '전체':
+        df = df[df['시도'].eq(region)]
+    if status != '전체':
+        df = df[df['구분'].eq(status)]
+    if keyword.strip():
+        cols = ['센터명', '주소', '시행사', '시공사']
+        df = df[df[cols].astype(str).apply(lambda c: c.str.contains(keyword.strip(), case=False, regex=False)).any(axis=1)]
+    df = df.sort_values(['입주시작일_dt', '준공예정일_dt', '센터명'], na_position='last')
+    c1, c2, c3 = st.columns(3)
+    c1.metric('조회 센터', f'{len(df):,}개')
+    c2.metric('입주 예정', f"{df['구분'].eq('입주 예정').sum():,}개")
+    c3.metric('일정 미확인', f"{df['구분'].eq('공사 중 · 일정 미확인').sum():,}개")
+    st.caption('준공예정일은 입주시작일이 아닙니다. 미확인 날짜는 추정하지 않습니다.')
+    view = df[['구분'] + KIC_COLUMNS].replace('', '미확인')
+    st.dataframe(view, hide_index=True, use_container_width=True, height=520,
+                 column_config={'출처URL': st.column_config.LinkColumn('공식 출처 링크')})
+    st.download_button('⬇️ 검색결과 Excel 다운로드', excel_bytes(view, '지식산업센터'),
+                       file_name=f'지식산업센터_입주예정_{date.today()}.xlsx',
+                       mime='application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
+                       use_container_width=True)
+
+
 def render_managed_offices():
     st.title('📒 애드플래닝 관리업체 · 실제 네이버 노출순위')
     raw = pd.read_csv(BASE_DIR / 'managed_offices.csv', sep='|', encoding='utf-8-sig').fillna('')
@@ -758,13 +836,15 @@ def render_managed_offices():
 
 with st.sidebar:
     st.header('📂 전국입주 DB')
-    page = st.radio('메뉴', ['🏢 아파트 입주 DB', '🏠 신규 부동산 DB', '📒 애드플래닝 관리업체'], key='main_page')
+    page = st.radio('메뉴', ['🏢 아파트 입주 DB', '🏠 신규 부동산 DB', '🏭 지식산업센터 DB', '📒 애드플래닝 관리업체'], key='main_page')
     st.divider()
 
 if page == '🏢 아파트 입주 DB':
     render_apartment_db()
 elif page == '🏠 신규 부동산 DB':
     render_broker_db()
+elif page == '🏭 지식산업센터 DB':
+    render_kic_db()
 else:
     render_managed_offices()
 
