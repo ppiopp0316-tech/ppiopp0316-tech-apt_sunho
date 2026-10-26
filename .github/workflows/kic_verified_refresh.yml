@@ -1,0 +1,30 @@
+name: Verified knowledge center DB refresh
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: '20 1 * * 1' # Monday 10:20 KST
+permissions:
+  contents: write
+jobs:
+  verified-refresh:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Publish only independently reviewed official evidence
+        run: python scripts/publish_verified_kic.py
+      - name: Commit verified changes if any
+        run: |
+          if git diff --quiet -- knowledge_industry_centers.csv; then
+            echo "No verified database changes."
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add knowledge_industry_centers.csv
+          git commit -m "Update verified knowledge industry center database"
+          git push
