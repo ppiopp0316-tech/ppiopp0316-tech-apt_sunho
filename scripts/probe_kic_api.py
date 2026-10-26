@@ -10,10 +10,14 @@ def main():
     if not key:
         print("DATA_GO_KR_API_KEY is missing", file=sys.stderr)
         return 2
+    # Address parameters match the official BuildingHUB OpenAPI guide example.
     params = {
         "serviceKey": key,
-        "sigunguCd": "11545",
+        "sigunguCd": "11680",
+        "platGbCd": "0",
         "bjdongCd": "10300",
+        "bun": "0012",
+        "ji": "0004",
         "numOfRows": "1",
         "pageNo": "1",
         "_type": "json",
