@@ -23,6 +23,8 @@ def main():
         if response.status_code >= 400:
             print(f"API HTTP status: {response.status_code}", file=sys.stderr)
             print("API returned an HTTP error; credentials and response body are hidden.", file=sys.stderr)
+            if response.status_code == 403:
+                print("403: check API access approval, endpoint, and key encoding.", file=sys.stderr)
             return 1
         body = response.text
         if any(s in body for s in ("SERVICE_KEY_IS_NOT_REGISTERED", "SERVICE_ACCESS_DENIED", "SERVICE_KEY_IS_NULL", "PERMISSION_DENIED", "NO_OPENAPI_SERVICE_ERROR")):
