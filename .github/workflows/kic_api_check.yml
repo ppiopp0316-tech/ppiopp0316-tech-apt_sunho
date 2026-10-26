@@ -1,5 +1,7 @@
 name: Knowledge center API connectivity check
 on:
+  pull_request:
+    branches: [main]
   workflow_dispatch:
   schedule:
     - cron: '15 1 * * 1' # Monday 10:15 Asia/Seoul (UTC+9)
