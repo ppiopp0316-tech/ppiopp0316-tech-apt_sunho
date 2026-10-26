@@ -20,7 +20,10 @@ def main():
     }
     try:
         response = requests.get(URL, params=params, timeout=35)
-        response.raise_for_status()
+        if response.status_code >= 400:
+            print(f"API HTTP status: {response.status_code}", file=sys.stderr)
+            print("API returned an HTTP error; credentials and response body are hidden.", file=sys.stderr)
+            return 1
         body = response.text
         if any(s in body for s in ("SERVICE_KEY_IS_NOT_REGISTERED", "SERVICE_ACCESS_DENIED", "SERVICE_KEY_IS_NULL", "PERMISSION_DENIED", "NO_OPENAPI_SERVICE_ERROR")):
             print("API returned an authorization or service error", file=sys.stderr)
