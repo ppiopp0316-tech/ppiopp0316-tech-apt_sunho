@@ -20,13 +20,17 @@ def main():
         "ji": "0004",
         "numOfRows": "1",
         "pageNo": "1",
-        "_type": "json",
+        "type": "json",
     }
     try:
         response = requests.get(URL, params=params, timeout=35)
         if response.status_code >= 400:
             print(f"API HTTP status: {response.status_code}", file=sys.stderr)
             print("API returned an HTTP error; credentials and response body are hidden.", file=sys.stderr)
+            known_errors = ("SERVICE_KEY_IS_NOT_REGISTERED", "SERVICE_ACCESS_DENIED", "SERVICE_KEY_IS_NULL", "PERMISSION_DENIED", "NO_OPENAPI_SERVICE_ERROR", "UNREGISTERED_IP_ERROR")
+            category = next((s for s in known_errors if s in response.text.upper()), None)
+            if category:
+                print(f"API error category: {category}", file=sys.stderr)
             if response.status_code == 403:
                 print("403: check API access approval, endpoint, and key encoding.", file=sys.stderr)
             return 1
