@@ -28,7 +28,20 @@ def main():
         if not any(s in body for s in ('"response"', "<response", '"header"', "<header")):
             print("Unexpected API response (not printing raw body to protect secrets)", file=sys.stderr)
             return 1
-        print("BuildingHUB permit API responded with a recognized envelope.")
+        import xml.etree.ElementTree as ET
+        if body.lstrip().startswith("<"):
+            root = ET.fromstring(body)
+            code = root.findtext(".//resultCode")
+            if code and code not in {"00", "000", "NORMAL_SERVICE"}:
+                print(f"API returned error code: {code}", file=sys.stderr)
+                return 1
+        else:
+            data = response.json()
+            code = str(data.get("response", {}).get("header", {}).get("resultCode", ""))
+            if code and code not in {"00", "000", "NORMAL_SERVICE"}:
+                print(f"API returned error code: {code}", file=sys.stderr)
+                return 1
+        print("BuildingHUB permit API responded with a successful envelope.")
         print("No records published: nationwide classification and occupancy verification pending.")
         return 0
     except requests.RequestException as exc:
