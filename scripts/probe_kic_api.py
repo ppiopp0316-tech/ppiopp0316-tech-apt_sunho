@@ -2,6 +2,7 @@
 import os
 import sys
 import requests
+from urllib.parse import unquote
 
 URL = "https://apis.data.go.kr/1613000/ArchPmsHubService/getApBasisOulnInfo"
 
@@ -10,6 +11,9 @@ def main():
     if not key:
         print("DATA_GO_KR_API_KEY is missing", file=sys.stderr)
         return 2
+    # A portal-issued encoded key must be decoded once before requests encodes query params.
+    if "%" in key:
+        key = unquote(key)
     # Address parameters match the official BuildingHUB OpenAPI guide example.
     params = {
         "serviceKey": key,
