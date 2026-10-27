@@ -255,7 +255,7 @@ def render_table(df: pd.DataFrame):
             region = f"{row.sido} {row.sigungu}".strip()
             naver = _safe_url(row.naver)
             name = (f'<a href="{naver}" target="_blank" rel="noopener noreferrer" '
-                    f'title="네이버 부동산에서 중개사 보기">{_esc(row.name)}</a>') if naver else _esc(row.name)
+                    f'title="네이버 부동산 단지 검색">{_esc(row.name)}</a>') if naver else _esc(row.name)
             origin = _safe_url(row.origin)
             origin_link = f'<a href="{origin}" target="_blank" rel="noopener noreferrer">공식 원문</a>' if origin else ""
             tag = f'<span class="apt-tag" style="background:{bg};color:{fg}">{_esc(row.source)}</span>' if row.source else ""

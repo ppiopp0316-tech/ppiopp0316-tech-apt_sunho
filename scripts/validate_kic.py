@@ -9,6 +9,8 @@ import csv
 import datetime as dt
 import sys
 from pathlib import Path
+sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
+from db_common import date_bounds, classify_kic
 
 COLUMNS = [
     "센터명", "시도", "시군구", "주소", "사업상태", "허가일", "착공일",
@@ -47,21 +49,15 @@ def check(path: Path, today: dt.date) -> tuple[list[dict], list[str]]:
             if value in EMPTY:
                 continue
             try:
-                parsed[field] = dt.date.fromisoformat(value)
+                parsed[field] = date_bounds(value)
             except ValueError:
-                errors.append(f"{prefix}: {field}은 YYYY-MM-DD 또는 미확인으로 입력하세요.")
+                errors.append(f"{prefix}: {field}은 YYYY-MM, YYYY-MM-DD 또는 미확인으로 입력하세요.")
         if not row["출처URL"].strip().startswith(("https://", "http://")):
             errors.append(f"{prefix}: 확인 가능한 출처URL이 필요합니다.")
-        if row["검증상태"].strip() not in {"공식확인", "추가확인필요"}:
-            errors.append(f"{prefix}: 검증상태는 공식확인 또는 추가확인필요여야 합니다.")
-        occupancy = parsed.get("입주시작일")
-        completion = parsed.get("준공예정일")
-        if occupancy and occupancy < today:
-            errors.append(f"{prefix}: 과거 입주시작일입니다.")
-        if completion and completion < today and not occupancy:
-            errors.append(f"{prefix}: 준공예정일이 지났고 입주시작일이 미확인입니다.")
-        if row["사업상태"].strip() in {"입주완료", "준공완료", "사용승인완료"}:
-            errors.append(f"{prefix}: 완료 사업장은 신규 입주예정 목록에서 제외해야 합니다.")
+        if row["검증상태"].strip() not in {"공식확인", "추가확인필요", "준공예정 공식 확인 · 입주시작일 미확인"}:
+            errors.append(f"{prefix}: 검증상태가 허용된 검증 구분과 일치하지 않습니다.")
+        if classify_kic(row, today) == '기간 외·완료':
+            errors.append(f"{prefix}: 향후 입주·준공 대상 또는 일정 미확인 공사 후보가 아닙니다.")
         accepted.append(row)
     return accepted, errors
 

@@ -1,4 +1,4 @@
-import io, re, json
+import io, re, json, os, html
 from datetime import date, timedelta
 from pathlib import Path
 from urllib.parse import unquote, quote
@@ -6,6 +6,8 @@ import pandas as pd
 import requests
 import streamlit as st
 from apt_sections import render_charts, render_table
+from db_common import (KIC_COLUMNS, SIDOS, normalize_sido, prepare_kic,
+                       filter_apartments, naver_search_url, add_months)
 
 BASE_DIR = Path(__file__).parent
 SUPPLEMENT_PATH = BASE_DIR / 'supplemental_verified.csv'
@@ -14,67 +16,68 @@ KIC_PATH = BASE_DIR / 'knowledge_industry_centers.csv'
 APPLYHOME_API = 'https://api.odcloud.kr/api/ApplyhomeInfoDetailSvc/v1/getAPTLttotPblancDetail'
 LH_URL = 'https://apply.lh.or.kr/lhapply/apply/noti/sp/list.do?mi=1042&sUppAisTpCd=06'
 
-st.set_page_config(page_title='전국입주 DB', page_icon='🏢', layout='wide')
-st.markdown('''
-<style>
-@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR:wght@400;500;600;700&family=IBM+Plex+Mono:wght@500;600&display=swap');
+def configure_page():
+    st.set_page_config(page_title='전국입주 DB', page_icon='🏢', layout='wide')
+    st.markdown('''
+    <style>
+    @import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR:wght@400;500;600;700&family=IBM+Plex+Mono:wght@500;600&display=swap');
 
-/* ── 글씨체: IBM Plex Sans KR (아이콘 글꼴은 건드리지 않음) ── */
-.stApp, .stApp h1, .stApp h2, .stApp h3, .stApp h4, .stApp p, .stApp li, .stApp label,
-.stApp input, .stApp textarea, .stApp button, .stApp td, .stApp th,
-.stApp [data-testid="stMarkdownContainer"], .stApp [data-testid="stCaptionContainer"],
-.stApp [data-testid="stMetricLabel"], .stApp [data-baseweb="select"] div,
-.stApp [data-baseweb="tab"], .stApp [data-testid="stAlert"] {
-  font-family: 'IBM Plex Sans KR', sans-serif;
-}
+    /* ── 글씨체: IBM Plex Sans KR (아이콘 글꼴은 건드리지 않음) ── */
+    .stApp, .stApp h1, .stApp h2, .stApp h3, .stApp h4, .stApp p, .stApp li, .stApp label,
+    .stApp input, .stApp textarea, .stApp button, .stApp td, .stApp th,
+    .stApp [data-testid="stMarkdownContainer"], .stApp [data-testid="stCaptionContainer"],
+    .stApp [data-testid="stMetricLabel"], .stApp [data-baseweb="select"] div,
+    .stApp [data-baseweb="tab"], .stApp [data-testid="stAlert"] {
+      font-family: 'IBM Plex Sans KR', sans-serif;
+    }
 
-/* ── 페이지 ── */
-.block-container{padding-top:1.6rem; max-width:1280px}
-.stApp h1{font-size:30px!important; font-weight:700!important; letter-spacing:-.6px; color:#141A22}
-.stApp h2, .stApp h3{font-weight:700!important; letter-spacing:-.3px; color:#141A22}
-.stApp [data-testid="stCaptionContainer"]{color:#5B6470}
+    /* ── 페이지 ── */
+    .block-container{padding-top:1.6rem; max-width:1280px}
+    .stApp h1{font-size:30px!important; font-weight:700!important; letter-spacing:-.6px; color:#141A22}
+    .stApp h2, .stApp h3{font-weight:700!important; letter-spacing:-.3px; color:#141A22}
+    .stApp [data-testid="stCaptionContainer"]{color:#5B6470}
 
-/* ── 사이드바 ── */
-[data-testid="stSidebar"]{background:#FFFFFF; border-right:1px solid #DDE0DA}
-[data-testid="stSidebar"] h2{font-size:17px!important}
+    /* ── 사이드바 ── */
+    [data-testid="stSidebar"]{background:#FFFFFF; border-right:1px solid #DDE0DA}
+    [data-testid="stSidebar"] h2{font-size:17px!important}
 
-/* ── 숫자 요약(metric) → 흰 카드 ── */
-[data-testid="stMetric"]{background:#FFFFFF; border:1px solid #DDE0DA; border-radius:14px; padding:18px 20px}
-[data-testid="stMetricLabel"] p{font-size:14px!important; font-weight:500; color:#4A535E}
-[data-testid="stMetricValue"], [data-testid="stMetricValue"] div{font-family:'IBM Plex Mono', monospace!important; font-weight:600; letter-spacing:-1px; color:#141A22}
+    /* ── 숫자 요약(metric) → 흰 카드 ── */
+    [data-testid="stMetric"]{background:#FFFFFF; border:1px solid #DDE0DA; border-radius:14px; padding:18px 20px}
+    [data-testid="stMetricLabel"] p{font-size:14px!important; font-weight:500; color:#4A535E}
+    [data-testid="stMetricValue"], [data-testid="stMetricValue"] div{font-family:'IBM Plex Mono', monospace!important; font-weight:600; letter-spacing:-1px; color:#141A22}
 
-/* ── 입력칸 ── */
-.stApp [data-baseweb="select"] > div, .stApp [data-baseweb="input"], .stApp [data-baseweb="base-input"]{
-  border-radius:10px!important; border-color:#C9CEC6!important; background:#FFFFFF}
+    /* ── 입력칸 ── */
+    .stApp [data-baseweb="select"] > div, .stApp [data-baseweb="input"], .stApp [data-baseweb="base-input"]{
+      border-radius:10px!important; border-color:#C9CEC6!important; background:#FFFFFF}
 
-/* ── 버튼 ── */
-.stApp .stDownloadButton button, .stApp .stButton button, .stApp .stLinkButton a{
-  border-radius:10px; border:1px solid #C9CEC6; background:#FFFFFF; color:#141A22; font-weight:600; min-height:44px}
-.stApp .stDownloadButton button:hover, .stApp .stButton button:hover, .stApp .stLinkButton a:hover{
-  border-color:#1E3A6E; color:#1E3A6E}
+    /* ── 버튼 ── */
+    .stApp .stDownloadButton button, .stApp .stButton button, .stApp .stLinkButton a{
+      border-radius:10px; border:1px solid #C9CEC6; background:#FFFFFF; color:#141A22; font-weight:600; min-height:44px}
+    .stApp .stDownloadButton button:hover, .stApp .stButton button:hover, .stApp .stLinkButton a:hover{
+      border-color:#1E3A6E; color:#1E3A6E}
 
-/* ── 탭 ── */
-.stApp [data-baseweb="tab"]{font-weight:600}
+    /* ── 탭 ── */
+    .stApp [data-baseweb="tab"]{font-weight:600}
 
-/* ── 표(dataframe) 테두리 ── */
-.stApp [data-testid="stDataFrame"]{border:1px solid #DDE0DA; border-radius:14px; overflow:hidden; background:#FFFFFF}
+    /* ── 표(dataframe) 테두리 ── */
+    .stApp [data-testid="stDataFrame"]{border:1px solid #DDE0DA; border-radius:14px; overflow:hidden; background:#FFFFFF}
 
-/* ── 모바일 보기 카드 ── */
-.apt-card,.broker-card{background:#FFFFFF; border:1px solid #DDE0DA; border-radius:14px; padding:18px 20px; margin-bottom:12px}
-.movein{font-family:'IBM Plex Mono', monospace; font-size:.95rem; font-weight:600; color:#1E3A6E}
-.apt-name,.broker-name{font-size:1.1rem; font-weight:700; margin:6px 0 10px}
-.apt-name a,.broker-name a{color:#141A22!important; text-decoration:none; border-bottom:1px solid #C9CEC6}
-.apt-name a:hover,.broker-name a:hover{color:#1E3A6E!important; border-color:#1E3A6E}
-.meta{font-size:.92rem; line-height:1.7; color:#4A535E}
-.hot{font-weight:800}
-.source-box{padding:.8rem 1rem; border-radius:14px; border:1px solid #DDE0DA; background:#FFFFFF; margin:.3rem 0 1rem}
+    /* ── 모바일 보기 카드 ── */
+    .apt-card,.broker-card{background:#FFFFFF; border:1px solid #DDE0DA; border-radius:14px; padding:18px 20px; margin-bottom:12px}
+    .movein{font-family:'IBM Plex Mono', monospace; font-size:.95rem; font-weight:600; color:#1E3A6E}
+    .apt-name,.broker-name{font-size:1.1rem; font-weight:700; margin:6px 0 10px}
+    .apt-name a,.broker-name a{color:#141A22!important; text-decoration:none; border-bottom:1px solid #C9CEC6}
+    .apt-name a:hover,.broker-name a:hover{color:#1E3A6E!important; border-color:#1E3A6E}
+    .meta{font-size:.92rem; line-height:1.7; color:#4A535E}
+    .hot{font-weight:800}
+    .source-box{padding:.8rem 1rem; border-radius:14px; border:1px solid #DDE0DA; background:#FFFFFF; margin:.3rem 0 1rem}
 
-@media(max-width:768px){
-  .block-container{padding-left:.8rem; padding-right:.8rem}
-  .stApp h1{font-size:1.5rem!important}
-  [data-testid="stMetric"]{padding:14px 16px}
-}
-</style>''', unsafe_allow_html=True)
+    @media(max-width:768px){
+      .block-container{padding-left:.8rem; padding-right:.8rem}
+      .stApp h1{font-size:1.5rem!important}
+      [data-testid="stMetric"]{padding:14px 16px}
+    }
+    </style>''', unsafe_allow_html=True)
 
 
 def normalize_key(k):
@@ -89,9 +92,9 @@ def normalize_key(k):
 
 def get_secret(name, default=''):
     try:
-        return st.secrets.get(name, default)
+        return os.environ.get(name) or st.secrets.get(name, default)
     except Exception:
-        return default
+        return os.environ.get(name, default)
 
 
 def get_api_key():
@@ -104,14 +107,16 @@ def clean_int(v):
 
 
 def normalize_movein(v):
-    if v is None:
+    value = str(v or '').strip()
+    match = re.search(r'(\d{4})[년 ./-]+(\d{1,2})', value)
+    digits = re.sub(r'[^\d]', '', value)
+    if match:
+        year, month = map(int, match.groups())
+    elif len(digits) >= 6:
+        year, month = int(digits[:4]), int(digits[4:6])
+    else:
         return None
-    s = str(v).strip()
-    m = re.search(r'(\d{4})\s*년?\s*0?(\d{1,2})', s)
-    if m:
-        return f'{m.group(1)}-{int(m.group(2)):02d}'
-    d = re.sub(r'[^\d]', '', s)
-    return f'{d[:4]}-{d[4:6]}' if len(d) >= 6 else None
+    return f'{year:04d}-{month:02d}' if 1900 <= year <= 2200 and 1 <= month <= 12 else None
 
 
 def guess_sigungu(a):
@@ -159,17 +164,26 @@ def fetch_applyhome(key):
 
 
 @st.cache_data(ttl=3600, show_spinner=False)
-def fetch_lh():
-    r = requests.get(LH_URL, headers={'User-Agent': 'Mozilla/5.0'}, timeout=30)
+def fetch_lh_url(url):
+    r = requests.get(url, headers={'User-Agent': 'Mozilla/5.0'}, timeout=30)
     r.raise_for_status()
-    target = None
-    for t in pd.read_html(io.StringIO(r.text)):
-        cols = [str(c).replace('\n', ' ').strip() for c in t.columns]
-        t.columns = cols
-        if '지역' in cols and any('지구명' in c for c in cols) and any('입주예정' in c for c in cols):
-            target = t
-            break
-    if target is None:
+    def select_table(text):
+        for table in pd.read_html(io.StringIO(text)):
+            table.columns = [str(c).replace('\n', ' ').strip() for c in table.columns]
+            if '지역' in table.columns and any('지구명' in c for c in table.columns) and any('입주예정' in c for c in table.columns):
+                return table
+        return pd.DataFrame()
+    tables = [select_table(r.text)]
+    pages = max([int(n) for n in re.findall(r'goPaging\((\d+)\)', r.text)] or [1])
+    from concurrent.futures import ThreadPoolExecutor
+    def next_page(page):
+        response = requests.get(url, params={'currPage': page}, headers={'User-Agent': 'Mozilla/5.0'}, timeout=30)
+        response.raise_for_status()
+        return select_table(response.text)
+    with ThreadPoolExecutor(max_workers=4) as pool:
+        tables.extend(pool.map(next_page, range(2, pages + 1)))
+    target = pd.concat([t for t in tables if not t.empty], ignore_index=True) if any(not t.empty for t in tables) else pd.DataFrame()
+    if target.empty:
         return pd.DataFrame()
     def fc(k):
         return next((c for c in target.columns if k in str(c)), None)
@@ -185,10 +199,23 @@ def fetch_lh():
     f['시공사'] = 'LH'
     f['주소'] = ''
     f['출처'] = 'LH청약플러스'
-    f['원문'] = LH_URL
+    f['원문'] = url
     f['최근확인'] = date.today().isoformat()
     f['검증상태'] = '공식 공급계획'
     return f[['입주예정월', '시도', '시군구', '단지명', '세대수', '시공사', '주소', '출처', '원문', '최근확인', '검증상태']]
+
+
+@st.cache_data(ttl=3600, show_spinner=False)
+def fetch_lh():
+    frames, errors = [], []
+    for url in (LH_URL, 'https://apply.lh.or.kr/lhapply/apply/noti/sp/list.do?sUppAisTpCd=05&mi=201523'):
+        try:
+            frames.append(fetch_lh_url(url))
+        except Exception as exc:
+            errors.append(str(exc))
+    if not frames:
+        raise RuntimeError('LH 공급계획 연결 실패: ' + '; '.join(errors))
+    return pd.concat(frames, ignore_index=True)
 
 
 def load_supplement():
@@ -265,29 +292,9 @@ def clean_apt_name(v):
 
 
 def naver_apt_url(row):
-    """네이버 부동산 지도에서 '중개'가 선택된 상태로 연다.
-
-    네이버 지도 URL의 표시 옵션:
-    - showRealtors=true   : 중개사 표시
-    - showComplexes=false : 단지 표시 끔
-    - showArticles=false  : 매물 표시 끔
-    """
-    sido = str(row.get('시도', '') or '').strip()
-    sigungu = str(row.get('시군구', '') or '').strip()
-    apt_name = clean_apt_name(row.get('단지명', ''))
-
-    # 동명이인 단지를 줄이기 위해 지역 + 실제 단지명을 검색어로 사용한다.
-    query = ' '.join(x for x in [sido, sigungu, apt_name] if x)
-    encoded_query = quote(query, safe='')
-
-    # 사용자가 네이버 부동산에서 '중개'를 눌렀을 때 생성되는 표시 옵션을 적용한다.
-    return (
-        'https://fin.land.naver.com/map'
-        '?showRealtors=true'
-        '&showComplexes=false'
-        '&showArticles=false'
-        f'#{encoded_query}'
-    )
+    # Verified against Naver's actual complex-search results, 2026-10-27.
+    return naver_search_url(clean_apt_name(row.get('단지명', '')),
+                            row.get('시도', ''), row.get('시군구', ''))
 
 
 def dedup(f):
@@ -319,11 +326,17 @@ def render_apartment_db():
         except Exception as e:
             l = pd.DataFrame(); errs.append(f'LH: {e}')
         s = load_supplement()
-    frames = [x for x in [a, l, s] if isinstance(x, pd.DataFrame) and not x.empty]
+        snapshot_path = BASE_DIR / 'apartment_snapshot.csv'
+        cached = pd.read_csv(snapshot_path, encoding='utf-8-sig').fillna('') if snapshot_path.exists() else pd.DataFrame()
+    if not get_api_key():
+        errs.append('청약홈 API 키가 없어 해당 출처의 실시간 갱신은 실행하지 않았습니다.')
+    frames = [x for x in [a, l, s, cached] if isinstance(x, pd.DataFrame) and not x.empty]
     if not frames:
         st.error('입주정보를 불러오지 못했습니다.')
         return
-    df = dedup(pd.concat(frames, ignore_index=True))
+    combined = pd.concat(frames, ignore_index=True).fillna('')
+    combined['시도'] = combined['시도'].map(normalize_sido)
+    df = dedup(combined)
     df = df[(df['세대수'] >= 300) & (df['입주예정월'] >= '2025-01')].copy()
     # 화면/검색용 실제 단지명. 원본 공고명은 '원공고단지명'으로 보존한다.
     df['원공고단지명'] = df['단지명']
@@ -345,15 +358,7 @@ def render_apartment_db():
         month = st.selectbox('입주월', ['전체'] + [f'{i:02d}' for i in range(1, 13)], key='apt_month')
         minhh = st.number_input('최소 세대수', min_value=300, value=300, step=100, key='apt_minhh')
         kw = st.text_input('단지명/주소/시공사 검색', key='apt_kw')
-    f = df[df['세대수'] >= minhh].copy()
-    if sido != '전체': f = f[f['시도'] == sido]
-    if year != '전체': f = f[f['입주예정월'].str.startswith(year)]
-    if month != '전체': f = f[f['입주예정월'].str[5:7] == month]
-    if kw.strip():
-        k = kw.strip()
-        f = f[f['단지명'].fillna('').str.contains(k, case=False, regex=False) |
-              f['주소'].fillna('').str.contains(k, case=False, regex=False) |
-              f['시공사'].fillna('').str.contains(k, case=False, regex=False)]
+    f = filter_apartments(df, sido, year, month, minhh, kw)
     st.subheader(f'검색 결과 · {len(f):,}개 단지')
     render_charts(f)
     mt, tt = st.tabs(['📱 모바일 보기', '📋 표 보기'])
@@ -362,8 +367,8 @@ def render_apartment_db():
             naver_url = naver_apt_url(r)
             st.markdown(
                 f"<div class='apt-card'><div class='movein'>📅 {r['입주예정월']} 입주예정</div>"
-                f"<div class='apt-name'><a href='{naver_url}' target='_blank' rel='noopener noreferrer'>{r['단지명']}</a></div>"
-                f"<div class='meta'>📍 {r['시도']} {r['시군구']}<br>🏠 {int(r['세대수']):,}세대<br>🏗️ {r['시공사']}<br>🔎 {r['출처']} · {r['검증상태']}</div></div>",
+                f"<div class='apt-name'><a href='{naver_url}' target='_blank' rel='noopener noreferrer'>{html.escape(str(r['단지명']))}</a></div>"
+                f"<div class='meta'>📍 {html.escape(str(r['시도']))} {html.escape(str(r['시군구']))}<br>🏠 {int(r['세대수']):,}세대<br>🏗️ {html.escape(str(r['시공사']))}<br>🔎 {html.escape(str(r['출처']))} · {html.escape(str(r['검증상태']))}</div></div>",
                 unsafe_allow_html=True
             )
             if r.get('원문'):
@@ -634,7 +639,7 @@ def render_broker_db():
 
     with st.expander('⚙️ 데이터 연결 안내'):
         st.markdown('''
-**자동연계 방법**  
+**자동연계 방법**
 Streamlit 앱의 Secrets에 아래처럼 등록하면 앱이 1시간 캐시 후 원천데이터를 다시 읽습니다.
 
 ```toml
@@ -647,11 +652,6 @@ BROKER_DATA_URL = "CSV 또는 JSON 원천데이터 URL"
 
 
 # ------------------------- 지식산업센터 입주예정 DB -------------------------
-KIC_COLUMNS = [
-    '센터명', '시도', '시군구', '주소', '사업상태', '허가일', '착공일',
-    '준공예정일', '사용승인일', '입주시작일', '시행사', '시공사', '연락처',
-    '공식출처', '출처URL', '최근확인', '검증상태'
-]
 
 
 def load_kic_db():
@@ -673,33 +673,26 @@ def render_kic_db():
         st.caption('과거 준공·입주 완료 센터를 임의로 포함하지 않습니다. 준공예정일과 실제 입주시작일은 별도로 관리합니다.')
         return
 
-    today = pd.Timestamp(date.today()).normalize()
-    horizon = today + pd.DateOffset(months=12)
-    for col in ('준공예정일', '입주시작일', '사용승인일'):
-        df[col + '_dt'] = pd.to_datetime(df[col], errors='coerce')
-    # 실제 입주시작일이 있는 경우 이를 우선하며, 없을 때만 준공예정일로 후보를 분류한다.
-    # 과거 사용승인 완료 자료라도 미래 입주가 공식 확인되면 보존한다.
-    move = df['입주시작일_dt']
-    completion = df['준공예정일_dt']
-    approved = df['사용승인일_dt']
-    future_move = move.ge(today) & move.le(horizon)
-    future_completion = move.isna() & completion.ge(today) & completion.le(horizon)
-    under_construction = (df['사업상태'].str.contains('공사|착공|건설|허가', regex=True, na=False)
-                          & move.isna() & (approved.isna() | approved.ge(today))
-                          & (completion.isna() | completion.ge(today)))
-    df = df[future_move | future_completion | under_construction].copy()
-    df['구분'] = '공사 중 · 일정 미확인'
-    df.loc[future_completion.loc[df.index], '구분'] = '준공 예정 · 입주일 미확인'
-    df.loc[future_move.loc[df.index], '구분'] = '입주 예정'
-    if df.empty:
-        st.info('현재 기준 향후 12개월 입주예정 또는 진행 중으로 확인되는 센터가 없습니다.')
-        return
-
+    df = prepare_kic(df)
+    today = pd.Timestamp.now(tz='Asia/Seoul').date()
+    st.caption(f'조회 기간: {today} ~ {add_months(today, 12)} · 일자가 없는 YYYY-MM 자료는 월 단위로 판단합니다.')
+    st.info('전국 수집 범위를 지원합니다. 현재 등록 자료만 표시하며 전국 수집 완료를 의미하지 않습니다.')
     with st.sidebar:
         st.header('🏭 지식산업센터 검색 조건')
-        region = st.selectbox('시도', ['전체'] + sorted(x for x in df['시도'].unique() if x), key='kic_region')
+        region = st.selectbox('시도', ['전체'] + SIDOS, key='kic_region')
+        scope = st.selectbox('조회 범위', ['향후 12개월', '일정 미확인 후보', '전체 보관자료'], key='kic_scope')
         status = st.selectbox('일정 구분', ['전체', '입주 예정', '준공 예정 · 입주일 미확인', '공사 중 · 일정 미확인'], key='kic_status')
+        year = st.selectbox('일정 연도', ['전체'] + sorted(set(df.loc[df['일정월'].str.match(r'\d{4}-\d{2}'), '일정월'].str[:4])), key='kic_year')
+        month = st.selectbox('일정 월', ['전체'] + [f'{m:02d}' for m in range(1, 13)], key='kic_month')
         keyword = st.text_input('센터명·주소·시행사·시공사 검색', key='kic_keyword')
+    if scope == '향후 12개월':
+        df = df[df['구분'].isin(['입주 예정', '준공 예정 · 입주일 미확인'])]
+    elif scope == '일정 미확인 후보':
+        df = df[df['구분'].eq('공사 중 · 일정 미확인')]
+    if year != '전체':
+        df = df[df['일정월'].str[:4].eq(year)]
+    if month != '전체':
+        df = df[df['일정월'].str[5:7].eq(month)]
     if region != '전체':
         df = df[df['시도'].eq(region)]
     if status != '전체':
@@ -714,8 +707,20 @@ def render_kic_db():
     c3.metric('일정 미확인', f"{df['구분'].eq('공사 중 · 일정 미확인').sum():,}개")
     st.caption('준공예정일은 입주시작일이 아닙니다. 미확인 날짜는 추정하지 않습니다.')
     view = df[['구분'] + KIC_COLUMNS].replace('', '미확인')
-    st.dataframe(view, hide_index=True, use_container_width=True, height=520,
-                 column_config={'출처URL': st.column_config.LinkColumn('공식 출처 링크')})
+    cards, table = st.tabs(['📱 모바일 보기', '📋 표 보기'])
+    with cards:
+        for _, row in view.head(200).iterrows():
+            with st.container(border=True):
+                st.subheader(row['센터명'])
+                st.write(row['구분'], '·', row['주소'])
+                st.write('준공예정:', row['준공예정일'], ' / 입주시작:', row['입주시작일'])
+                st.write('시행사:', row['시행사'], ' / 시공사:', row['시공사'])
+                st.caption(row['공식출처'] + ' · ' + row['검증상태'])
+                if row['출처URL'].startswith(('https://', 'http://')):
+                    st.link_button('공식 출처 보기', row['출처URL'])
+    with table:
+        st.dataframe(view, hide_index=True, use_container_width=True, height=520,
+                     column_config={'출처URL': st.column_config.LinkColumn('공식 출처 링크')})
     st.download_button('⬇️ 검색결과 Excel 다운로드', excel_bytes(view, '지식산업센터'),
                        file_name=f'지식산업센터_입주예정_{date.today()}.xlsx',
                        mime='application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
@@ -834,18 +839,24 @@ def render_managed_offices():
 
 
 
-with st.sidebar:
-    st.header('📂 전국입주 DB')
-    page = st.radio('메뉴', ['🏢 아파트 입주 DB', '🏠 신규 부동산 DB', '🏭 지식산업센터 DB', '📒 애드플래닝 관리업체'], key='main_page')
-    st.divider()
+def main():
+    configure_page()
+    with st.sidebar:
+        st.header('📂 전국입주 DB')
+        page = st.radio('메뉴', ['🏢 아파트 입주 DB', '🏠 신규 부동산 DB', '🏭 지식산업센터 DB', '📒 애드플래닝 관리업체'], key='main_page')
+        st.divider()
 
-if page == '🏢 아파트 입주 DB':
-    render_apartment_db()
-elif page == '🏠 신규 부동산 DB':
-    render_broker_db()
-elif page == '🏭 지식산업센터 DB':
-    render_kic_db()
-else:
-    render_managed_offices()
+    if page == '🏢 아파트 입주 DB':
+        render_apartment_db()
+    elif page == '🏠 신규 부동산 DB':
+        render_broker_db()
+    elif page == '🏭 지식산업센터 DB':
+        render_kic_db()
+    else:
+        render_managed_offices()
 
-st.caption('전국입주 DB · 공식/공공 원천데이터 기반')
+    st.caption('전국입주 DB · 공식/공공 원천데이터 기반')
+
+
+if __name__ == '__main__':
+    main()

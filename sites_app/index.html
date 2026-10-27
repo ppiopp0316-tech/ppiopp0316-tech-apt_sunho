@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <meta
+      name="description"
+      content="전국 입주 예정 단지, 신규 부동산, 지식산업센터와 애드플래닝 관리업체를 조회하는 업무용 DB"
+    />
+    <meta name="robots" content="noindex,nofollow" />
+    <title>전국입주 DB · 애드플래닝</title>
+    <link rel="icon" href="icon.svg" type="image/svg+xml" />
+    <link rel="stylesheet" href="styles.css" />
+    <script src="vendor/xlsx.full.min.js" defer></script>
+    <script src="app.mjs" type="module"></script>
+  </head>
+  <body>
+    <a class="skip" href="#main">본문 바로가기</a>
+    <header class="mobilebar">
+      <button id="menu" aria-label="메뉴 열기" aria-expanded="false">☰</button
+      ><b>전국입주 DB</b><span class="pill">업무 공간</span>
+    </header>
+    <aside id="sidebar">
+      <a class="brand" href="#apartments"
+        ><span class="brand-icon">▥</span
+        ><span>전국입주 DB<small>AD PLANNING / DATA WORKSPACE</small></span></a
+      >
+      <p class="nav-label">데이터베이스</p>
+      <nav id="navigation" aria-label="주 메뉴"></nav>
+      <div id="filterbox"></div>
+      <div class="sidebar-foot">
+        공식·공공 원천자료 기반<br /><span id="build-date">자료 확인 중</span>
+      </div>
+    </aside>
+    <main id="main" tabindex="-1">
+      <div class="loading" role="status">데이터를 불러오고 있습니다…</div>
+    </main>
+    <dialog id="detail">
+      <div id="detail-body"></div>
+      <button class="dialog-close" id="close-detail" aria-label="상세정보 닫기">
+        ✕
+      </button>
+    </dialog>
+    <div id="toast" role="status" aria-live="polite"></div>
+    <input id="upload" type="file" accept=".csv,.xlsx,.xls" hidden />
+  </body>
+</html>
