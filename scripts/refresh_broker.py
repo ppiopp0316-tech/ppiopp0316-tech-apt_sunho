@@ -60,6 +60,7 @@ def main():
         if total_count is None:
             total_count = int(payload.get("totalCount", 0))
             if total_count < MIN_ROWS:
+                if total_count < MIN_ROWS:
                 raise RuntimeError("전체 데이터 건수가 너무 적습니다.")
 
         rows.extend(batch)
