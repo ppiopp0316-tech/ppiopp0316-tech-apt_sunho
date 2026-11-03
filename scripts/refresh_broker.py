@@ -34,9 +34,9 @@ def main():
 
     print("API 응답 최상위 항목:", list(data.keys()))
 
-    body = data.get("response", {}).get("body", {})
+    body = data.get("body", {})
     if not body:
-        body = data
+        body = data.get("response", {}).get("body", {})
 
     print("API 전체 건수:", body.get("totalCount", "미확인"))
 
