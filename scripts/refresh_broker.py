@@ -1,56 +1,165 @@
 
+import gzip
+import io
+import json
 import os
+from datetime import datetime, timezone
+from pathlib import Path
 from urllib.parse import unquote
 
+import pandas as pd
 import requests
 
-API_URL = "https://api.data.go.kr/openapi/tn_pubr_public_med_office_api"
+ROOT = Path(__file__).resolve().parent.parent
+OUTPUT = ROOT / "broker_offices.csv.gz"
+META = ROOT / "broker_source_meta.json"
 
+API_URL = "https://api.data.go.kr/openapi/tn_pubr_public_med_office_api"
+PAGE_SIZE = 1000
+MIN_ROWS = 50000
+
+COLUMN_MAP = {
+    "medOfficeNm": "중개사무소명",
+    "estblRegNo": "개설등록번호",
+    "rprsvNm": "대표자명",
+    "telno": "전화번호",
+    "estblRegYmd": "개설등록일자",
+    "lctnRoadNmAddr": "소재지도로명주소",
+    "lctnLotnoAddr": "소재지지번주소",
+    "opbizLreaClscSe": "개업공인중개사종별구분",
+    "latitude": "위도",
+    "longitude": "경도",
+    "crtrYmd": "데이터기준일자",
+}
 
 def main():
     key = os.environ.get("DATA_GO_KR_API_KEY", "").strip()
     if not key:
-        raise RuntimeError("GitHub API 인증키가 없습니다.")
+        raise RuntimeError("API 인증키가 없습니다.")
 
-    params = {
-        "serviceKey": unquote(key),
-        "pageNo": 1,
-        "numOfRows": 10,
-        "type": "json",
-    }
+    session = requests.Session()
+    rows = []
+    total = None
 
-    response = requests.get(API_URL, params=params, timeout=60)
-    response.raise_for_status()
-
-    try:
+    for page in range(1, 1001):
+        response = session.get(
+            API_URL,
+            params={
+                "serviceKey": unquote(key),
+                "pageNo": page,
+                "numOfRows": PAGE_SIZE,
+                "type": "json",
+            },
+            timeout=90,
+        )
+        response.raise_for_status()
         data = response.json()
-    except ValueError:
+
+        body = data.get("body")
+        if body is None:
+            body = data.get("response", {}).get("body")
+
+        if not isinstance(body, dict):
+            raise RuntimeError("API 응답 구조가 올바르지 않습니다.")
+
+        if total is None:
+            total = int(body.get("totalCount", 0))
+            print(f"API 전체 건수: {total:,}건")
+            if total < MIN_ROWS:
+                raise RuntimeError("전체 건수가 안전 기준보다 적습니다.")
+
+        batch = body.get("items", [])
+        if isinstance(batch, dict):
+            batch = batch.get("item", [])
+
+        if not isinstance(batch, list) or not batch:
+            raise RuntimeError(f"{page}페이지 데이터가 비어 있습니다.")
+
+        rows.extend(batch)
+        print(f"{page}페이지 완료 / 누적 {len(rows):,}건")
+
+        if len(rows) >= total:
+            break
+    else:
+        raise RuntimeError("최대 페이지 수를 초과했습니다.")
+
+    if len(rows) != total:
         raise RuntimeError(
-            "JSON 응답이 아닙니다: " + response.text[:300]
+            f"전체 건수 불일치: {len(rows):,} / {total:,}"
         )
 
-    if not isinstance(data, dict):
-        raise RuntimeError("예상하지 못한 API 응답입니다.")
+    df = pd.DataFrame(rows)
 
-    print("API 응답 최상위 항목:", list(data.keys()))
+    required = [
+        "medOfficeNm",
+        "estblRegNo",
+        "estblRegYmd",
+        "lctnRoadNmAddr",
+    ]
+    missing = [c for c in required if c not in df.columns]
+    if missing:
+        raise RuntimeError(f"필수 항목 누락: {missing}")
 
-    body = data.get("body", {})
-    if not body:
-        body = data.get("response", {}).get("body", {})
+    df = df.rename(columns=COLUMN_MAP)
 
-    print("API 전체 건수:", body.get("totalCount", "미확인"))
+    for column in COLUMN_MAP.values():
+        if column not in df.columns:
+            df[column] = ""
 
-    items = body.get("items", [])
-    if isinstance(items, dict):
-        items = items.get("item", [])
+    df = df.fillna("")
 
-    if isinstance(items, list) and items:
-        print("첫 번째 데이터의 항목명:", list(items[0].keys()))
-        print("조회된 샘플 건수:", len(items))
-    else:
-        print("데이터 목록 구조:", type(items).__name__)
+    names = df["중개사무소명"].astype(str).str.strip()
+    if (names == "").any():
+        raise RuntimeError("사무소명이 없는 데이터가 있습니다.")
 
-    print("진단 완료: 기존 DB 파일은 변경하지 않았습니다.")
+    reg = df["개설등록번호"].astype(str).str.strip()
+    if (reg == "").any():
+        raise RuntimeError("등록번호가 없는 데이터가 있습니다.")
+
+    if reg.duplicated().any():
+        raise RuntimeError(
+            "중복 등록번호가 발견됐습니다. 원본 확인이 필요합니다."
+        )
+
+    if OUTPUT.exists():
+        with gzip.open(OUTPUT, "rt", encoding="utf-8-sig") as f:
+            previous_count = sum(1 for _ in f) - 1
+
+        if previous_count > 0 and len(df) < previous_count * 0.9:
+            raise RuntimeError(
+                "기존 DB 대비 데이터가 10% 넘게 감소했습니다."
+            )
+
+    buffer = io.StringIO()
+    df.to_csv(buffer, index=False)
+
+    compressed = gzip.compress(
+        buffer.getvalue().encode("utf-8-sig"),
+        mtime=0,
+    )
+
+    metadata = {
+        "source": "전국공인중개사사무소표준데이터",
+        "url": API_URL,
+        "retrieved_at": datetime.now(timezone.utc).isoformat(),
+        "raw_rows": len(df),
+        "api_total_count": total,
+        "columns": list(df.columns),
+    }
+
+    temp_output = OUTPUT.with_name(OUTPUT.name + ".tmp")
+    temp_meta = META.with_name(META.name + ".tmp")
+
+    temp_output.write_bytes(compressed)
+    temp_meta.write_text(
+        json.dumps(metadata, ensure_ascii=False, indent=2),
+        encoding="utf-8",
+    )
+
+    temp_output.replace(OUTPUT)
+    temp_meta.replace(META)
+
+    print(f"전체 수집 및 저장 완료: {len(df):,}건")
 
 
 if __name__ == "__main__":
