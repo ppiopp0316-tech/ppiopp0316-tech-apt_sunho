@@ -132,7 +132,9 @@ def main():
         ]
 
         print(f"사무소명 또는 주소가 다른 등록번호: {len(conflicts):,}개")
-        raise RuntimeError("중복 진단 완료. 기존 DB는 변경하지 않았습니다.")
+        print("중복 등록번호는 원본 그대로 보존합니다.")
+
+    print(f"전체 원본 행 유지: {len(df):,}건")
 
     if OUTPUT.exists():
         with gzip.open(OUTPUT, "rt", encoding="utf-8-sig") as f:
