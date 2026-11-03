@@ -1,0 +1,46 @@
+
+name: 신규 부동산 DB 자동 갱신
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: '30 0 * * *'
+
+permissions:
+  contents: write
+
+concurrency:
+  group: broker-daily-refresh
+  cancel-in-progress: false
+
+jobs:
+  refresh:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+
+    steps:
+      - name: 저장소 가져오기
+        uses: actions/checkout@v4
+
+      - name: Python 설치
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: 필요한 라이브러리 설치
+        run: pip install requests pandas
+
+      - name: 신규 부동산 데이터 수집
+        env:
+          DATA_GO_KR_API_KEY: ${{ secrets.DATA_GO_KR_API_KEY }}
+        run: python scripts/refresh_broker.py
+
+      - name: 변경 데이터 저장
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add broker_offices.csv.gz broker_source_meta.json
+          if ! git diff --cached --quiet; then
+            git commit -m "Auto refresh broker offices DB"
+            git push
+          fi
