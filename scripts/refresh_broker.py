@@ -116,10 +116,23 @@ def main():
     if (reg == "").any():
         raise RuntimeError("등록번호가 없는 데이터가 있습니다.")
 
-    if reg.duplicated().any():
-        raise RuntimeError(
-            "중복 등록번호가 발견됐습니다. 원본 확인이 필요합니다."
+    duplicates = df[reg.duplicated(keep=False)].copy()
+
+    if not duplicates.empty:
+        print(f"중복 등록번호 관련 행: {len(duplicates):,}건")
+        print(f"중복된 등록번호 종류: {reg[reg.duplicated(keep=False)].nunique():,}개")
+
+        same_office = duplicates.groupby("개설등록번호").agg(
+            사무소명수=("중개사무소명", "nunique"),
+            주소수=("소재지도로명주소", "nunique"),
         )
+        conflicts = same_office[
+            (same_office["사무소명수"] > 1)
+            | (same_office["주소수"] > 1)
+        ]
+
+        print(f"사무소명 또는 주소가 다른 등록번호: {len(conflicts):,}개")
+        raise RuntimeError("중복 진단 완료. 기존 DB는 변경하지 않았습니다.")
 
     if OUTPUT.exists():
         with gzip.open(OUTPUT, "rt", encoding="utf-8-sig") as f:
