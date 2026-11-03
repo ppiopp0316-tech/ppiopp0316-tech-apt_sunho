@@ -57,11 +57,13 @@ def main():
         if not isinstance(batch, list):
             raise RuntimeError("API 데이터 목록이 없습니다.")
 
-        if total_count is None:
-            total_count = int(payload.get("totalCount", 0))
-            if total_count < MIN_ROWS:
-                if total_count < MIN_ROWS:
-                raise RuntimeError("전체 데이터 건수가 너무 적습니다.")
+
+if total_count is None:
+    total_count = int(payload.get("totalCount", 0))
+    print(f"API 전체 건수: {total_count:,}건")
+    if total_count < MIN_ROWS:
+        raise RuntimeError("전체 데이터 건수가 너무 적습니다.")
+
 
         rows.extend(batch)
         print(f"페이지 {page}: {len(batch)}건 수집")
