@@ -438,7 +438,8 @@ def normalize_broker_df(raw):
     if '개설등록번호' in out:
         key = out['개설등록번호'].str.strip()
         fallback = out['중개사무소명'].map(nname) + '|' + out['주소'].map(nname)
-        out['_dedup'] = key.where(key != '', fallback)
+        # 등록번호는 기관별로 재사용될 수 있어 사무소명과 주소를 함께 비교
+        out['_dedup'] = key + '|' + fallback
         out = out.drop_duplicates('_dedup', keep='last').drop(columns='_dedup')
     return out
 
