@@ -397,7 +397,10 @@ def render_apartment_db():
         if not table_f.empty:
             table_f['_naver_url'] = table_f.apply(naver_apt_url, axis=1)
         render_table(table_f)
-    st.download_button('⬇️ 현재 검색결과 Excel 다운로드', excel_bytes(f, '입주DB'), file_name=f'전국_300세대이상_입주예정_{date.today()}.xlsx', mime='application/vnd.openxmlformats-officedocument.spreadsheetml.sheet', width='stretch')
+    if st.button('⬇️ Excel 다운로드 준비', key='apt_prepare_excel'):
+        st.session_state['apt_excel_ready'] = True
+    if st.session_state.get('apt_excel_ready'):
+        st.download_button('⬇️ 현재 검색결과 Excel 다운로드', excel_bytes(f, '입주DB'), file_name=f'전국_300세대이상_입주예정_{date.today()}.xlsx', mime='application/vnd.openxmlformats-officedocument.spreadsheetml.sheet', width='stretch')
     if errs:
         with st.expander('일부 출처 오류'):
             for e in errs: st.write('•', e)
@@ -644,7 +647,10 @@ def render_broker_db():
     show_stats = stats[['지역','오늘신규','7일신규','신규수','최근개업일','등급']].rename(columns={'신규수':f'{days}일신규'})
     st.dataframe(show_stats, width="stretch", hide_index=True, height=min(650, 80 + len(show_stats)*35))
 
-    st.download_button('⬇️ 신규지역 요약 Excel', excel_bytes(show_stats, '신규지역'), file_name=f'신규부동산_{days}일_{min_count}개이상_지역_{date.today()}.xlsx', mime='application/vnd.openxmlformats-officedocument.spreadsheetml.sheet', width="stretch")
+    if st.button('⬇️ 신규지역 Excel 준비', key='broker_prepare_summary_excel'):
+        st.session_state['broker_summary_excel_ready'] = True
+    if st.session_state.get('broker_summary_excel_ready'):
+        st.download_button('⬇️ 신규지역 요약 Excel', excel_bytes(show_stats, '신규지역'), file_name=f'신규부동산_{days}일_{min_count}개이상_지역_{date.today()}.xlsx', mime='application/vnd.openxmlformats-officedocument.spreadsheetml.sheet', width="stretch")
 
     st.divider()
     region = st.selectbox('지역 상세보기', stats['지역'].tolist(), key='broker_region')
@@ -657,7 +663,10 @@ def render_broker_db():
 
     cols = ['개설등록일자','중개사무소명','대표자명','전화번호','개설등록번호','소재지도로명주소','개업공인중개사종별구분']
     st.dataframe(detail[cols], width="stretch", hide_index=True, height=min(600, 80 + len(detail)*35))
-    st.download_button('⬇️ 선택 지역 업체 Excel', excel_bytes(detail[cols], '중개사무소'), file_name=f"{re.sub(r'[^가-힣A-Za-z0-9_-]','_',region)}_신규중개사무소_{date.today()}.xlsx", mime='application/vnd.openxmlformats-officedocument.spreadsheetml.sheet', width="stretch")
+    if st.button('⬇️ 선택 지역 Excel 준비', key='broker_prepare_detail_excel'):
+        st.session_state['broker_detail_excel_ready'] = True
+    if st.session_state.get('broker_detail_excel_ready'):
+        st.download_button('⬇️ 선택 지역 업체 Excel', excel_bytes(detail[cols], '중개사무소'), file_name=f"{re.sub(r'[^가-힣A-Za-z0-9_-]','_',region)}_신규중개사무소_{date.today()}.xlsx", mime='application/vnd.openxmlformats-officedocument.spreadsheetml.sheet', width="stretch")
 
     with st.expander('⚙️ 데이터 연결 안내'):
         st.markdown('''
@@ -749,10 +758,13 @@ def render_kic_db():
     else:
         st.dataframe(view, hide_index=True, width='stretch', height=520,
                      column_config={'출처URL': st.column_config.LinkColumn('공식 출처 링크')})
-    st.download_button('⬇️ 검색결과 Excel 다운로드', excel_bytes(view, '지식산업센터'),
-                       file_name=f'지식산업센터_입주예정_{date.today()}.xlsx',
-                       mime='application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
-                       width="stretch")
+    if st.button('⬇️ 지식산업센터 Excel 준비', key='kic_prepare_excel'):
+        st.session_state['kic_excel_ready'] = True
+    if st.session_state.get('kic_excel_ready'):
+        st.download_button('⬇️ 검색결과 Excel 다운로드', excel_bytes(view, '지식산업센터'),
+                           file_name=f'지식산업센터_입주예정_{date.today()}.xlsx',
+                           mime='application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
+                           width="stretch")
 
 
 @st.cache_data(show_spinner=False)
@@ -884,12 +896,21 @@ def main():
     configure_page()
     with st.sidebar:
         st.header('📂 전국입주 DB')
-        page = st.radio('메뉴', ['🏢 아파트 입주 DB', '🏠 신규 부동산 DB', '🏭 지식산업센터 DB', '📒 애드플래닝 관리업체'], key='main_page')
+        page = st.radio('메뉴', ['🏠 홈', '🏢 아파트 입주 DB', '🏘️ 신규 부동산 DB', '🏭 지식산업센터 DB', '📒 애드플래닝 관리업체'], key='main_page')
         st.divider()
 
-    if page == '🏢 아파트 입주 DB':
+    if page == '🏠 홈':
+        st.title('📂 전국입주 DB')
+        st.caption('애드플래닝 부동산 마케팅 DB · 빠른 시작 모드')
+        c1, c2, c3, c4 = st.columns(4)
+        c1.metric('아파트 DB', '사용 가능')
+        c2.metric('신규 부동산 DB', '사용 가능')
+        c3.metric('지식산업센터 DB', '사용 가능')
+        c4.metric('관리업체', '사용 가능')
+        st.info('왼쪽 메뉴에서 필요한 DB를 선택하면 해당 데이터만 불러옵니다. 접속 시 모든 DB를 한꺼번에 로딩하지 않습니다.')
+    elif page == '🏢 아파트 입주 DB':
         render_apartment_db()
-    elif page == '🏠 신규 부동산 DB':
+    elif page == '🏘️ 신규 부동산 DB':
         render_broker_db()
     elif page == '🏭 지식산업센터 DB':
         render_kic_db()
