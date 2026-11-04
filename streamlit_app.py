@@ -555,7 +555,7 @@ def load_broker_source(uploaded=None):
     return pd.DataFrame(), '연결 대기'
 
 
-def broker_area_stats(df, days=30, min_count=3):
+def broker_area_stats(df, days=183, min_count=3):
     if df.empty:
         return pd.DataFrame(), pd.DataFrame()
     today = pd.Timestamp(date.today())
@@ -586,7 +586,7 @@ def render_broker_db():
 
     with st.sidebar:
         st.header('🏠 신규 부동산 조건')
-        days = st.slider('최근 등록 조회 기간', 1, 365, 30, key='broker_days')
+        days = st.slider('최근 등록 조회 기간', 1, 365, 183, key='broker_days', help='신규 부동산 기본 기준은 최근 6개월(183일)입니다.')
         min_count = st.number_input('지역별 최소 신규 수', min_value=1, max_value=50, value=3, step=1, key='broker_min')
         uploaded = st.file_uploader('중개사무소 CSV/XLSX 임시 업로드', type=['csv','xlsx','xls'], key='broker_upload')
 
