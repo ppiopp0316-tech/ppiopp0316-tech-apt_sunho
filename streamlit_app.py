@@ -316,24 +316,36 @@ def render_apartment_db():
     st.title('🏢 전국 신규 아파트 입주 DB')
     st.caption('300세대 이상 · 입주예정월 중심 · 누락단지 공식 보완DB 포함')
     errs = []
-    with st.spinner('최신 입주정보 확인 중...'):
-        try:
-            a = fetch_applyhome(get_api_key())
-        except Exception as e:
-            a = pd.DataFrame(); errs.append(f'청약홈: {e}')
-        try:
-            l = fetch_lh()
-        except Exception as e:
-            l = pd.DataFrame(); errs.append(f'LH: {e}')
-        s = load_supplement()
-        snapshot_path = BASE_DIR / 'apartment_snapshot.csv'
-        cached = pd.read_csv(snapshot_path, encoding='utf-8-sig').fillna('') if snapshot_path.exists() else pd.DataFrame()
-    if not get_api_key():
-        errs.append('청약홈 API 키가 없어 해당 출처의 실시간 갱신은 실행하지 않았습니다.')
-    frames = [x for x in [a, l, s, cached] if isinstance(x, pd.DataFrame) and not x.empty]
+
+    # 빠른 시작: 매 접속마다 외부 API를 호출하지 않고 저장된 스냅샷을 먼저 표시한다.
+    # 외부 API 호출은 사용자가 명시적으로 갱신 버튼을 눌렀을 때만 실행한다.
+    s = load_supplement()
+    snapshot_path = BASE_DIR / 'apartment_snapshot.csv'
+    cached = pd.read_csv(snapshot_path, encoding='utf-8-sig').fillna('') if snapshot_path.exists() else pd.DataFrame()
+    frames = [x for x in [s, cached] if isinstance(x, pd.DataFrame) and not x.empty]
+
+    refresh_live = st.button('🔄 최신 공식자료 실시간 갱신', key='apt_live_refresh')
+    if refresh_live or not frames:
+        with st.spinner('최신 공식자료 확인 중...'):
+            try:
+                a = fetch_applyhome(get_api_key())
+            except Exception as e:
+                a = pd.DataFrame(); errs.append(f'청약홈: {e}')
+            try:
+                l = fetch_lh()
+            except Exception as e:
+                l = pd.DataFrame(); errs.append(f'LH: {e}')
+        if not get_api_key():
+            errs.append('청약홈 API 키가 없어 해당 출처의 실시간 갱신은 실행하지 않았습니다.')
+        live_frames = [x for x in [a, l] if isinstance(x, pd.DataFrame) and not x.empty]
+        frames = live_frames + frames
+    else:
+        st.caption('⚡ 빠른 모드 · 저장된 최신 DB를 즉시 표시합니다. 필요할 때만 위 버튼으로 공식자료를 실시간 확인하세요.')
+
     if not frames:
         st.error('입주정보를 불러오지 못했습니다.')
         return
+
     combined = pd.concat(frames, ignore_index=True).fillna('')
     combined['시도'] = combined['시도'].map(normalize_sido)
     df = dedup(combined)
@@ -377,13 +389,13 @@ def render_apartment_db():
                     original_name = str(r.get('원공고단지명', '') or '').strip()
                     if original_name and original_name != str(r.get('단지명', '') or '').strip():
                         st.write('원 공고명:', original_name)
-                    st.link_button('공식 원문 보기', r['원문'], use_container_width=True)
+                    st.link_button('공식 원문 보기', r['원문'], width='stretch')
     with tt:
         table_f = f.copy()
         if not table_f.empty:
             table_f['_naver_url'] = table_f.apply(naver_apt_url, axis=1)
         render_table(table_f)
-    st.download_button('⬇️ 현재 검색결과 Excel 다운로드', excel_bytes(f, '입주DB'), file_name=f'전국_300세대이상_입주예정_{date.today()}.xlsx', mime='application/vnd.openxmlformats-officedocument.spreadsheetml.sheet', use_container_width=True)
+    st.download_button('⬇️ 현재 검색결과 Excel 다운로드', excel_bytes(f, '입주DB'), file_name=f'전국_300세대이상_입주예정_{date.today()}.xlsx', mime='application/vnd.openxmlformats-officedocument.spreadsheetml.sheet', width='stretch')
     if errs:
         with st.expander('일부 출처 오류'):
             for e in errs: st.write('•', e)
@@ -518,7 +530,7 @@ def load_broker_source(uploaded=None):
         raw = fetch_broker_url(url)
         return normalize_broker_df(raw), 'BROKER_DATA_URL 자동연계'
     if BROKER_LOCAL_PATH.exists():
-        raw = pd.read_csv(BROKER_LOCAL_PATH, encoding='utf-8-sig')
+        raw = pd.read_csv(BROKER_LOCAL_PATH, encoding='utf-8-sig', dtype=str, low_memory=False)
         return normalize_broker_df(raw), '공공데이터포털 공식 자료 · 2026-10-16 수집'
     return pd.DataFrame(), '연결 대기'
 
