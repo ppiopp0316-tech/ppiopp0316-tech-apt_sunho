@@ -49,6 +49,9 @@ def configure_page():
     [data-testid="stSidebar"] [role="radiogroup"] label{
       min-height:38px; align-items:center;
     }
+    [data-testid="stSidebar"] [role="radiogroup"] > label:first-child{
+      display:none!important;
+    }
 
     /* ── 숫자 요약(metric) → 흰 카드 ── */
     [data-testid="stMetric"]{background:#FFFFFF; border:1px solid #DDE0DA; border-radius:14px; padding:18px 20px}
@@ -905,10 +908,14 @@ def main():
     configure_page()
     with st.sidebar:
         st.header('📂 전국입주 DB')
-        page = st.radio('메뉴', ['🏢 아파트 입주 DB', '🏘️ 신규 부동산 DB', '🏭 지식산업센터 DB', '📒 애드플래닝 관리업체'], key='main_page')
+        page = st.radio('메뉴', ['🏠 홈', '🏢 아파트 입주 DB', '🏘️ 신규 부동산 DB', '🏭 지식산업센터 DB', '📒 애드플래닝 관리업체'], key='main_page')
         st.divider()
 
-    if page == '🏢 아파트 입주 DB':
+    if page == '🏠 홈':
+        st.title('📂 전국입주 DB')
+        st.caption('애드플래닝 부동산 마케팅 DB')
+        st.info('왼쪽 메뉴에서 필요한 DB를 선택해 주세요.')
+    elif page == '🏢 아파트 입주 DB':
         render_apartment_db()
     elif page == '🏘️ 신규 부동산 DB':
         render_broker_db()
