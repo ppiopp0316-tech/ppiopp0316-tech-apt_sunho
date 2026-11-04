@@ -40,6 +40,15 @@ def configure_page():
     /* ── 사이드바 ── */
     [data-testid="stSidebar"]{background:#FFFFFF; border-right:1px solid #DDE0DA}
     [data-testid="stSidebar"] h2{font-size:17px!important}
+    [data-testid="stSidebar"] [role="radiogroup"] label,
+    [data-testid="stSidebar"] [role="radiogroup"] label *,
+    [data-testid="stSidebar"] .stRadio label,
+    [data-testid="stSidebar"] .stRadio label *{
+      color:#141A22!important; opacity:1!important;
+    }
+    [data-testid="stSidebar"] [role="radiogroup"] label{
+      min-height:38px; align-items:center;
+    }
 
     /* ── 숫자 요약(metric) → 흰 카드 ── */
     [data-testid="stMetric"]{background:#FFFFFF; border:1px solid #DDE0DA; border-radius:14px; padding:18px 20px}
