@@ -184,7 +184,7 @@ def _render_monthly(d: pd.DataFrame):
                                             color="#4A535E").encode(x=x, y="units:Q", text="k:N")
             chart = bars + labels
         st.altair_chart(chart.properties(height=260).configure_view(strokeWidth=0),
-                        use_container_width=True)
+                        width="stretch")
 
 
 # ─────────────────────────────────────────────────────────────
