@@ -555,6 +555,7 @@ def load_broker_source(uploaded=None):
     return pd.DataFrame(), '연결 대기'
 
 
+@st.cache_data(show_spinner=False, max_entries=32)
 def broker_area_stats(df, days=183, min_count=3):
     if df.empty:
         return pd.DataFrame(), pd.DataFrame()
@@ -641,11 +642,15 @@ def render_broker_db():
         listing = listing[listing['중개사무소명'].str.contains(keyword.strip(), regex=False) | listing['주소'].str.contains(keyword.strip(), regex=False)]
     listing = listing.sort_values('개설등록일자_dt', ascending=False)
     list_cols = ['개설등록일자', '중개사무소명', '대표자명', '전화번호', '소재지도로명주소', '개설등록번호', '데이터기준일자']
-    table = listing[list_cols].replace('', '미확인')
     display_limit = st.selectbox('화면 표시 개수', [100, 300, 500, 1000], index=1, key='broker_display_limit')
-    st.caption(f'조회 결과 {len(table):,}개 · 화면에는 최대 {display_limit:,}개 표시, CSV는 조회 결과 전체 포함')
-    st.dataframe(table.head(display_limit), hide_index=True, width='stretch', height=450)
-    st.download_button('조회 업체 CSV 다운로드', table.to_csv(index=False).encode('utf-8-sig'), file_name='신규부동산_공식자료.csv', mime='text/csv')
+    st.caption(f'조회 결과 {len(listing):,}개 · 화면에는 최대 {display_limit:,}개 표시, CSV는 필요할 때만 생성합니다.')
+    table_preview = listing[list_cols].head(display_limit).replace('', '미확인')
+    st.dataframe(table_preview, hide_index=True, width='stretch', height=450)
+    if st.button('⬇️ 조회 업체 CSV 준비', key='broker_prepare_csv'):
+        st.session_state['broker_csv_ready'] = True
+    if st.session_state.get('broker_csv_ready'):
+        table_all = listing[list_cols].replace('', '미확인')
+        st.download_button('⬇️ 조회 업체 CSV 다운로드', table_all.to_csv(index=False).encode('utf-8-sig'), file_name='신규부동산_공식자료.csv', mime='text/csv')
     if recent.empty:
         st.info(f'수집 자료에서 최근 {days}일 등록 업체를 확인하지 못했습니다. 최근 등록 필터를 해제하면 기존 업체를 볼 수 있습니다.')
     if stats.empty:
