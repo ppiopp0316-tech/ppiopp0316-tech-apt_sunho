@@ -49,9 +49,6 @@ def configure_page():
     [data-testid="stSidebar"] [role="radiogroup"] label{
       min-height:38px; align-items:center;
     }
-    [data-testid="stSidebar"] [role="radiogroup"] > label:first-child{
-      display:none!important;
-    }
 
     /* ── 숫자 요약(metric) → 흰 카드 ── */
     [data-testid="stMetric"]{background:#FFFFFF; border:1px solid #DDE0DA; border-radius:14px; padding:18px 20px}
@@ -913,8 +910,13 @@ def main():
 
     if page == '🏠 홈':
         st.title('📂 전국입주 DB')
-        st.caption('애드플래닝 부동산 마케팅 DB')
-        st.info('왼쪽 메뉴에서 필요한 DB를 선택해 주세요.')
+        st.caption('애드플래닝 부동산 마케팅 DB · 빠른 시작 모드')
+        c1, c2, c3, c4 = st.columns(4)
+        c1.metric('아파트 DB', '사용 가능')
+        c2.metric('신규 부동산 DB', '사용 가능')
+        c3.metric('지식산업센터 DB', '사용 가능')
+        c4.metric('관리업체', '사용 가능')
+        st.info('왼쪽 메뉴에서 필요한 DB를 선택하면 해당 데이터만 불러옵니다. 접속 시 모든 DB를 한꺼번에 로딩하지 않습니다.')
     elif page == '🏢 아파트 입주 DB':
         render_apartment_db()
     elif page == '🏘️ 신규 부동산 DB':
