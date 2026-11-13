@@ -1,7 +1,7 @@
 {
   "source": "전국공인중개사사무소표준데이터",
   "url": "https://api.data.go.kr/openapi/tn_pubr_public_med_office_api",
-  "retrieved_at": "2026-11-12T07:31:12.238535+00:00",
+  "retrieved_at": "2026-11-13T07:03:40.536224+00:00",
   "raw_rows": 76562,
   "api_total_count": 76562,
   "columns": [
